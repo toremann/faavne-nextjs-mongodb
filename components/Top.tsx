@@ -2,31 +2,31 @@ import React from 'react'
 import { differenceInMinutes, formatDistance } from "date-fns";
 
 const setColor = (rating: number) => {
-    if (rating >= 250) {
-      return "text-warning text-opacity-100";
-    }
-    if (rating >= 200) {
-      return "text-warning text-opacity-85";
-    }
-    if (rating >= 150) {
-      return "text-warning text-opacity-50";
-    }
-    if (rating >= 100) {
-      return "text-success text-opacity-100";
-    }
-    if (rating >= 75) {
-      return "text-success text-opacity-75";
-    }
-    if (rating >= 50) {
-      return "text-primary text-opacity-100";
-    }
-    if (rating >= 25) {
-      return "text-primary text-opacity-75";
-    }
-    if (rating <= 24) {
-      return "text-secondary text-opacity-50";
-    }
-  };
+  if (rating >= 250) {
+    return "custom-color-100";
+  }
+  if (rating >= 200) {
+    return "custom-color-90";
+  }
+  if (rating >= 150) {
+    return "custom-color-80";
+  }
+  if (rating >= 100) {
+    return "custom-color-70";
+  }
+  if (rating >= 75) {
+    return "custom-color-60";
+  }
+  if (rating >= 50) {
+    return "custom-color-50";
+  }
+  if (rating >= 25) {
+    return "custom-color-40";
+  }
+  if (rating <= 24) {
+    return "custom-color-30";
+  }
+};
 
   const isBigEnough = (stocks: any) => {
     return stocks.price_info.last.price >= 1;
