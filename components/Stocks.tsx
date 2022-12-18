@@ -1,37 +1,41 @@
 import { differenceInMinutes, formatDistance } from "date-fns";
 
 const setColor = (rating: number) => {
-  if (rating >= 250) {
+  if (rating >= 350) {
     return "custom-color-100";
   }
-  if (rating >= 200) {
+  if (rating >= 300) {
     return "custom-color-90";
   }
-  if (rating >= 150) {
+  if (rating >= 250) {
     return "custom-color-80";
   }
-  if (rating >= 100) {
+  if (rating >= 200) {
     return "custom-color-70";
   }
-  if (rating >= 75) {
+  if (rating >= 150) {
     return "custom-color-60";
   }
-  if (rating >= 50) {
+  if (rating >= 100) {
     return "custom-color-50";
   }
-  if (rating >= 25) {
+  if (rating >= 50) {
     return "custom-color-40";
   }
-  if (rating <= 24) {
+  if (rating >= 25) {
     return "custom-color-30";
+  }
+  if (rating >= 0) {
+    return "custom-color-20"
   }
 };
 
 const Stocks = ({ stocks }: { stocks: any }) => {
   return (
     <>
-      <div className="container mt-5">
+      <div className="container mt-4 bg-light rounded">
         {stocks
+          .filter(stock => stock.price_info.last.price > 0)
           .sort((a: any, b: any) =>
             (a.key_ratios_info.dividend_per_share / a.price_info.last.price) *
               1000 <
@@ -51,7 +55,7 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                   {stock.instrument_info.long_name}
                 </h6>
               </div>
-              <div className="col-md-auto">
+              <div className="col">
                 <h6
                   className={
                     differenceInMinutes(
@@ -94,7 +98,23 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                   )}
                 </h6>
               </div>
-              <div className="col-md-auto">
+              <div className="col">
+                    <h6>
+                      {stock.company_info.dividend_date
+                        ? new Date(
+                            stock.company_info.excluding_date
+                          ).toLocaleDateString("en-GB")
+                        : ""}
+                    </h6>
+                    <h6>
+                      {stock.company_info.excluding_date
+                        ? new Date(
+                            stock.company_info.dividend_date
+                          ).toLocaleDateString("en-GB")
+                        : ""}
+                    </h6>
+                  </div>
+              <div className="col">
                 <div
                   className={
                     stock.price_info.diff_pct > 0
@@ -115,7 +135,7 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                   </h6>
                 </div>
               </div>
-              <div className="col col-lg-2">
+              <div className="col text-end">
                 <h1
                   className={`${setColor(
                     (stock.key_ratios_info.dividend_per_share /
