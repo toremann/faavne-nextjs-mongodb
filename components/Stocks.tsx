@@ -35,7 +35,7 @@ const Stocks = ({ stocks }: { stocks: any }) => {
     <>
       <div className="container mt-4 bg-light rounded">
         {stocks
-          .filter(stock => stock.price_info.last.price > 0)
+          .filter((stock: any) => stock.price_info.last.price > 0)
           .sort((a: any, b: any) =>
             (a.key_ratios_info.dividend_per_share / a.price_info.last.price) *
               1000 <
