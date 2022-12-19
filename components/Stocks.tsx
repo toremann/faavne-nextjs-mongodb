@@ -26,7 +26,7 @@ const setColor = (rating: number) => {
     return "custom-color-30";
   }
   if (rating >= 0) {
-    return "custom-color-20"
+    return "custom-color-20";
   }
 };
 
@@ -46,8 +46,8 @@ const Stocks = ({ stocks }: { stocks: any }) => {
           )
           .slice(3)
           .map((stock: any, index: any) => (
-            <div key={index} className="row border-bottom">
-              <div className="col">
+            <div key={index} className="row border-bottom align-items-end">
+              <div className="col-md-4">
                 <h4 className="font-weight-bold">
                   {stock.instrument_info.symbol}
                 </h4>
@@ -56,36 +56,7 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                 </h6>
               </div>
               <div className="col">
-                <h6
-                  className={
-                    differenceInMinutes(
-                      new Date(stock.company_info.excluding_date),
-                      new Date()
-                    ) < 0
-                      ? "text-danger"
-                      : "text-success"
-                  }
-                >
-                  {stock.company_info.excluding_date ? (
-                    `EX: ${formatDistance(
-                      new Date(stock.company_info.excluding_date),
-                      new Date(),
-                      { addSuffix: true }
-                    )}`
-                  ) : (
-                    <h6 className="text-black-50">EX date not set</h6>
-                  )}
-                </h6>
-                <h6
-                  className={
-                    differenceInMinutes(
-                      new Date(stock.company_info.dividend_date),
-                      new Date()
-                    ) < 0
-                      ? "text-danger"
-                      : "text-success"
-                  }
-                >
+                <h6 className="font-weight-bold">
                   {stock.company_info.dividend_date ? (
                     `DD: ${formatDistance(
                       new Date(stock.company_info.dividend_date),
@@ -94,26 +65,35 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                       { addSuffix: true }
                     )}`
                   ) : (
-                    <h6 className="text-black-50">Divident date not set</h6>
+                    <h6 className="text-muted">Date not set</h6>
                   )}
+                </h6>
+                <h6 className="text-success">
+                  {stock.company_info.dividend_date &&
+                    new Date(
+                      stock.company_info.excluding_date
+                    ).toLocaleDateString("en-GB")}
                 </h6>
               </div>
               <div className="col">
-                    <h6>
-                      {stock.company_info.dividend_date
-                        ? new Date(
-                            stock.company_info.excluding_date
-                          ).toLocaleDateString("en-GB")
-                        : ""}
-                    </h6>
-                    <h6>
-                      {stock.company_info.excluding_date
-                        ? new Date(
-                            stock.company_info.dividend_date
-                          ).toLocaleDateString("en-GB")
-                        : ""}
-                    </h6>
-                  </div>
+                <h6 className="font-weight-bold">
+                  {stock.company_info.excluding_date ? (
+                    `EX: ${formatDistance(
+                      new Date(stock.company_info.excluding_date),
+                      new Date(),
+                      { addSuffix: true }
+                    )}`
+                  ) : (
+                    <h6 className="text-muted">EX date not set</h6>
+                  )}
+                </h6>
+                <h6 className="text-success">
+                  {stock.company_info.excluding_date &&
+                    new Date(
+                      stock.company_info.dividend_date
+                    ).toLocaleDateString("en-GB")}
+                </h6>
+              </div>
               <div className="col">
                 <div
                   className={
@@ -122,7 +102,7 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                       : "text-danger text-right"
                   }
                 >
-                  <h4>{stock.price_info.last.price.toFixed(2)}NOK</h4>
+                  <h6>{stock.price_info.last.price.toFixed(2)}NOK</h6>
                   <h6>
                     {stock.price_info.diff_pct}%{" "}
                     <i
@@ -135,7 +115,7 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                   </h6>
                 </div>
               </div>
-              <div className="col text-end">
+              <div className="col-md-1">
                 <h1
                   className={`${setColor(
                     (stock.key_ratios_info.dividend_per_share /
@@ -144,14 +124,13 @@ const Stocks = ({ stocks }: { stocks: any }) => {
                   )}`}
                 >
                   {stock.key_ratios_info.hasOwnProperty("dividend_per_share") &&
-                  stock.price_info.last.hasOwnProperty("price") &&
-                  stock.price_info.last.price > 0
-                    ? Math.round(
-                        (stock.key_ratios_info.dividend_per_share /
-                          stock.price_info.last.price) *
-                          1000
-                      )
-                    : ""}
+                    stock.price_info.last.hasOwnProperty("price") &&
+                    stock.price_info.last.price > 0 &&
+                    Math.round(
+                      (stock.key_ratios_info.dividend_per_share /
+                        stock.price_info.last.price) *
+                        1000
+                    )}
                 </h1>
               </div>
             </div>
