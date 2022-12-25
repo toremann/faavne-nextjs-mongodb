@@ -32,7 +32,7 @@ const setColor = (rating: number) => {
     return stocks.price_info.last.price >= 1;
   }
 
-const Top = ({ stocks }: { stocks: any }) => {
+const Top = ({ stocks, serverDate }: { stocks: any, serverDate: Date }) => {
   return (
     <>
         <div className="row row-cols-1 row-cols-md-3">

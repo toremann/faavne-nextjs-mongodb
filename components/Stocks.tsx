@@ -1,4 +1,5 @@
-import { differenceInMinutes, formatDistance } from "date-fns";
+import { formatDistance } from "date-fns";
+import Search from "./Search";
 
 const setColor = (rating: number) => {
   if (rating >= 350) {
@@ -33,7 +34,9 @@ const setColor = (rating: number) => {
 const Stocks = ({ stocks }: { stocks: any }) => {
   return (
     <>
+    
       <div className="container mt-4 bg-light rounded">
+      <Search />
         {stocks
           .filter((stock: any) => stock.price_info.last.price > 0)
           .sort((a: any, b: any) =>

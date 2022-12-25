@@ -4,10 +4,10 @@ import clientPromise from "../lib/mongodb";
 import Stocks from "../components/Stocks";
 import Top from "../components/Top";
 
-export default function Main({ stocks }: { stocks: any }) {
+export default function Main({ stocks, serverDate }: { stocks: any, serverDate: Date } ) {
   return (
     <>
-      <div className="container mt-4">
+      <div className="container mt-3">
         <Head>
           <title>Faavne</title>
           <link rel="icon" href="/favicon.ico" />
@@ -20,7 +20,7 @@ export default function Main({ stocks }: { stocks: any }) {
             </p>
           </div>
         </div>
-        <Top stocks={stocks} />
+        <Top stocks={stocks} serverDate={serverDate}/>
         <Stocks stocks={stocks} />
         <div className="text-center m-5 bg-black-25">
           <Link href="https://github.com/toremann" className="link-dark">
@@ -40,7 +40,7 @@ export async function getServerSideProps() {
     const stocks = await db.collection("stocks").find({}).toArray();
 
     return {
-      props: { stocks: JSON.parse(JSON.stringify(stocks)) },
+      props: { stocks: JSON.parse(JSON.stringify(stocks)), serverDate: Date() }, 
     };
   } catch (e) {
     console.error(e);
