@@ -8,13 +8,11 @@ const Search = ({ query, setQuery }: any) => {
         value={query}
         type="search"
         className="form-control rounded"
-        placeholder="Search"
+        placeholder="Søk.."
         aria-label="Search"
         aria-describedby="search-addon"
+        autoFocus
       />
-      <button type="button" className="btn btn-outline-primary">
-        search
-      </button>
     </div>
   );
 };

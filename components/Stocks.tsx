@@ -13,7 +13,7 @@ const Stocks = ({
 }) => {
   return (
     <>
-      <div className="container mt-4 bg-light rounded">
+      <div className="container mt-4 rounded">
         <Search stocks={stocks} query={query} setQuery={setQuery} />
         {stocks
           .filter((stock: any) => stock.price_info.last.price > 0)
@@ -48,10 +48,11 @@ const Stocks = ({
                     <h6 className="text-muted">Date not set</h6>
                   )}
                 </h6>
+
                 <h6 className="text-success">
-                  {stock.company_info.dividend_date &&
+                  {stock.company_info.excluding_date &&
                     new Date(
-                      stock.company_info.excluding_date
+                      stock.company_info.dividend_date
                     ).toLocaleDateString("en-GB")}
                 </h6>
               </div>
@@ -68,9 +69,9 @@ const Stocks = ({
                   )}
                 </h6>
                 <h6 className="text-success">
-                  {stock.company_info.excluding_date &&
+                  {stock.company_info.dividend_date &&
                     new Date(
-                      stock.company_info.dividend_date
+                      stock.company_info.excluding_date
                     ).toLocaleDateString("en-GB")}
                 </h6>
               </div>
