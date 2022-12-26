@@ -29,7 +29,7 @@ const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
                     <h4 className="card-title font-weight-bold">
                       {stock.instrument_info.symbol}
                     </h4>
-                    <h6 className="card-subtitle mb-2 text-muted">
+                    <h6 className="card-subtitle mb-2 text-muted d-none d-sm-block d-lg-none d-xl-block">
                       {stock.instrument_info.long_name}
                     </h6>
                   </div>

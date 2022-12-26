@@ -26,7 +26,8 @@ const Stocks = ({
               : -1
           )
           .map((stock: any, index: any) => (
-            <div key={index} className="row border-bottom align-items-end">
+            <div key={index} className="row flex-xs-column border-bottom mb-2">
+              {/* first */}
               <div className="col-md-4">
                 <h4 className="font-weight-bold">
                   {stock.instrument_info.symbol}
@@ -35,6 +36,7 @@ const Stocks = ({
                   {stock.instrument_info.long_name}
                 </h6>
               </div>
+              {/* second */}
               <div className="col">
                 <h6 className="font-weight-bold">
                   {stock.company_info.dividend_date ? (
@@ -56,6 +58,7 @@ const Stocks = ({
                     ).toLocaleDateString("en-GB")}
                 </h6>
               </div>
+              {/* third */}
               <div className="col">
                 <h6 className="font-weight-bold">
                   {stock.company_info.excluding_date ? (
@@ -75,6 +78,7 @@ const Stocks = ({
                     ).toLocaleDateString("en-GB")}
                 </h6>
               </div>
+              {/* fourth */}
               <div className="col">
                 <div
                   className={
@@ -96,7 +100,8 @@ const Stocks = ({
                   </h6>
                 </div>
               </div>
-              <div className="col-md-1">
+              {/* fifth - should be second on small devices*/}
+              <div className="col-md-1"> 
                 <h1
                   className={`${setColor(
                     (stock.key_ratios_info.dividend_per_share /

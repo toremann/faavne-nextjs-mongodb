@@ -20,7 +20,7 @@ export const setColor = (rating: number) => {
     if (rating >= 25) {
       return "custom-color-40";
     }
-    if (rating <= 24) {
+    if (rating >= 0) {
       return "custom-color-30";
     }
   };
