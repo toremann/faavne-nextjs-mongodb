@@ -26,18 +26,37 @@ const Stocks = ({
               : -1
           )
           .map((stock: any, index: any) => (
-            <div key={index} className="d-lg-flex flex-row">
+            <div key={index} className="row row-cols-lg-5 row-cols-2 border-bottom justify-content-between justify-content-lg-between">
               {/* first */}
-              <div className="col">
+              <div className="col col-lg-4">
                 <h4 className="font-weight-bold">
                   {stock.instrument_info.symbol}
                 </h4>
-                <h6 className="text-muted">
+                <h6 className="text-muted d-none d-lg-block">
                   {stock.instrument_info.long_name}
                 </h6>
               </div>
+              {/* hide on lg, show on breakpoint */}
+              <div className="col d-lg-none d-block"> 
+                <h1
+                  className={`${setColor(
+                    (stock.key_ratios_info.dividend_per_share /
+                      stock.price_info.last.price) *
+                      1000
+                  )}`}
+                >
+                  {stock.key_ratios_info.hasOwnProperty("dividend_per_share") &&
+                    stock.price_info.last.hasOwnProperty("price") &&
+                    stock.price_info.last.price > 0 &&
+                    Math.round(
+                      (stock.key_ratios_info.dividend_per_share /
+                        stock.price_info.last.price) *
+                        1000
+                    )}
+                </h1>
+              </div>
               {/* second */}
-              <div className="col">
+              <div className="col col-lg-2">
                 <h6 className="font-weight-bold">
                   {stock.company_info.dividend_date ? (
                     `DD: ${formatDistance(
@@ -59,7 +78,7 @@ const Stocks = ({
                 </h6>
               </div>
               {/* third */}
-              <div className="col">
+              <div className="col col-lg-2">
                 <h6 className="font-weight-bold">
                   {stock.company_info.excluding_date ? (
                     `EX: ${formatDistance(
@@ -79,7 +98,7 @@ const Stocks = ({
                 </h6>
               </div>
               {/* fourth */}
-              <div className="col">
+              <div className="col col-lg-2">
                 <div
                   className={
                     stock.price_info.diff_pct > 0
@@ -101,7 +120,7 @@ const Stocks = ({
                 </div>
               </div>
               {/* fifth - should be second on small devices*/}
-              <div className="col"> 
+              <div className="col col-lg-2 d-none d-lg-block"> 
                 <h1
                   className={`${setColor(
                     (stock.key_ratios_info.dividend_per_share /
