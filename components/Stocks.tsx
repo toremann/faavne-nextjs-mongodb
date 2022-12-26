@@ -26,9 +26,9 @@ const Stocks = ({
               : -1
           )
           .map((stock: any, index: any) => (
-            <div key={index} className="row flex-xs-column border-bottom mb-2">
+            <div key={index} className="d-lg-flex flex-row">
               {/* first */}
-              <div className="col-md-4">
+              <div className="col">
                 <h4 className="font-weight-bold">
                   {stock.instrument_info.symbol}
                 </h4>
@@ -101,7 +101,7 @@ const Stocks = ({
                 </div>
               </div>
               {/* fifth - should be second on small devices*/}
-              <div className="col-md-1"> 
+              <div className="col"> 
                 <h1
                   className={`${setColor(
                     (stock.key_ratios_info.dividend_per_share /
