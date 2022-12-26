@@ -1,42 +1,20 @@
 import { formatDistance } from "date-fns";
 import Search from "./Search";
+import { setColor } from "../utils/setColor";
 
-const setColor = (rating: number) => {
-  if (rating >= 350) {
-    return "custom-color-100";
-  }
-  if (rating >= 300) {
-    return "custom-color-90";
-  }
-  if (rating >= 250) {
-    return "custom-color-80";
-  }
-  if (rating >= 200) {
-    return "custom-color-70";
-  }
-  if (rating >= 150) {
-    return "custom-color-60";
-  }
-  if (rating >= 100) {
-    return "custom-color-50";
-  }
-  if (rating >= 50) {
-    return "custom-color-40";
-  }
-  if (rating >= 25) {
-    return "custom-color-30";
-  }
-  if (rating >= 0) {
-    return "custom-color-20";
-  }
-};
-
-const Stocks = ({ stocks }: { stocks: any }) => {
+const Stocks = ({
+  stocks,
+  query,
+  setQuery,
+}: {
+  setQuery: Function;
+  query: String;
+  stocks: any;
+}) => {
   return (
     <>
-    
       <div className="container mt-4 bg-light rounded">
-      <Search />
+        <Search stocks={stocks} query={query} setQuery={setQuery} />
         {stocks
           .filter((stock: any) => stock.price_info.last.price > 0)
           .sort((a: any, b: any) =>
@@ -47,7 +25,6 @@ const Stocks = ({ stocks }: { stocks: any }) => {
               ? 1
               : -1
           )
-          .slice(3)
           .map((stock: any, index: any) => (
             <div key={index} className="row border-bottom align-items-end">
               <div className="col-md-4">

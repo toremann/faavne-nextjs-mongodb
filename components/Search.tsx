@@ -1,9 +1,4 @@
-import { useState } from "react";
-
-const Search = () => {
-  const [query, setQuery] = useState("");
-  console.log(query);
-
+const Search = ({ query, setQuery }: any) => {
   return (
     <div className="input-group mb-4">
       <input

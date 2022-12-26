@@ -1,44 +1,25 @@
-import React from 'react'
+import React from "react";
 import { differenceInMinutes, formatDistance } from "date-fns";
+import { setColor } from "../utils/setColor";
 
-const setColor = (rating: number) => {
-  if (rating >= 250) {
-    return "custom-color-100";
-  }
-  if (rating >= 200) {
-    return "custom-color-90";
-  }
-  if (rating >= 150) {
-    return "custom-color-80";
-  }
-  if (rating >= 100) {
-    return "custom-color-70";
-  }
-  if (rating >= 75) {
-    return "custom-color-60";
-  }
-  if (rating >= 50) {
-    return "custom-color-50";
-  }
-  if (rating >= 25) {
-    return "custom-color-40";
-  }
-  if (rating <= 24) {
-    return "custom-color-30";
-  }
+const isBigEnough = (stocks: any) => {
+  return stocks.price_info.last.price >= 1;
 };
 
-  const isBigEnough = (stocks: any) => {
-    return stocks.price_info.last.price >= 1;
-  }
-
-const Top = ({ stocks, serverDate }: { stocks: any, serverDate: Date }) => {
+const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
   return (
     <>
-        <div className="row row-cols-1 row-cols-md-3">
-          {stocks
+      <div className="row row-cols-1 row-cols-md-3">
+        {stocks
           .filter(isBigEnough)
-          .sort((a: any, b: any) => (((a.key_ratios_info.dividend_per_share / a.price_info.last.price) * 1000) < ((b.key_ratios_info.dividend_per_share / b.price_info.last.price) * 1000) ? 1 : -1))
+          .sort((a: any, b: any) =>
+            (a.key_ratios_info.dividend_per_share / a.price_info.last.price) *
+              1000 <
+            (b.key_ratios_info.dividend_per_share / b.price_info.last.price) *
+              1000
+              ? 1
+              : -1
+          )
           .slice(0, 3)
           .map((stock: any, index: any) => (
             <div className="col mt-4" key={index}>
@@ -75,7 +56,7 @@ const Top = ({ stocks, serverDate }: { stocks: any, serverDate: Date }) => {
                 <div className="card-body text-center">
                   <h6>Utbytte per aksje:</h6>
                   <h1>{stock.key_ratios_info.dividend_per_share}</h1>
-                  <h6 className="">Rating:</h6>
+                  <h6>Rating:</h6>
                   <h1
                     className={`${setColor(
                       (stock.key_ratios_info.dividend_per_share /
@@ -87,13 +68,17 @@ const Top = ({ stocks, serverDate }: { stocks: any, serverDate: Date }) => {
                       "dividend_per_share"
                     ) &&
                     stock.price_info.last.hasOwnProperty("price") &&
-                    stock.price_info.last.price > 0
-                      ? Math.round(
-                          (stock.key_ratios_info.dividend_per_share /
-                            stock.price_info.last.price) *
-                            1000
-                        )
-                      : <h1 className="text-danger bg-dark rounded bg-opacity-75">No data</h1>}
+                    stock.price_info.last.price > 0 ? (
+                      Math.round(
+                        (stock.key_ratios_info.dividend_per_share /
+                          stock.price_info.last.price) *
+                          1000
+                      )
+                    ) : (
+                      <h1 className="text-danger bg-dark rounded bg-opacity-75">
+                        No data
+                      </h1>
+                    )}
                   </h1>
                 </div>
 
@@ -109,13 +94,15 @@ const Top = ({ stocks, serverDate }: { stocks: any, serverDate: Date }) => {
                           : "text-success"
                       }
                     >
-                      {stock.company_info.excluding_date
-                        ? `EX: ${formatDistance(
-                            new Date(stock.company_info.excluding_date),
-                            new Date(),
-                            { addSuffix: true }
-                          )}`
-                        :  <h6 className="text-black-50">EX date not set</h6>}
+                      {stock.company_info.excluding_date ? (
+                        `EX: ${formatDistance(
+                          new Date(stock.company_info.excluding_date),
+                          new Date(),
+                          { addSuffix: true }
+                        )}`
+                      ) : (
+                        <h6 className="text-black-50">EX date not set</h6>
+                      )}
                     </h6>
                     <h6
                       className={
@@ -127,40 +114,39 @@ const Top = ({ stocks, serverDate }: { stocks: any, serverDate: Date }) => {
                           : "text-success"
                       }
                     >
-                      {stock.company_info.dividend_date
-                        ? `DD: ${formatDistance(
-                            new Date(stock.company_info.dividend_date),
-                            new Date(),
+                      {stock.company_info.dividend_date ? (
+                        `DD: ${formatDistance(
+                          new Date(stock.company_info.dividend_date),
+                          new Date(),
 
-                            { addSuffix: true }
-                          )}`
-                        : <h6 className="text-black-50">Divident date not set</h6>}
+                          { addSuffix: true }
+                        )}`
+                      ) : (
+                        <h6 className="text-black-50">Divident date not set</h6>
+                      )}
                     </h6>
                   </div>
                   <div>
                     <h6>
-                      {stock.company_info.dividend_date
-                        ? new Date(
-                            stock.company_info.excluding_date
-                          ).toLocaleDateString("en-GB")
-                        : ""}
+                      {stock.company_info.dividend_date &&
+                        new Date(
+                          stock.company_info.excluding_date
+                        ).toLocaleDateString("en-GB")}
                     </h6>
                     <h6>
-                      {stock.company_info.excluding_date
-                        ? new Date(
-                            stock.company_info.dividend_date
-                          ).toLocaleDateString("en-GB")
-                        : ""}
+                      {stock.company_info.excluding_date &&
+                        new Date(
+                          stock.company_info.dividend_date
+                        ).toLocaleDateString("en-GB")}
                     </h6>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          
-        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Top
+export default Top;
