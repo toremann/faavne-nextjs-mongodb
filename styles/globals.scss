@@ -1,0 +1,51 @@
+// Data visualisation
+
+$color-100: #115f9a;
+$color-90: #1984c5;
+$color-80: #22a7f0;
+$color-70: #48b5c4;
+$color-60: #76c68f;
+$color-50: #a6d75b;
+$color-40: #c9e52f;
+$color-30: #d0ee11;
+$color-20: #f4f100;
+
+.custom-color-100 {
+    color: $color-100;
+}
+
+.custom-color-90 {
+    color: $color-90;
+}
+
+.custom-color-80 {
+    color: $color-80;
+}
+
+.custom-color-70 {
+    color: $color-70;
+}
+
+.custom-color-60 {
+    color: $color-60;
+}
+
+.custom-color-50 {
+    color: $color-50;
+}
+
+.custom-color-40 {
+    color: $color-40;
+}
+
+.custom-color-30 {
+    color: $color-30;
+}
+
+.custom-color-20 {
+    color: $color-20
+}
+
+.highlight {
+    background-color: #115f9a;
+}

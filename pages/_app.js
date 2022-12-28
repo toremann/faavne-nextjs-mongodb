@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import "bootstrap/scss/bootstrap.scss";
 
 import { useEffect } from "react";
 
