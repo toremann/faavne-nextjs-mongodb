@@ -13,7 +13,6 @@ const Stocks = ({
   stocks: any;
   serverDate: Date;
 }) => {
-
   return (
     <>
       <div className="container mt-4 rounded">
@@ -31,7 +30,7 @@ const Stocks = ({
           .map((stock: any, index: any) => (
             <>
               <div>
-                <div key={index} className="row justify-content-between mt-3">
+                <div key={index} className="row mt-3">
                   {/* show on mobile */}
                   <div className="col text-muted d-lg-none d-block">
                     {stock.instrument_info.long_name}
@@ -42,14 +41,21 @@ const Stocks = ({
                   </div>
                 </div>
               </div>
-              <div className="row row-cols-lg-5 row-cols-2 mt-2 border-bottom justify-content-between justify-content-lg-between">
-                {/* first */}
-                <div className="col col-lg-4">
-                  <p className="h4 font-weight-bold">
-                    {stock.instrument_info.symbol}
-                  </p>
-                  <p className="text-muted d-none d-lg-block">
+              {/* show on desktop */}
+              <div className="row d-lg-flex d-none">
+                <div className="col col-8 ">
+                  <p className="m-0 text-muted ">
                     {stock.instrument_info.long_name}
+                  </p>
+                </div>
+                <div className="col-2">Utbytte:</div>
+                <div className="col-2">Rating:</div>
+              </div>
+              <div className="row row-cols-lg-5 row-cols-2 border-bottom justify-content-between justify-content-lg-between">
+                {/* first */}
+                <div className="col col-lg-2">
+                  <p className="h1 font-weight-bold">
+                    {stock.instrument_info.symbol}
                   </p>
                 </div>
                 {/* hide on lg, show on breakpoint */}
@@ -76,6 +82,28 @@ const Stocks = ({
                 {/* second */}
                 <div className="col col-lg-2">
                   <p
+                    className={`h6 font-weight-bold
+                  ${
+                    differenceInMinutes(
+                      new Date(stock.company_info.excluding_date),
+                      serverDate
+                    ) < 0
+                      ? "text-danger"
+                      : "text-success"
+                  }
+                  `}
+                  >
+                    {stock.company_info.excluding_date ? (
+                      `EX: ${formatDistance(
+                        new Date(stock.company_info.excluding_date),
+                        new Date(),
+                        { addSuffix: true }
+                      )}`
+                    ) : (
+                      <h6 className="text-muted">EX: Date not set</h6>
+                    )}
+                  </p>
+                  <p
                     className={`h6 font-weight-bold ${
                       differenceInMinutes(
                         new Date(stock.company_info.dividend_date),
@@ -92,40 +120,18 @@ const Stocks = ({
 
                         { addSuffix: true }
                       )}`
-                      
                     ) : (
-                      <h6 className="text-muted">Date not set</h6>
+                      <h6 className="text-muted">DD: Date not set</h6>
                     )}
-                  </p>
-
-                  <p className={`h6`} >
-                    {stock.company_info.excluding_date &&
-                      new Date(
-                        stock.company_info.dividend_date
-                      ).toLocaleDateString("en-GB")}
                   </p>
                 </div>
                 {/* third */}
                 <div className="col col-lg-2">
-                  <p className={`h6 font-weight-bold
-                  ${
-                    differenceInMinutes(
-                      new Date(stock.company_info.excluding_date),
-                      serverDate
-                    ) < 0
-                      ? "text-danger"
-                      : "text-success"
-                  }
-                  `}>
-                    {stock.company_info.excluding_date ? (
-                      `EX: ${formatDistance(
-                        new Date(stock.company_info.excluding_date),
-                        new Date(),
-                        { addSuffix: true }
-                      )}`
-                    ) : (
-                      <h6 className="text-muted">EX date not set</h6>
-                    )}
+                  <p className={`h6`}>
+                    {stock.company_info.excluding_date &&
+                      new Date(
+                        stock.company_info.dividend_date
+                      ).toLocaleDateString("en-GB")}
                   </p>
                   <p className={`h6`}>
                     {stock.company_info.dividend_date &&
@@ -159,6 +165,11 @@ const Stocks = ({
                   </div>
                 </div>
                 {/* fifth - should be second on small devices*/}
+                <div className="col col-lg-2 d-none d-lg-block">
+                  <p className="h1">
+                    {stock.key_ratios_info.dividend_per_share}
+                  </p>
+                </div>
                 <div className="col col-lg-2 d-none d-lg-block">
                   <p
                     className={`h1 ${setColor(

@@ -54,7 +54,7 @@ const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
                   </div>
                 </div>
                 <div className="card-body text-center">
-                  <h6>Utbytte per aksje:</h6>
+                  <h6>Utbytte:</h6>
                   <h1>{stock.key_ratios_info.dividend_per_share}</h1>
                   <h6>Rating:</h6>
                   <h1
