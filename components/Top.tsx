@@ -9,7 +9,7 @@ const isBigEnough = (stocks: any) => {
 const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
   return (
     <>
-      <div className="row row-cols-1 row-cols-md-3">
+      <div className="row row-cols-1 row-cols-lg-3">
         {stocks
           .filter(isBigEnough)
           .sort((a: any, b: any) =>
@@ -88,7 +88,7 @@ const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
                       className={
                         differenceInMinutes(
                           new Date(stock.company_info.excluding_date),
-                          new Date()
+                          serverDate
                         ) < 0
                           ? "text-danger"
                           : "text-success"
@@ -97,7 +97,7 @@ const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
                       {stock.company_info.excluding_date ? (
                         `EX: ${formatDistance(
                           new Date(stock.company_info.excluding_date),
-                          new Date(),
+                          serverDate,
                           { addSuffix: true }
                         )}`
                       ) : (
@@ -108,7 +108,7 @@ const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
                       className={
                         differenceInMinutes(
                           new Date(stock.company_info.dividend_date),
-                          new Date()
+                          serverDate
                         ) < 0
                           ? "text-danger"
                           : "text-success"
@@ -117,7 +117,7 @@ const Top = ({ stocks, serverDate }: { stocks: any; serverDate: Date }) => {
                       {stock.company_info.dividend_date ? (
                         `DD: ${formatDistance(
                           new Date(stock.company_info.dividend_date),
-                          new Date(),
+                          serverDate,
 
                           { addSuffix: true }
                         )}`

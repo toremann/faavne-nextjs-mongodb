@@ -13,6 +13,9 @@ export default function Main({ stocks, serverDate }: { stocks: any, serverDate: 
   const [isLoaded, setIsLoaded] = useState(false);
   const [query, setQuery] = useState("");
 
+  console.log('server side rendered date', serverDate)
+  console.log('client side rendered date', Date.now())
+
   useEffect(() => {
     setIsLoaded(false)
     setItems(stocks);
@@ -44,7 +47,7 @@ const searchStocks = items
           </div>
         </div>
         <Top stocks={stocks} serverDate={serverDate}/>
-        {isLoaded ? <Stocks stocks={searchStocks} query={query} setQuery={setQuery} /> : <Loading />}
+        {isLoaded ? <Stocks stocks={searchStocks} query={query} setQuery={setQuery} serverDate={serverDate}/> : <Loading />}
         <div className="text-center m-5 bg-black-25">
           <Link href="https://github.com/toremann" className="link-dark">
             <h3 className="bi bi-github" />
@@ -63,7 +66,7 @@ export async function getServerSideProps() {
     const stocks = await db.collection("stocks").find({}).toArray();
 
     return {
-      props: { stocks: JSON.parse(JSON.stringify(stocks)), serverDate: Date() }, 
+      props: { stocks: JSON.parse(JSON.stringify(stocks)), serverDate: Date.now() }, 
     };
   } catch (e) {
     console.error(e);
