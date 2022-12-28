@@ -28,9 +28,9 @@ const Stocks = ({
               : -1
           )
           .map((stock: any, index: any) => (
-            <>
+            <div key={index}>
               <div>
-                <div key={index} className="row mt-3">
+                <div className="row mt-3">
                   {/* show on mobile */}
                   <div className="col text-muted d-lg-none d-block">
                     {stock.instrument_info.long_name}
@@ -100,6 +100,7 @@ const Stocks = ({
                         { addSuffix: true }
                       )}`
                     ) : (
+                      // H6 cannot descend from p
                       <h6 className="text-muted">EX: Date not set</h6>
                     )}
                   </p>
@@ -121,6 +122,7 @@ const Stocks = ({
                         { addSuffix: true }
                       )}`
                     ) : (
+                      // H6 cannot descend from p
                       <h6 className="text-muted">DD: Date not set</h6>
                     )}
                   </p>
@@ -191,7 +193,7 @@ const Stocks = ({
                   </p>
                 </div>
               </div>
-            </>
+            </div>
           ))}
       </div>
     </>
