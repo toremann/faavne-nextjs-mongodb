@@ -3,6 +3,7 @@ import Search from './Search';
 import { setColor } from '../utils/setColor';
 
 const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; query: String; stocks: any; serverDate: Date }) => {
+  
   return (
     <>
       <div className="container mt-4 rounded">
@@ -11,6 +12,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
           .filter((stock: any) => stock.price_info.last.price > 0)
           .sort((a: any, b: any) => ((a.key_ratios_info.dividend_per_share / a.price_info.last.price) * 1000 < (b.key_ratios_info.dividend_per_share / b.price_info.last.price) * 1000 ? 1 : -1))
           .map((stock: any, index: any) => (
+            
             <div key={index}>
               <div>
                 <div className="row mt-3">
@@ -37,11 +39,8 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
                 </div>
                 {/* hide on lg, show on breakpoint */}
                 <div className="col d-lg-none d-block">
-                  <h1 className={`${setColor((stock.key_ratios_info.dividend_per_share / stock.price_info.last.price) * 1000)}`}>
-                    {stock.key_ratios_info.hasOwnProperty('dividend_per_share') &&
-                      stock.price_info.last.hasOwnProperty('price') &&
-                      stock.price_info.last.price > 0 &&
-                      Math.round((stock.key_ratios_info.dividend_per_share / stock.price_info.last.price) * 1000)}
+                  <h1 className={`${setColor(stock.stats[stock.stats.length - 1].rating)}`}>
+                    {stock.stats[stock.stats.length - 1].rating}
                   </h1>
                 </div>
                 {/* second */}
@@ -83,11 +82,8 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
                   <p className="h1">{stock.key_ratios_info.dividend_per_share}</p>
                 </div>
                 <div className="col col-lg-2 d-none d-lg-block">
-                  <p className={`h1 ${setColor((stock.key_ratios_info.dividend_per_share / stock.price_info.last.price) * 1000)}`}>
-                    {stock.key_ratios_info.hasOwnProperty('dividend_per_share') &&
-                      stock.price_info.last.hasOwnProperty('price') &&
-                      stock.price_info.last.price > 0 &&
-                      Math.round((stock.key_ratios_info.dividend_per_share / stock.price_info.last.price) * 1000)}
+                  <p className={`h1 ${setColor(stock.stats[stock.stats.length - 1].rating)}`}>
+                    {stock.stats[stock.stats.length - 1].rating}
                   </p>
                 </div>
               </div>
