@@ -1,26 +1,29 @@
 import { differenceInMinutes, formatDistance } from 'date-fns';
 import Search from './Search';
 import { setColor } from '../utils/setColor';
+import { Stock } from '../interfaces/stocks';
 
-const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; query: String; stocks: any; serverDate: Date }) => {
-  
+const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; query: String; stocks: Array<Stock>; serverDate: Date }) => {
+
   return (
     <>
       <div className="container mt-4 rounded">
         <Search stocks={stocks} query={query} setQuery={setQuery} />
         {stocks
-          .filter((stock: any) => stock.price_info.last.price > 0)
-          .sort((a: any, b: any) => ((a.key_ratios_info.dividend_per_share / a.price_info.last.price) * 1000 < (b.key_ratios_info.dividend_per_share / b.price_info.last.price) * 1000 ? 1 : -1))
-          .map((stock: any, index: any) => (
-            
+          .filter((stock: Stock) => stock.price_info.last.price > 0)
+          .sort((a: Stock, b: Stock) => (a.stats[6].rating < b.stats[6].rating ? 1 : -1))
+          .map((stock: any, index: number) => (
             <div key={index}>
               <div>
                 <div className="row mt-3">
                   {/* show on mobile */}
                   <div className="col text-muted d-lg-none d-block">{stock.instrument_info.long_name}</div>
-                  <div className="col d-lg-none d-block">
-                    {stock.price_info.last.price.toFixed(2)}NOK {' ('}
-                    {stock.price_info.diff_pct}%{')'}
+                  <div className={`col d-lg-none d-block list-inline ${stock.price_info.diff_pct > 0 ? 'text-success' : 'text-danger'}`}>
+                    {stock.price_info.last.price.toFixed(2)}NOK{' '}
+                    <li className={'list-inline-item'}>
+                      {' ('}
+                      {stock.price_info.diff_pct}%{')'}
+                    </li>
                   </div>
                 </div>
               </div>
@@ -30,7 +33,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
                   <p className="m-0 text-muted">{stock.instrument_info.long_name}</p>
                 </div>
                 <div className="col-2">Utbytte:</div>
-                <div className="col-2">Rating:</div>
+                <div className="col-2">Rating: {/* <i>{stock.stats[6].rating - stock.stats[5].rating}</i> */}</div>
               </div>
               <div className="row row-cols-lg-5 row-cols-2 border-bottom justify-content-between justify-content-lg-between">
                 {/* first */}
@@ -39,22 +42,18 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
                 </div>
                 {/* hide on lg, show on breakpoint */}
                 <div className="col d-lg-none d-block">
-                  <h1 className={`${setColor(stock.stats[stock.stats.length - 1].rating)}`}>
-                    {stock.stats[stock.stats.length - 1].rating}
-                  </h1>
+                  <h1 className={`${setColor(stock.stats[stock.stats.length - 1].rating)}`}>{stock.stats[stock.stats.length - 1].rating}</h1>
                 </div>
                 {/* second */}
                 <div className="col col-lg-2">
-                  
                   <p className={`h6 font-weight-bold ${differenceInMinutes(new Date(stock.company_info.dividend_date), serverDate) < 0 ? 'text-danger' : 'text-success'}`}>
-                    {stock.company_info.dividend_date
-                      && `DD: ${formatDistance(
-                          new Date(stock.company_info.dividend_date),
-                          serverDate,
+                    {stock.company_info.dividend_date &&
+                      `DD: ${formatDistance(
+                        new Date(stock.company_info.dividend_date),
+                        serverDate,
 
-                          { addSuffix: true }
-                        )}`
-                      }
+                        { addSuffix: true }
+                      )}`}
                   </p>
                   <p
                     className={`h6 font-weight-bold
@@ -65,8 +64,8 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
                 </div>
                 {/* third */}
                 <div className="col col-lg-2">
-                  <p className={`h6`}>{stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')}</p>
-                  <p className={`h6`}>{stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')}</p>
+                  <p className="h6">{stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')}</p>
+                  <p className="h6">{stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')}</p>
                 </div>
                 {/* fourth */}
                 <div className="col col-lg-2 d-none d-lg-block">
@@ -82,9 +81,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; q
                   <p className="h1">{stock.key_ratios_info.dividend_per_share}</p>
                 </div>
                 <div className="col col-lg-2 d-none d-lg-block">
-                  <p className={`h1 ${setColor(stock.stats[stock.stats.length - 1].rating)}`}>
-                    {stock.stats[stock.stats.length - 1].rating}
-                  </p>
+                  <p className={`h1 ${setColor(stock.stats[stock.stats.length - 1].rating)}`}>{stock.stats[stock.stats.length - 1].rating}</p>
                 </div>
               </div>
             </div>
