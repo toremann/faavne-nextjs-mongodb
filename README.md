@@ -5,6 +5,7 @@ Hosted at [www.faavne.no](https://www.faavne.no)
 Faavne finds dividend stocks and rates them.
 
 Frontend deployed with Vercel
+- Typescript
 - Nextjs
 - Bootstrap
 - Bootstrap icons
