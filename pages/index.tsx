@@ -65,7 +65,7 @@ export default function Main({
           <Loading />
         )}
         <div className="text-center m-5 bg-black-25">
-          <Link href="https://github.com/toremann" className="link-dark">
+          <Link href="https://github.com/toremann" className="link-dark" aria-label="Learn more about this project">
             <h3 className="bi bi-github" />
           </Link>
         </div>
