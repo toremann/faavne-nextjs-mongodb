@@ -1,4 +1,4 @@
-import { differenceInMinutes, formatDistance } from 'date-fns';
+import { formatDistance } from 'date-fns';
 import Search from './Search';
 import { setColor } from '../utils/setColor';
 import { Stock } from '../interfaces/stocks';
@@ -55,14 +55,28 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   );
 };
 
-const Stocks = ({ stocks, query, setQuery, serverDate }: { setQuery: Function; query: String; stocks: Array<Stock>; serverDate: Date }) => {
+const Stocks = ({
+  stocks,
+  query,
+  setQuery,
+  serverDate,
+  filter,
+  handleFilter,
+}: {
+  setQuery: Function;
+  query: String;
+  stocks: Array<Stock>;
+  serverDate: Date;
+  filter: Boolean;
+  handleFilter: Function;
+}) => {
   return (
     <div className="container mt-4 rounded-top ">
-      <Search stocks={stocks} query={query} setQuery={setQuery} />
+      <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
         .sort((a: Stock, b: Stock) => (a.stats[6].rating < b.stats[6].rating ? 1 : -1))
-        .map((stock: any, index: number) => (
+        .map((stock: Stock, index: number) => (
           <div key={index} className="m-4 rounded">
             <Header stock={stock} />
             <Body stock={stock} />
