@@ -6,6 +6,7 @@ export interface Stock {
   instrument_info: {
     long_name: String
     symbol: String
+    name: String
   }
 
   key_ratios_info: {
