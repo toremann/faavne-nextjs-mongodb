@@ -6,7 +6,7 @@ import { Stock } from '../interfaces/stocks';
 import { useState, useEffect } from 'react';
 import Loading from '../components/Loading';
 
-export default function Main({ stocks, serverDate }: { stocks: Stock; serverDate: Date }) {
+export default function Main({ stocks, serverDate }: { stocks: Stock[]; serverDate: Date }) {
   const [items, setItems] = useState<Stock[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [query, setQuery] = useState('');
