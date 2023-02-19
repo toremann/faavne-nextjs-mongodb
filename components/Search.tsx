@@ -1,25 +1,25 @@
 const Search = ({ query, setQuery, handleFilter, filter }: any) => {
   return (
-    <div className="mb-4">
-      <div className="input-group d-flex flex-row">
-        <input
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
-          value={query}
-          type="search"
-          className="form-control rounded"
-          placeholder="Søk.."
-          aria-label="Search"
-          aria-describedby="search-addon"
-          autoFocus
-        />
-      </div>
-      <div className="form-check form-switch d-flex flex-row">
-        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={filter} onChange={handleFilter} />
-        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-          EX / DD
-        </label>
+    <div className="container mt-4">
+      <div className="row">
+        <div className="col-md-8 offset-md-2">
+          <form>
+            <div className="form-group">
+              <label htmlFor="search-input">Søk:</label>
+              <div className="input-group">
+                <input type="text" className="form-control" id="search-input" placeholder="Aksje navn eller symbol.." value={query} onChange={(e) => setQuery(e.target.value)} />
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" id="toggle-switch" checked={filter} onChange={handleFilter} />
+                <label className="form-check-label" htmlFor="toggle-switch">
+                  Vis kun aksjer med utbytte dato
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
