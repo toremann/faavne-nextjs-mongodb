@@ -9,7 +9,7 @@ const Header = ({ stock }: { stock: Stock }) => {
     <div className="row bg-light border-top">
       <div className="col-6 text-truncate">{stock.instrument_info.long_name}</div>
       <div className="col-3">Utbytte</div>
-      <div className="col-3">Rating {checkRating(stock.stats[6].rating - stock.stats[5].rating)}</div>
+      <div className="col-3">Rating {checkRating((stock.stats[6]?.rating ?? 0) - (stock.stats[5]?.rating ?? 0))}</div>
     </div>
   );
 };
@@ -75,7 +75,7 @@ const Stocks = ({
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
-        .sort((a: Stock, b: Stock) => (a.stats[6].rating < b.stats[6].rating ? 1 : -1))
+        .sort((a: Stock, b: Stock) => ((a.stats[6]?.rating ?? 0) < (b.stats[6]?.rating ?? 0) ? 1 : -1))
         .map((stock: Stock, index: number) => (
           <div key={index} className="m-4 rounded">
             <Header stock={stock} />
