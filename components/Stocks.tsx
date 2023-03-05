@@ -4,6 +4,8 @@ import Search from './Search';
 import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
 import { checkRating } from '../utils/checkRating';
+import { translateSentence } from '../utils/translate';
+import { nb } from 'date-fns/locale';
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
@@ -35,10 +37,9 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
     <div className="row rounded border border-primary-subtle">
       <div className="col-12">
-
         <div className="row">
-          <div className="col-md-6">Excluding dato</div>
-          <div className="col-md-6">Utbytte dato</div>
+          <div className="col-md-6">Excluding dato:</div>
+          <div className="col-md-6">Utbytte dato:</div>
         </div>
 
         <div className="row">
@@ -47,7 +48,7 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
               `${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
                 new Date(stock.company_info.excluding_date),
                 serverDate,
-                { addSuffix: true }
+                { locale: nb }
               )}${')'}`}
           </div>
 
@@ -56,7 +57,7 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
               `${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
                 new Date(stock.company_info.dividend_date),
                 serverDate,
-                { addSuffix: true }
+                { locale: nb }
               )}${')'}`}
           </div>
         </div>
@@ -64,14 +65,14 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
 
       <div className="col-12">
         <div className="row">
-          <div className="col-4 col-md-3">Dividend Per Share</div>
-          <div className="col-4 col-md-3">Dividend Yield</div>
-          <div className="col-4 col-md-3">Yield YTD</div>
+          <div className="col-4 col-md-3">Utbytte per aksje:</div>
+          <div className="col-4 col-md-3">Yield:</div>
+          <div className="col-4 col-md-3">Yield YTD:</div>
         </div>
         <div className="row">
-          <div className="col-4 col-md-3 h1">{stock.key_ratios_info.dividend_per_share}</div>
-          <div className="col-4 col-md-3 h1">{stock.key_ratios_info.dividend_yield}</div>
-          <div className="col-4 col-md-3 h1">{stock.historical_returns_info.yield_ytd}</div>
+          <div className="col-4 col-md-3 h3">{stock.key_ratios_info.dividend_per_share}</div>
+          <div className="col-4 col-md-3 h3">{stock.key_ratios_info.dividend_yield}</div>
+          <div className="col-4 col-md-3 h3">{stock.historical_returns_info.yield_ytd}</div>
         </div>
       </div>
     </div>
