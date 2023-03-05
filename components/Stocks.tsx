@@ -8,7 +8,7 @@ import { nb } from 'date-fns/locale';
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
-    <div className="d-flex align-items-center justify-content-between m-4 mb-0">
+    <div className="d-flex align-items-center justify-content-between m-4 mb-0 text-white">
       <div className="text-truncate">{stock.instrument_info.long_name}</div>
       <div className="">Rating</div>
     </div>
@@ -17,7 +17,7 @@ const Header = ({ stock }: { stock: Stock }) => {
 
 const Body = ({ stock }: { stock: Stock }) => {
   return (
-    <div className="d-flex align-items-center justify-content-between m-4 mt-0">
+    <div className="d-flex align-items-center justify-content-between m-4 mt-0 text-white">
       <div className="h1 mr-2 col-3">{stock.instrument_info.symbol}</div>
       <div className={`col-5 ${stock.price_info.diff_pct > 0 ? 'text-success' : 'text-danger'}`}>
         <p className="h6">{stock.price_info.last.price.toFixed(2)}NOK</p>
@@ -34,39 +34,37 @@ const Body = ({ stock }: { stock: Stock }) => {
 
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
-    <div className="row rounded border border-primary-subtle">
+    <div className="row rounded border border-primary text-white m-1">
       <div className="col-12">
         <div className="row">
-          <div className="col-md-6">Excluding dato:</div>
-          <div className="col-md-6">Utbytte dato:</div>
+          <div className="col-md-6">
+            Excluding dato:
+            <div className="h3">
+              {stock.company_info.excluding_date
+                ? `${stock.company_info.excluding_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                    new Date(stock.company_info.excluding_date),
+                    serverDate,
+                    { locale: nb }
+                  )}${')'}`
+                : 'Ingen dato'}
+            </div>
+          </div>
+          <div className="col-md-6">
+            Utbytte dato:
+            <div className="h3">
+              {stock.company_info.dividend_date
+                ? `${stock.company_info.dividend_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                    new Date(stock.company_info.dividend_date),
+                    serverDate,
+                    { locale: nb }
+                  )}${')'}`
+                : 'Ingen dato'}
+            </div>
+          </div>
         </div>
 
         <div className="row">
-          <div className="col-md-6 h3">
-            {stock.company_info.excluding_date
-              ? `${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-                  new Date(stock.company_info.excluding_date),
-                  serverDate,
-                  { locale: nb }
-                )}${')'}`
-              : 'Ingen dato'}
-          </div>
-
-          <div className="col-md-6 h3">
-            {stock.company_info.dividend_date
-              ? `${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-                  new Date(stock.company_info.dividend_date),
-                  serverDate,
-                  { locale: nb }
-                )}${')'}`
-              : 'Ingen dato'}
-          </div>
-        </div>
-      </div>
-
-      <div className="col-12">
-        <div className="row">
-          <div className="col-4 col-md-3">Utbytte per aksje:</div>
+          <div className="col-4 col-md-3 ">Utbytte per aksje:</div>
           <div className="col-4 col-md-3">Yield:</div>
           <div className="col-4 col-md-3">Yield YTD:</div>
         </div>
@@ -90,13 +88,13 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
   };
 
   return (
-    <div className="container mt-4 rounded-top bg-light">
+    <div className="container mt-4 rounded bg-secondary bg-gradient bg-opacity-25 p-2">
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
         .sort((a: Stock, b: Stock) => ((a.stats[6]?.rating ?? 0) < (b.stats[6]?.rating ?? 0) ? 1 : -1))
         .map((stock: Stock, index: number) => (
-          <div key={index} className="border rounded m-4">
+          <div key={index} className={`border border-dark rounded m-4 bg-dark bg-gradient`}>
             <Header stock={stock} />
             <Body stock={stock} />
             <div className="d-grid gap-2 m-4">
