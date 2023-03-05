@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Search from './Search';
 import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
-import { checkRating } from '../utils/checkRating';
 import { recalculateRating } from '../utils/rating';
 import { nb } from 'date-fns/locale';
 
@@ -48,10 +47,9 @@ const Body = ({ stock }: { stock: Stock }) => {
   );
 };
 
-
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
-    <div className="row rounded border border-primary text-white m-1">
+    <div className="row">
       <div className="col-12">
         <div className="row">
           <div className="col-md-6">
@@ -81,7 +79,7 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
         </div>
 
         <div className="row">
-          <div className="col-4 col-md-3 ">Utbytte per aksje:</div>
+          <div className="col-4 col-md-3 text-truncate">Utbytte per aksje:</div>
           <div className="col-4 col-md-3">Yield:</div>
           <div className="col-4 col-md-3">Yield YTD:</div>
         </div>
@@ -95,13 +93,26 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   );
 };
 
+const Graph = () => {
+  return(
+  <div>Graphs</div>
+  )
+};
+
 const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: StocksProps) => {
   const [isBodyExpanded, setIsBodyExpanded] = useState(stocks.map(() => false));
+  const [isGraphExpanded, setIsGraphExpanded] = useState(stocks.map(() => false)); 
 
   const toggleBodyExpansion = (index: number) => {
     const updatedExpandedState = [...isBodyExpanded];
     updatedExpandedState[index] = !isBodyExpanded[index];
     setIsBodyExpanded(updatedExpandedState);
+  };
+
+  const toggleGraphExpansion = (index: number) => {
+    const updateExpandedGraph = [...isGraphExpanded];
+    updateExpandedGraph[index] = !isGraphExpanded[index]
+    setIsGraphExpanded(updateExpandedGraph); 
   };
 
   return (
@@ -114,15 +125,33 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
           <div key={index} className={`border border-dark rounded m-4 bg-dark bg-gradient`}>
             <Header stock={stock} />
             <Body stock={stock} />
-            <div className="d-grid gap-2 m-4">
-              <button className="btn btn-outline-primary" onClick={() => toggleBodyExpansion(index)}>
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="mr-2">Utbytte</div>
-                  <div>{isBodyExpanded[index] ? <i className="bi bi-caret-up-fill" /> : <i className="bi bi-caret-down-fill" />}</div>
-                </div>
-              </button>
 
-              {isBodyExpanded[index] && <Footer stock={stock} serverDate={serverDate} />}
+            <div className="accordion">
+              <div className="accordion-item">
+                <h2 className="accordion-header">
+                  <button className="accordion-button collapsed" type="button" onClick={() => toggleBodyExpansion(index)}>
+                    Utbytte
+                  </button>
+                </h2>
+                <div className={`accordion-collapse collapse ${isBodyExpanded[index] ? 'show' : ''}`}>
+                  <div className="accordion-body">
+                    <Footer stock={stock} serverDate={serverDate} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="accordion-item">
+                <h2 className="accordion-header">
+                  <button className="accordion-button" type="button" onClick={() => toggleGraphExpansion(index)}>
+                    Graph
+                  </button>
+                </h2>
+                <div className={`accordion-collapse collapse ${isGraphExpanded[index] ? 'show' : ''}`}>
+                  <div className="accordion-body">
+                    <Graph />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}
@@ -131,3 +160,4 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
 };
 
 export default Stocks;
+
