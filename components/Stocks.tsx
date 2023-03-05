@@ -3,8 +3,8 @@ import { useState } from 'react';
 import Search from './Search';
 import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
+import { checkRating } from '../utils/checkRating';
 import { nb } from 'date-fns/locale';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
@@ -33,16 +33,15 @@ const Body = ({ stock }: { stock: Stock }) => {
 };
 
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
-  
   return (
-    <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} transition={{ duration: 0.5 }} className="row rounded border border-primary-subtle">
+    <div className="row rounded border border-primary-subtle">
       <div className="col-12">
-        <motion.div initial={{ opacity: 0, x: 0 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="row">
+        <div className="row">
           <div className="col-md-6">Excluding dato:</div>
           <div className="col-md-6">Utbytte dato:</div>
-        </motion.div>
+        </div>
 
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="row">
+        <div className="row">
           <div className="col-md-6 h3">
             {stock.company_info.excluding_date
               ? `${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
@@ -62,34 +61,32 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
                 )}${')'}`
               : 'Ingen dato'}
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <div className="col-12">
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="row">
+        <div className="row">
           <div className="col-4 col-md-3">Utbytte per aksje:</div>
           <div className="col-4 col-md-3">Yield:</div>
           <div className="col-4 col-md-3">Yield YTD:</div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="row">
+        </div>
+        <div className="row">
           <div className="col-4 col-md-3 h3">{stock.key_ratios_info.dividend_per_share}</div>
           <div className="col-4 col-md-3 h3">{stock.key_ratios_info.dividend_yield}</div>
           <div className="col-4 col-md-3 h3">{stock.historical_returns_info.yield_ytd}</div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: StocksProps) => {
   const [isBodyExpanded, setIsBodyExpanded] = useState(stocks.map(() => false));
-  const iconAnimationControls = stocks.map(() => useAnimation());
 
-  const toggleBodyExpansion = async (index: number) => {
+  const toggleBodyExpansion = (index: number) => {
     const updatedExpandedState = [...isBodyExpanded];
     updatedExpandedState[index] = !isBodyExpanded[index];
     setIsBodyExpanded(updatedExpandedState);
-    await iconAnimationControls[index].start(isBodyExpanded[index] ? { rotate: 0 } : { rotate: 180 });
   };
 
   return (
@@ -106,17 +103,11 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
               <button className="btn btn-outline-primary" onClick={() => toggleBodyExpansion(index)}>
                 <div className="d-flex align-items-center justify-content-between">
                   <div className="mr-2">Utbytte</div>
-                  <motion.i animate={iconAnimationControls[index]} className="bi bi-caret-down-fill" />
+                  <div>{isBodyExpanded[index] ? <i className="bi bi-caret-up-fill" /> : <i className="bi bi-caret-down-fill" />}</div>
                 </div>
               </button>
 
-              <AnimatePresence>
-                {isBodyExpanded[index] && (
-                  <motion.div key="footer" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} transition={{ duration: 0.5 }}>
-                    <Footer stock={stock} serverDate={serverDate} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {isBodyExpanded[index] && <Footer stock={stock} serverDate={serverDate} />}
             </div>
           </div>
         ))}
