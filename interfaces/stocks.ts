@@ -1,4 +1,6 @@
 export interface Stock {
+  symbol: String
+
   company_info: {
     excluding_date: Date
     dividend_date: Date
@@ -22,4 +24,13 @@ export interface Stock {
 
   stats: { rating: number }[];
   stock: object;
+}
+
+export interface StocksProps {
+  stocks: Stock[];
+  query: string;
+  setQuery: Function;
+  serverDate: Date;
+  filter: boolean;
+  handleFilter: Function;
 }
