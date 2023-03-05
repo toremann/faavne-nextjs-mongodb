@@ -11,8 +11,13 @@ export interface Stock {
     name: String
   }
 
+  historical_returns_info:{
+    yield_ytd: number
+  }
+
   key_ratios_info: {
     dividend_per_share: number
+    dividend_yield: number
   }
 
   price_info: {

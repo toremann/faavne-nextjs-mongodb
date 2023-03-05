@@ -24,7 +24,7 @@ const Body = ({ stock }: { stock: Stock }) => {
           {stock.price_info.diff_pct}% <i className={stock.price_info.diff_pct > 0 ? 'bi bi-arrow-up-circle' : 'bi bi-arrow-down-circle'} />
         </p>
       </div>
-      <div className={``}>
+      <div>
         <h1 className={`h1 ${setColor(stock.stats[stock.stats.length - 1].rating)}`}>{stock.stats[stock.stats.length - 1].rating}</h1>
       </div>
     </div>
@@ -34,23 +34,46 @@ const Body = ({ stock }: { stock: Stock }) => {
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
     <div className="row rounded border border-primary-subtle">
-      <div className="col-md-6">
-        {stock.company_info.excluding_date &&
-          `Excluding date: ${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-            new Date(stock.company_info.excluding_date),
-            serverDate,
-            { addSuffix: true }
-          )}${')'}`}
+      <div className="col-12">
+
+        <div className="row">
+          <div className="col-md-6">Excluding dato</div>
+          <div className="col-md-6">Utbytte dato</div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 h3">
+            {stock.company_info.excluding_date &&
+              `${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                new Date(stock.company_info.excluding_date),
+                serverDate,
+                { addSuffix: true }
+              )}${')'}`}
+          </div>
+
+          <div className="col-md-6 h3">
+            {stock.company_info.dividend_date &&
+              `${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                new Date(stock.company_info.dividend_date),
+                serverDate,
+                { addSuffix: true }
+              )}${')'}`}
+          </div>
+        </div>
       </div>
-      <div className="col-md-6">
-        {stock.company_info.dividend_date &&
-          `Divident date: ${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-            new Date(stock.company_info.dividend_date),
-            serverDate,
-            { addSuffix: true }
-          )}${')'}`}
+
+      <div className="col-12">
+        <div className="row">
+          <div className="col-4 col-md-3">Dividend Per Share</div>
+          <div className="col-4 col-md-3">Dividend Yield</div>
+          <div className="col-4 col-md-3">Yield YTD</div>
+        </div>
+        <div className="row">
+          <div className="col-4 col-md-3 h1">{stock.key_ratios_info.dividend_per_share}</div>
+          <div className="col-4 col-md-3 h1">{stock.key_ratios_info.dividend_yield}</div>
+          <div className="col-4 col-md-3 h1">{stock.historical_returns_info.yield_ytd}</div>
+        </div>
       </div>
-      <div className="col-12 col-md-3 h1">{stock.key_ratios_info.dividend_per_share}</div>
     </div>
   );
 };
