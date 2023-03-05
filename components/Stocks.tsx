@@ -4,6 +4,7 @@ import Search from './Search';
 import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
 import { checkRating } from '../utils/checkRating';
+import { recalculateRating } from '../utils/rating';
 import { nb } from 'date-fns/locale';
 
 const Header = ({ stock }: { stock: Stock }) => {
@@ -16,6 +17,21 @@ const Header = ({ stock }: { stock: Stock }) => {
 };
 
 const Body = ({ stock }: { stock: Stock }) => {
+  // Find highest and lowest rating
+  let highestRating = -Infinity;
+  let lowestRating = Infinity;
+  for (const stat of stock.stats) {
+    if (stat.rating > highestRating) {
+      highestRating = stat.rating;
+    }
+    if (stat.rating < lowestRating) {
+      lowestRating = stat.rating;
+    }
+  }
+
+  // Recalculate rating to be between 0 and 100
+  const rating = recalculateRating(stock.stats[stock.stats.length - 1].rating);
+
   return (
     <div className="d-flex align-items-center justify-content-between m-4 mt-0 text-white">
       <div className="h1 mr-2 col-3">{stock.instrument_info.symbol}</div>
@@ -26,11 +42,12 @@ const Body = ({ stock }: { stock: Stock }) => {
         </p>
       </div>
       <div>
-        <h1 className={`h1 ${setColor(stock.stats[stock.stats.length - 1].rating)}`}>{stock.stats[stock.stats.length - 1].rating}</h1>
+        <h1 className={`h1 ${setColor(rating)}`}>{rating}</h1>
       </div>
     </div>
   );
 };
+
 
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (

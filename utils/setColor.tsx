@@ -1,4 +1,16 @@
 export const setColor = (rating: number) => {
+  if (rating >= 450) {
+    return "custom-color-500";
+  }
+  if (rating >= 400) {
+    return "custom-color-400";
+  }
+  if (rating >= 350) {
+    return "custom-color-300";
+  }
+  if (rating >= 300) {
+    return "custom-color-200";
+  }
     if (rating >= 250) {
       return "custom-color-100";
     }
