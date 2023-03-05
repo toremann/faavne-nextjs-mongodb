@@ -1,86 +1,129 @@
 import { formatDistance } from 'date-fns';
+import { useState } from 'react';
 import Search from './Search';
 import { setColor } from '../utils/setColor';
-import { Stock } from '../interfaces/stocks';
+import { Stock, StocksProps } from '../interfaces/stocks';
 import { checkRating } from '../utils/checkRating';
+import { recalculateRating } from '../utils/rating';
+import { nb } from 'date-fns/locale';
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
-    <div className="row bg-light border-top">
-      <div className="col-6 text-truncate">{stock.instrument_info.long_name}</div>
-      <div className="col-3">Utbytte</div>
-      <div className="col-3">Rating {checkRating((stock.stats[6]?.rating ?? 0) - (stock.stats[5]?.rating ?? 0))}</div>
+    <div className="d-flex align-items-center justify-content-between m-4 mb-0 text-white">
+      <div className="text-truncate">{stock.instrument_info.long_name}</div>
+      <div className="">Rating</div>
     </div>
   );
 };
 
 const Body = ({ stock }: { stock: Stock }) => {
+  // Find highest and lowest rating
+  let highestRating = -Infinity;
+  let lowestRating = Infinity;
+  for (const stat of stock.stats) {
+    if (stat.rating > highestRating) {
+      highestRating = stat.rating;
+    }
+    if (stat.rating < lowestRating) {
+      lowestRating = stat.rating;
+    }
+  }
+
+  // Recalculate rating to be between 0 and 100
+  const rating = recalculateRating(stock.stats[stock.stats.length - 1].rating);
+
   return (
-    <div className="row bg-light">
-      <div className="col-3 h1">{stock.instrument_info.symbol}</div>
-      <div className={`col-3 ${stock.price_info.diff_pct > 0 ? 'text-success' : 'text-danger'}`}>
+    <div className="d-flex align-items-center justify-content-between m-4 mt-0 text-white">
+      <div className="h1 mr-2 col-3">{stock.instrument_info.symbol}</div>
+      <div className={`col-5 ${stock.price_info.diff_pct > 0 ? 'text-success' : 'text-danger'}`}>
         <p className="h6">{stock.price_info.last.price.toFixed(2)}NOK</p>
         <p className="h6">
           {stock.price_info.diff_pct}% <i className={stock.price_info.diff_pct > 0 ? 'bi bi-arrow-up-circle' : 'bi bi-arrow-down-circle'} />
         </p>
       </div>
-      <div className="col-3 h1">{stock.key_ratios_info.dividend_per_share}</div>
-      <div className={`col-3`}>
-        <h1 className={`h1 ${setColor(stock.stats[stock.stats.length - 1].rating)}`}>{stock.stats[stock.stats.length - 1].rating}</h1>
+      <div>
+        <h1 className={`h1 ${setColor(rating)}`}>{rating}</h1>
       </div>
     </div>
   );
 };
+
 
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
-    <div className="row sm-col bg-warning bg-gradient rounded-bottom">
-      <div className="col-6">
-        {stock.company_info.excluding_date &&
-          `Excluding date: ${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-            new Date(stock.company_info.excluding_date),
-            serverDate,
-            { addSuffix: true }
-          )}${')'}`}
-      </div>
-      <div className="col-6">
-        {stock.company_info.dividend_date &&
-          `Divident date: ${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-            new Date(stock.company_info.dividend_date),
-            serverDate,
-            { addSuffix: true }
-          )}${')'}`}
+    <div className="row rounded border border-primary text-white m-1">
+      <div className="col-12">
+        <div className="row">
+          <div className="col-md-6">
+            Excluding dato:
+            <div className="h3">
+              {stock.company_info.excluding_date
+                ? `${stock.company_info.excluding_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                    new Date(stock.company_info.excluding_date),
+                    serverDate,
+                    { locale: nb }
+                  )}${')'}`
+                : 'Ingen dato'}
+            </div>
+          </div>
+          <div className="col-md-6">
+            Utbytte dato:
+            <div className="h3">
+              {stock.company_info.dividend_date
+                ? `${stock.company_info.dividend_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                    new Date(stock.company_info.dividend_date),
+                    serverDate,
+                    { locale: nb }
+                  )}${')'}`
+                : 'Ingen dato'}
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-4 col-md-3 ">Utbytte per aksje:</div>
+          <div className="col-4 col-md-3">Yield:</div>
+          <div className="col-4 col-md-3">Yield YTD:</div>
+        </div>
+        <div className="row">
+          <div className="col-4 col-md-3 h3">{stock.key_ratios_info.dividend_per_share}</div>
+          <div className="col-4 col-md-3 h3">{stock.key_ratios_info.dividend_yield}</div>
+          <div className="col-4 col-md-3 h3">{stock.historical_returns_info.yield_ytd}</div>
+        </div>
       </div>
     </div>
   );
 };
 
-const Stocks = ({
-  stocks,
-  query,
-  setQuery,
-  serverDate,
-  filter,
-  handleFilter,
-}: {
-  setQuery: Function;
-  query: String;
-  stocks: Array<Stock>;
-  serverDate: Date;
-  filter: Boolean;
-  handleFilter: Function;
-}) => {
+const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: StocksProps) => {
+  const [isBodyExpanded, setIsBodyExpanded] = useState(stocks.map(() => false));
+
+  const toggleBodyExpansion = (index: number) => {
+    const updatedExpandedState = [...isBodyExpanded];
+    updatedExpandedState[index] = !isBodyExpanded[index];
+    setIsBodyExpanded(updatedExpandedState);
+  };
+
   return (
-    <div className="container mt-4 rounded-top ">
+    <div className="container mt-4 rounded bg-secondary bg-gradient bg-opacity-25 p-2">
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
         .sort((a: Stock, b: Stock) => ((a.stats[6]?.rating ?? 0) < (b.stats[6]?.rating ?? 0) ? 1 : -1))
         .map((stock: Stock, index: number) => (
-          <div key={index} className="m-4 rounded">
+          <div key={index} className={`border border-dark rounded m-4 bg-dark bg-gradient`}>
             <Header stock={stock} />
             <Body stock={stock} />
-            <Footer stock={stock} serverDate={serverDate} />
+            <div className="d-grid gap-2 m-4">
+              <button className="btn btn-outline-primary" onClick={() => toggleBodyExpansion(index)}>
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="mr-2">Utbytte</div>
+                  <div>{isBodyExpanded[index] ? <i className="bi bi-caret-up-fill" /> : <i className="bi bi-caret-down-fill" />}</div>
+                </div>
+              </button>
+
+              {isBodyExpanded[index] && <Footer stock={stock} serverDate={serverDate} />}
+            </div>
           </div>
         ))}
     </div>
