@@ -4,7 +4,6 @@ import Search from './Search';
 import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
 import { checkRating } from '../utils/checkRating';
-import { translateSentence } from '../utils/translate';
 import { nb } from 'date-fns/locale';
 
 const Header = ({ stock }: { stock: Stock }) => {
@@ -44,21 +43,23 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
 
         <div className="row">
           <div className="col-md-6 h3">
-            {stock.company_info.excluding_date &&
-              `${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-                new Date(stock.company_info.excluding_date),
-                serverDate,
-                { locale: nb }
-              )}${')'}`}
+            {stock.company_info.excluding_date
+              ? `${stock.company_info.dividend_date && new Date(stock.company_info.excluding_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                  new Date(stock.company_info.excluding_date),
+                  serverDate,
+                  { locale: nb }
+                )}${')'}`
+              : 'Ingen dato'}
           </div>
 
           <div className="col-md-6 h3">
-            {stock.company_info.dividend_date &&
-              `${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
-                new Date(stock.company_info.dividend_date),
-                serverDate,
-                { locale: nb }
-              )}${')'}`}
+            {stock.company_info.dividend_date
+              ? `${stock.company_info.excluding_date && new Date(stock.company_info.dividend_date).toLocaleDateString('en-GB')} ${'('}${formatDistance(
+                  new Date(stock.company_info.dividend_date),
+                  serverDate,
+                  { locale: nb }
+                )}${')'}`
+              : 'Ingen dato'}
           </div>
         </div>
       </div>
