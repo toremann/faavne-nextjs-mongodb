@@ -9,10 +9,12 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
+    "chart.js": "^4.2.1",
     "date-fns": "^2.29.3",
     "mongodb": "^5.1.0",
     "next": "^13.2.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "update": "^0.7.4"
   },

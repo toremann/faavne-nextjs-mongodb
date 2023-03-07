@@ -5,6 +5,15 @@ import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
 import { recalculateRating } from '../utils/rating';
 import { nb } from 'date-fns/locale';
+import { Data } from '../utils/Data';
+import LineChart from './Linechart';
+
+import { CategoryScale } from "chart.js";
+import Chart from "chart.js/auto";
+
+
+Chart.register(CategoryScale);
+
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
@@ -93,9 +102,32 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   );
 };
 
-const Graph = () => {
+const Graph = ({stock}: any) => {
+  console.log(stock)
+  const [chartData, setChartData] = useState({
+    labels: stock.stats.map((stats) => new Date(stats.date).toLocaleTimeString('en-GB')),
+
+    datasets: [
+      {
+        label: "Users Gained ",
+        data: stock.stats.map((stats) => stats.rating),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#f0331a",
+          "#f3ba2f",
+          "#2a71d0"
+        ],
+        borderColor: "black",
+        borderWidth: 2
+      }
+    ]
+  });
   return(
-  <div>Graphs</div>
+  <div>
+          <LineChart chartData={chartData} />
+
+  </div>
   )
 };
 
@@ -142,13 +174,14 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
 
               <div className="accordion-item">
                 <h2 className="accordion-header">
-                  <button className="accordion-button" type="button" onClick={() => toggleGraphExpansion(index)}>
+                  <button className="accordion-button collapsed" type="button" onClick={() => toggleGraphExpansion(index)}>
                     Graph
                   </button>
                 </h2>
                 <div className={`accordion-collapse collapse ${isGraphExpanded[index] ? 'show' : ''}`}>
                   <div className="accordion-body">
-                    <Graph />
+                    
+                    <Graph stock={stock}/>
                   </div>
                 </div>
               </div>

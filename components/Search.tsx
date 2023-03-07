@@ -1,6 +1,4 @@
 const Search = ({ stocks, query, setQuery, handleFilter, filter }: any) => {
-  console.log(stocks);
-
   return (
     <div className="container mt-4 text-black">
       <div className="row">
