@@ -29,7 +29,7 @@ export interface Stock {
 
   stats: { rating: number }[];
   stock: {stats: {map: Function}};
-
+}
 
 export interface StocksProps {
   stocks: Stock[];
