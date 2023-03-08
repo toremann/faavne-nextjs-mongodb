@@ -28,8 +28,8 @@ export interface Stock {
   };
 
   stats: { rating: number }[];
-  stock: object;
-}
+  stock: {stats: {map: Function}};
+
 
 export interface StocksProps {
   stocks: Stock[];
