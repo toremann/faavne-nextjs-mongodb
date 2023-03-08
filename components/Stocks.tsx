@@ -5,15 +5,12 @@ import { setColor } from '../utils/setColor';
 import { Stock, StocksProps } from '../interfaces/stocks';
 import { recalculateRating } from '../utils/rating';
 import { nb } from 'date-fns/locale';
-import { Data } from '../utils/Data';
 import LineChart from './Linechart';
 
-import { CategoryScale } from "chart.js";
-import Chart from "chart.js/auto";
-
+import { CategoryScale } from 'chart.js';
+import Chart from 'chart.js/auto';
 
 Chart.register(CategoryScale);
-
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
@@ -25,18 +22,6 @@ const Header = ({ stock }: { stock: Stock }) => {
 };
 
 const Body = ({ stock }: { stock: Stock }) => {
-  // Find highest and lowest rating
-  let highestRating = -Infinity;
-  let lowestRating = Infinity;
-  for (const stat of stock.stats) {
-    if (stat.rating > highestRating) {
-      highestRating = stat.rating;
-    }
-    if (stat.rating < lowestRating) {
-      lowestRating = stat.rating;
-    }
-  }
-
   // Recalculate rating to be between 0 and 100
   const rating = recalculateRating(stock.stats[stock.stats.length - 1].rating);
 
@@ -102,38 +87,75 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   );
 };
 
-const Graph = ({stock}: any) => {
-  console.log(stock)
-  const [chartData, setChartData] = useState({
-    labels: stock.stats.map((stats) => new Date(stats.date).toLocaleTimeString('en-GB')),
+const Graph = ({ stock }: any) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [ratingData, setChartData] = useState({
+    labels: stock.stats.map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
 
     datasets: [
       {
-        label: "Users Gained ",
-        data: stock.stats.map((stats) => stats.rating),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#f0331a",
-          "#f3ba2f",
-          "#2a71d0"
-        ],
-        borderColor: "black",
-        borderWidth: 2
-      }
-    ]
+        label: 'Rating',
+        data: stock.stats.map((stats: { rating: number }) => stats.rating),
+        backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#f0331a', '#f3ba2f', '#2a71d0'],
+        borderColor: 'black',
+        borderWidth: 2,
+        lineTension: 0.2,
+      },
+    ],
   });
-  return(
-  <div>
-          <LineChart chartData={chartData} />
 
-  </div>
-  )
+  const [priceData, setPriceData] = useState({
+    labels: stock.stats.map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
+
+    datasets: [
+      {
+        label: 'Pris',
+        data: stock.stats.map((stats: { price: number }) => stats.price),
+        backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#f0331a', '#f3ba2f', '#2a71d0'],
+        borderColor: 'black',
+        borderWidth: 2,
+        lineTension: 0.2,
+      },
+    ],
+  });
+
+  const handleButtonClick = (value: number) => {
+    setActiveIndex(value);
+  };
+
+  return (
+    <div>
+      <ul className="nav nav-tabs justify-content-center mb-2">
+        <li className="nav-item">
+          <a className={`nav-link ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleButtonClick(0)}>
+            Rating
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className={`nav-link ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleButtonClick(1)}>
+            Pris
+          </a>
+        </li>
+      </ul>
+      <div>
+        <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">
+          <div className="carousel-inner">
+            <div className={`carousel-item ${activeIndex === 0 ? 'active' : ''}`}>
+              <LineChart chartData={ratingData} name={'rating'} />
+            </div>
+            <div className={`carousel-item ${activeIndex === 1 ? 'active' : ''}`}>
+              <LineChart chartData={priceData} name={'price'} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: StocksProps) => {
   const [isBodyExpanded, setIsBodyExpanded] = useState(stocks.map(() => false));
-  const [isGraphExpanded, setIsGraphExpanded] = useState(stocks.map(() => false)); 
+  const [isGraphExpanded, setIsGraphExpanded] = useState(stocks.map(() => false));
 
   const toggleBodyExpansion = (index: number) => {
     const updatedExpandedState = [...isBodyExpanded];
@@ -143,8 +165,8 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
 
   const toggleGraphExpansion = (index: number) => {
     const updateExpandedGraph = [...isGraphExpanded];
-    updateExpandedGraph[index] = !isGraphExpanded[index]
-    setIsGraphExpanded(updateExpandedGraph); 
+    updateExpandedGraph[index] = !isGraphExpanded[index];
+    setIsGraphExpanded(updateExpandedGraph);
   };
 
   return (
@@ -180,8 +202,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
                 </h2>
                 <div className={`accordion-collapse collapse ${isGraphExpanded[index] ? 'show' : ''}`}>
                   <div className="accordion-body">
-                    
-                    <Graph stock={stock}/>
+                    <Graph stock={stock} />
                   </div>
                 </div>
               </div>
@@ -193,4 +214,3 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
 };
 
 export default Stocks;
-
