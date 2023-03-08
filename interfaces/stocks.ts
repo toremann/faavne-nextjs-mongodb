@@ -1,5 +1,5 @@
 export interface Stock {
-  symbol: String
+  symbol: String,
 
   company_info: {
     excluding_date: Date
