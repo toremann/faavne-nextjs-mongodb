@@ -19,7 +19,7 @@ const Search = ({ stocks, query, setQuery, handleFilter, filter }: any) => {
               </div>
               
               <div className="d-md-block">
-                <span className="d-none d-md-inline-block">Sist oppdatert:</span>
+                <span className="d-none d-md-inline-block">Sist oppdatert: {new Date(stocks[0].stats[6].date).toLocaleString('en-GB')}</span>
                 <span className="d-md-none">Sist oppdatert: {new Date(stocks[0].stats[6].date).toLocaleString('en-GB')}</span>
               </div>
             </div>
