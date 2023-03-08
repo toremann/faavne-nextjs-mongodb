@@ -12,6 +12,7 @@ import Chart from 'chart.js/auto';
 
 Chart.register(CategoryScale);
 
+
 const Header = ({ stock }: { stock: Stock }) => {
   return (
     <div className="d-flex align-items-center justify-content-between m-4 mb-0 text-white">
@@ -40,6 +41,7 @@ const Body = ({ stock }: { stock: Stock }) => {
     </div>
   );
 };
+
 
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
@@ -157,11 +159,13 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
   const [isBodyExpanded, setIsBodyExpanded] = useState(stocks.map(() => false));
   const [isGraphExpanded, setIsGraphExpanded] = useState(stocks.map(() => false));
 
+
   const toggleBodyExpansion = (index: number) => {
     const updatedExpandedState = [...isBodyExpanded];
     updatedExpandedState[index] = !isBodyExpanded[index];
     setIsBodyExpanded(updatedExpandedState);
   };
+
 
   const toggleGraphExpansion = (index: number) => {
     const updateExpandedGraph = [...isGraphExpanded];
@@ -179,6 +183,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
           <div key={index} className={`border border-dark rounded m-4 bg-dark bg-gradient`}>
             <Header stock={stock} />
             <Body stock={stock} />
+
 
             <div className="accordion">
               <div className="accordion-item">
