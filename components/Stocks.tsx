@@ -178,7 +178,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
-        .sort((a: Stock, b: Stock) => ((a.stats[6]?.rating ?? 0) < (b.stats[6]?.rating ?? 0) ? 1 : -1))
+        .sort((a: Stock, b: Stock) => ((a.stats[4]?.rating ?? 0) < (b.stats[4]?.rating ?? 0) ? 1 : -1))
         .map((stock: Stock, index: number) => (
           <div key={index} className={`border border-dark rounded m-4 bg-dark bg-gradient`}>
             <Header stock={stock} />
