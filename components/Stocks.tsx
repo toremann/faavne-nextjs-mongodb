@@ -6,12 +6,11 @@ import { Stock, StocksProps } from '../interfaces/stocks';
 import { recalculateRating } from '../utils/rating';
 import { nb } from 'date-fns/locale';
 import LineChart from './Linechart';
-
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
+import Accordion from 'react-bootstrap/Accordion';
 
 Chart.register(CategoryScale);
-
 
 const Header = ({ stock }: { stock: Stock }) => {
   return (
@@ -41,7 +40,6 @@ const Body = ({ stock }: { stock: Stock }) => {
     </div>
   );
 };
-
 
 const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
   return (
@@ -128,20 +126,20 @@ const Graph = ({ stock }: any) => {
   return (
     <div>
       <ul className="nav nav-tabs justify-content-center mb-2">
-  <li className="nav-item">
-    <button className={`nav-link ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleButtonClick(0)}>
-      Rating
-    </button>
-  </li>
-  <li className="nav-item">
-    <button className={`nav-link ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleButtonClick(1)}>
-      Pris
-    </button>
-  </li>
-</ul>
+        <li className="nav-item">
+          <button className={`nav-link ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleButtonClick(0)}>
+            Rating
+          </button>
+        </li>
+        <li className="nav-item">
+          <button className={`nav-link ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleButtonClick(1)}>
+            Pris
+          </button>
+        </li>
+      </ul>
 
       <div>
-        <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false" data-bs-ride="carousel">
           <div className="carousel-inner">
             <div className={`carousel-item ${activeIndex === 0 ? 'active' : ''}`}>
               <LineChart chartData={ratingData} name={'rating'} />
@@ -157,23 +155,6 @@ const Graph = ({ stock }: any) => {
 };
 
 const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: StocksProps) => {
-  const [isBodyExpanded, setIsBodyExpanded] = useState(stocks.map(() => false));
-  const [isGraphExpanded, setIsGraphExpanded] = useState(stocks.map(() => false));
-
-
-  const toggleBodyExpansion = (index: number) => {
-    const updatedExpandedState = [...isBodyExpanded];
-    updatedExpandedState[index] = !isBodyExpanded[index];
-    setIsBodyExpanded(updatedExpandedState);
-  };
-
-
-  const toggleGraphExpansion = (index: number) => {
-    const updateExpandedGraph = [...isGraphExpanded];
-    updateExpandedGraph[index] = !isGraphExpanded[index];
-    setIsGraphExpanded(updateExpandedGraph);
-  };
-
   return (
     <div className="mt-3 rounded bg-secondary bg-gradient bg-opacity-25">
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
@@ -184,34 +165,20 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
             <Header stock={stock} />
             <Body stock={stock} />
 
-
-            <div className="accordion">
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button className="accordion-button collapsed" type="button" onClick={() => toggleBodyExpansion(index)}>
-                    Utbytte
-                  </button>
-                </h2>
-                <div className={`accordion-collapse collapse ${isBodyExpanded[index] ? 'show' : ''}`}>
-                  <div className="accordion-body">
-                    <Footer stock={stock} serverDate={serverDate} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button className="accordion-button collapsed" type="button" onClick={() => toggleGraphExpansion(index)}>
-                    Graph
-                  </button>
-                </h2>
-                <div className={`accordion-collapse collapse ${isGraphExpanded[index] ? 'show' : ''}`}>
-                  <div className="accordion-body">
-                    <Graph stock={stock} />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Utbytte</Accordion.Header>
+                <Accordion.Body>
+                  <Footer stock={stock} serverDate={serverDate} />
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>Graph</Accordion.Header>
+                <Accordion.Body>
+                  <Graph stock={stock} />
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           </div>
         ))}
     </div>
