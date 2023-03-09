@@ -39,7 +39,7 @@ export default function Main({ stocks, serverDate }: { stocks: Stock[]; serverDa
         </Head>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1 className="display-4">Faavne</h1>
+            <h1 className="display-4 text-md-start text-center">Faavne</h1>
             <p className="lead d-none d-md-block">
               Utbytte aksjer er aksjer som betaler ut en del av overskuddet til aksjonærene som utbytte. De kan gi en fast inntekt for investorer og kan også ses på som et tegn på et selskaps
               økonomiske helse.

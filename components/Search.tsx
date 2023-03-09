@@ -17,11 +17,6 @@ const Search = ({ stocks, query, setQuery, handleFilter, filter }: any) => {
                   Vis kun aksjer med utbytte dato
                 </label>
               </div>
-              
-              <div className="d-md-block">
-                <span className="d-none d-md-inline-block">Sist oppdatert: {new Date(stocks[0].stats[4].date).toLocaleString('en-GB')}</span>
-                <span className="d-md-none">Sist oppdatert: {new Date(stocks[0].stats[4].date).toLocaleString('en-GB')}</span>
-              </div>
             </div>
           </form>
         </div>
