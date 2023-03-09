@@ -63,7 +63,11 @@ export async function getServerSideProps() {
     const client = await clientPromise;
     const db = client.db('faavne');
 
-    const stocks = await db.collection('stocks').find({}).toArray();
+    const stocks = await db.collection('stocks')
+    .find({'stats.4': { $exists: true }})
+    .sort({ 'stats.4.rating': -1 }) 
+    .limit(20)
+    .toArray();
 
     return {
       props: {

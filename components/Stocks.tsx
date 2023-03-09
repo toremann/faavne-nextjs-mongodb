@@ -128,17 +128,18 @@ const Graph = ({ stock }: any) => {
   return (
     <div>
       <ul className="nav nav-tabs justify-content-center mb-2">
-        <li className="nav-item">
-          <a className={`nav-link ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleButtonClick(0)}>
-            Rating
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className={`nav-link ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleButtonClick(1)}>
-            Pris
-          </a>
-        </li>
-      </ul>
+  <li className="nav-item">
+    <button className={`nav-link ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleButtonClick(0)}>
+      Rating
+    </button>
+  </li>
+  <li className="nav-item">
+    <button className={`nav-link ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleButtonClick(1)}>
+      Pris
+    </button>
+  </li>
+</ul>
+
       <div>
         <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">
           <div className="carousel-inner">
@@ -178,7 +179,6 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
-        .sort((a: Stock, b: Stock) => ((a.stats[4]?.rating ?? 0) < (b.stats[4]?.rating ?? 0) ? 1 : -1))
         .map((stock: Stock, index: number) => (
           <div key={index} className={`border border-dark rounded m-4 bg-dark bg-gradient`}>
             <Header stock={stock} />
