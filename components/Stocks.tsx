@@ -174,7 +174,7 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
   };
 
   return (
-    <div className="container mt-4 rounded bg-secondary bg-gradient bg-opacity-25 p-2">
+    <div className="mt-3 rounded bg-secondary bg-gradient bg-opacity-25">
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)

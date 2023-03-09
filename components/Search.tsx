@@ -1,6 +1,6 @@
 const Search = ({ stocks, query, setQuery, handleFilter, filter }: any) => {
   return (
-    <div className="container mt-4 text-black">
+    <div className="p-4 text-black">
       <div className="row">
         <div className="col-md-8 offset-md-2">
           <form>
