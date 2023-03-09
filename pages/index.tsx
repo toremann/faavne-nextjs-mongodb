@@ -40,12 +40,13 @@ export default function Main({ stocks, serverDate }: { stocks: Stock[]; serverDa
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
             <h1 className="display-4">Faavne</h1>
-            <p className="lead">
+            <p className="lead d-none d-md-block">
               Utbytte aksjer er aksjer som betaler ut en del av overskuddet til aksjonærene som utbytte. De kan gi en fast inntekt for investorer og kan også ses på som et tegn på et selskaps
               økonomiske helse.
             </p>
           </div>
         </div>
+
         {isLoaded ? <Stocks stocks={searchStocks} query={query} setQuery={setQuery} serverDate={serverDate} filter={filter} handleFilter={handleFilter} /> : <Loading />}
         <div className="text-center m-5 bg-black-25">
           <Link href="https://github.com/toremann" className="link-dark" aria-label="Learn more about this project">
