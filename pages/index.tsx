@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import clientPromise from '../lib/mongodb';
 import Stocks from '../components/Stocks';
 import { Stock } from '../interfaces/stocks';
@@ -48,11 +47,7 @@ export default function Main({ stocks, serverDate }: { stocks: Stock[]; serverDa
         </div>
 
         {isLoaded ? <Stocks stocks={searchStocks} query={query} setQuery={setQuery} serverDate={serverDate} filter={filter} handleFilter={handleFilter} /> : <Loading />}
-        <div className="text-center m-5 bg-black-25">
-          <Link href="https://github.com/toremann" className="link-dark" aria-label="Learn more about this project">
-            <h3 className="bi bi-github" />
-          </Link>
-        </div>
+        
       </div>
     </>
   );

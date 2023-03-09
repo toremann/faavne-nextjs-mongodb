@@ -9,6 +9,7 @@ import LineChart from './Linechart';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import Accordion from 'react-bootstrap/Accordion';
+import Link from 'next/link';
 
 Chart.register(CategoryScale);
 
@@ -156,7 +157,7 @@ const Graph = ({ stock }: any) => {
 
 const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: StocksProps) => {
   return (
-    <div className="mt-3 rounded bg-secondary bg-gradient bg-opacity-25">
+    <div className="mt-3 pb-2 rounded bg-secondary bg-gradient bg-opacity-25">
       <Search stocks={stocks} query={query} setQuery={setQuery} filter={filter} handleFilter={handleFilter} />
       {stocks
         .filter((stock: Stock) => stock.price_info.last.price > 0)
@@ -181,6 +182,11 @@ const Stocks = ({ stocks, query, setQuery, serverDate, filter, handleFilter }: S
             </Accordion>
           </div>
         ))}
+        <div className="text-center m-2 bg-black-25">
+          <Link href="https://github.com/toremann" className="link-dark" aria-label="Learn more about this project">
+            <h3 className="bi bi-github" id="github-icon" />
+          </Link>
+        </div>
     </div>
   );
 };

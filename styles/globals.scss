@@ -64,3 +64,35 @@ $color-20: #f4f100;
 .custom-color-20 {
     color: $color-20
 }
+
+#github-icon {
+    color: black;
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.2) rotate(5deg);
+      animation: wiggle 0.2s ease-in-out 2;
+      color: #007bff
+    }
+  }
+  
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(10deg);
+    }
+    50% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  
+  
+  
