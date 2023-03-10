@@ -140,7 +140,7 @@ const Graph = ({ stock }: any) => {
       </ul>
 
       <div>
-        <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false" data-bs-ride="carousel">
+        <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false" data-bs-interval="false">
           <div className="carousel-inner">
             <div className={`carousel-item ${activeIndex === 0 ? 'active' : ''}`}>
               <LineChart chartData={ratingData} name={'rating'} />
