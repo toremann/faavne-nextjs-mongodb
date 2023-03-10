@@ -61,7 +61,6 @@ export async function getServerSideProps() {
     const stocks = await db.collection('stocks')
     .find({'stats.4': { $exists: true }})
     .sort({ 'stats.4.rating': -1 }) 
-    .limit(20)
     .toArray();
 
     return {
