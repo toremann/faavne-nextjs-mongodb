@@ -23,7 +23,6 @@ const Header = ({ stock }: { stock: Stock }) => {
 };
 
 const Body = ({ stock }: { stock: Stock }) => {
-  // Recalculate rating to be between 0 and 100
   const rating = recalculateRating(stock.stats[stock.stats.length - 1].rating);
 
   return (
@@ -89,6 +88,8 @@ const Footer = ({ stock, serverDate }: { stock: Stock; serverDate: Date }) => {
 };
 
 const Graph = ({ stock }: any) => {
+  console.log(stock.stats.map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')))
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [ratingData, setChartData] = useState({
     labels: stock.stats.map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
@@ -96,7 +97,7 @@ const Graph = ({ stock }: any) => {
     datasets: [
       {
         label: 'Rating',
-        data: stock.stats.map((stats: { rating: number }) => stats.rating),
+        data: stock.stats.map((stats: { rating: number }) => recalculateRating(stats.rating)),
         backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#f0331a', '#f3ba2f', '#2a71d0'],
         borderColor: 'black',
         borderWidth: 2,
