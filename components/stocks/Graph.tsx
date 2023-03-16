@@ -9,12 +9,12 @@ Chart.register(CategoryScale);
 export const Graph = ({ stock }: any) => {  
     const [activeIndex, setActiveIndex] = useState(0);
     const [ratingData, setChartData] = useState({
-      labels: stock.stats.map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
+      labels: stock.stats.slice(-7).map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
   
       datasets: [
         {
           label: 'Rating',
-          data: stock.stats.map((stats: { rating: number }) => recalculateRating(stats.rating)),
+          data: stock.stats.slice(-7).map((stats: { rating: number }) => recalculateRating(stats.rating)),
           backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#f0331a', '#f3ba2f', '#2a71d0'],
           borderColor: 'black',
           borderWidth: 2,
@@ -24,12 +24,12 @@ export const Graph = ({ stock }: any) => {
     });
   
     const [priceData, setPriceData] = useState({
-      labels: stock.stats.map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
+      labels: stock.stats.slice(-7).map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
   
       datasets: [
         {
           label: 'Pris',
-          data: stock.stats.map((stats: { price: number }) => Number(stats.price).toFixed(2)),
+          data: stock.stats.slice(-7).map((stats: { price: number }) => Number(stats.price).toFixed(2)),
           backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#f0331a', '#f3ba2f', '#2a71d0'],
           borderColor: 'black',
           borderWidth: 2,
