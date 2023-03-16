@@ -21,7 +21,7 @@
     "update": "^0.4.2"
   },
   "devDependencies": {
-    "@types/node": "18.14.2",
+    "@types/node": "18.15.3",
     "@types/react": "18.0.28",
     "prettier": "^2.8.4",
     "sass": "^1.59.3",
