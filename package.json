@@ -7,7 +7,7 @@
     "format": "prettier --write \"**/*.{js,jsx,md}\""
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
+    "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "chart.js": "^4.2.1",
