@@ -9,7 +9,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
-    "bootstrap-icons": "^1.10.3",
+    "bootstrap-icons": "^1.10.5",
     "chart.js": "^4.2.1",
     "date-fns": "^2.29.3",
     "mongodb": "^5.1.0",
