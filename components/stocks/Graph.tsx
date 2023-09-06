@@ -45,9 +45,6 @@ export const Graph = ({ stock }: any) => {
     const lastUpdate = stock.stats.length
 
     const lastObject = stock.stats[lastUpdate -1].date
-
-    console.log(lastObject)
-    console.log(lastUpdate)
   
     return (
       <div>
