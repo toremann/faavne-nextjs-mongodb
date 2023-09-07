@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { recalculateRating } from "../../utils/rating";
 import LineChart from "../Linechart";
 import Chart from 'chart.js/auto';
@@ -21,22 +21,27 @@ export const Graph = ({ stock }: any) => {
           lineTension: 0.2,
         },
       ],
-    });
+    });  
+
+    useEffect(() => {
+      if (stock) {
+        const labels = stock.stats.slice(-7).map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB'));
+        const data = activeIndex === 0
+          ? stock.stats.slice(-7).map((stats: { rating: number }) => recalculateRating(stats.rating))
+          : stock.stats.slice(-7).map((stats: { price: number }) => Number(stats.price).toFixed(2));
   
-    const [priceData, setPriceData] = useState({
-      labels: stock.stats.slice(-7).map((stats: { date: Date }) => new Date(stats.date).toLocaleTimeString('en-GB')),
-  
-      datasets: [
-        {
-          label: 'Pris',
-          data: stock.stats.slice(-7).map((stats: { price: number }) => Number(stats.price).toFixed(2)),
-          backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#f0331a', '#f3ba2f', '#2a71d0'],
-          borderColor: 'black',
-          borderWidth: 2,
-          lineTension: 0.2,
-        },
-      ],
-    });
+        setChartData({
+          ...ratingData,
+          labels,
+          datasets: [
+            {
+              ...ratingData.datasets[0],
+              data,
+            },
+          ],
+        });
+      }
+    }, [stock, activeIndex]); 
   
     const handleButtonClick = (value: number) => {
       setActiveIndex(value);
@@ -68,7 +73,7 @@ export const Graph = ({ stock }: any) => {
                 <LineChart chartData={ratingData} lastUpdate={lastObject} />
               </div>
               <div className={`carousel-item ${activeIndex === 1 ? 'active' : ''}`}>
-                <LineChart chartData={priceData} lastUpdate={lastObject} />
+                <LineChart chartData={ratingData} lastUpdate={lastObject} />
               </div>
             </div>
           </div>
