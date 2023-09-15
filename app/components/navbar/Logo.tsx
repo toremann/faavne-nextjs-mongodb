@@ -8,7 +8,7 @@ const Logo = () => {
   return (
     <div
       onClick={() => router.push("/")}
-      className="font-bold text-xl text-white cursor-pointer"
+      className="font-bold text-xl text-black cursor-pointer"
     >
       Faavne.no
     </div>

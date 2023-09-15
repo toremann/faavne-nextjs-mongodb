@@ -1,8 +1,9 @@
+import { SafeUser } from "@/app/types";
 import Container from "../Container";
 import Logo from "./Logo";
 
 interface NavbarProps {
-  currentUser?: null;
+  currentUser?: SafeUser | null;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
