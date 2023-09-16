@@ -25,7 +25,7 @@ model User {
   updatedAt      DateTime  @updatedAt
   favoriteIds    String[]  @db.ObjectId
 
-  accounts Account[]
+  accounts   Account[]
   portfolios Portfolio[]
 }
 
@@ -48,16 +48,26 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Stock {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  symbol      String
-  name        String
-  instrument  Int
-  quantity    Int
-  price       Int?
-  portfolioId String @db.ObjectId
+type StocksStats {
+  date           DateTime @db.Date
+  price          Float
+  score          Float
+  normalizeScore Int
+}
 
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+model Stock {
+  name           String
+  nameLong       String
+  symbol         String
+  isin           String        @id @map("_id")
+  price          Float
+  pct            Float?
+  dividend       Float?
+  dividendDate   Int?
+  excludingDate  Int?
+  score          Float
+  normalizeScore Int
+  stats          StocksStats[]
 }
 
 model Portfolio {
@@ -67,6 +77,5 @@ model Portfolio {
   createdAt   DateTime @default(now())
   userId      String   @db.ObjectId
 
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  stocks Stock[]
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

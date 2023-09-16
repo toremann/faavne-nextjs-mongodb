@@ -2,7 +2,7 @@ import prisma from '@/app/libs/prismadb';
 
 export default async function getStocks() {
   try {
-    const stocks = await prisma.stocks.findMany({});
+    const stocks = await prisma.stock.findMany({});
 
     return stocks;
   } catch (error: any) {
