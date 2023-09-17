@@ -38,7 +38,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ stock, currentUser }) => {
   const router = useRouter();
 
   return (
-    <div onClick={() => router.push(`/stock/${stock.symbol}`)} className="col-span-1 cursor-pointer group">
+    <div onClick={() => router.push(`/stock/${stock.isin}`)} className="col-span-1 cursor-pointer group">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="px-4 py-6">
           <div className="flex justify-between">
