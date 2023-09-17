@@ -1,10 +1,6 @@
 import prisma from "@/app/libs/prismadb";
 
-interface IParams {
-    isin: string;
-}
-
-export default async function getStockById(isin) {
+export default async function getStockById(isin: string) {
     try {
         console.log('getStockById:', isin)
 

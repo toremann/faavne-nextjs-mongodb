@@ -9,23 +9,22 @@ import { differenceInDays } from 'date-fns';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { SafeUser } from '@/app/types';
 
+import StockHead from '@/app/components/stocks/StocksHead';
+
 import Container from '@/app/components/Container';
+import { Stock } from '@prisma/client';
+import StocksInfo from '@/app/components/stocks/StocksInfo';
 
-const Stock = ({ stock, currentUser }) => {
-  const loginModal = useLoginModal();
-  const router = useRouter();
+interface StockProps {
+  stock: Stock;
+  currentUser: SafeUser | null;
+}
 
-  const [isLoading, setIsLoading] = useState(false);
-
+const Stock: React.FC<StockProps> = ({ stock, currentUser }) => {
   return (
     <Container>
-      <div
-        className="
-          max-w-screen-lg 
-          mx-auto
-        "
-      >
-        <div className="flex flex-col gap-6">{stock.name}</div>
+      <div className="max-w-screen-lg mx-auto">
+        <StockHead title={stock.name} subtitle={stock.symbol} currentUser={currentUser} />
       </div>
     </Container>
   );

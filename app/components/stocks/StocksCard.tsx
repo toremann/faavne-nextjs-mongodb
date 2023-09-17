@@ -1,5 +1,7 @@
 'use client';
 
+import scoreColor from '@/app/utils/scoreColor';
+
 import { SafeUser } from '@/app/types';
 import { Stock } from '@prisma/client';
 
@@ -13,33 +15,12 @@ interface ListingCardProps {
   scoreColor: (score: number) => string;
 }
 
-const scoreColor = (score: number) => {
-  const colorClasses: Record<string, string> = {
-    1: 'bg-red-100',
-    25: 'bg-yellow-200',
-    50: 'bg-blue-300',
-    75: 'bg-green-400',
-    100: 'bg-purple-500',
-  };
-
-  let bgColorClass = 'bg-gray-200';
-
-  for (const pointRange in colorClasses) {
-    if (score <= parseInt(pointRange)) {
-      bgColorClass = colorClasses[pointRange];
-      break;
-    }
-  }
-
-  return bgColorClass;
-};
-
 const ListingCard: React.FC<ListingCardProps> = ({ stock, currentUser }) => {
   const router = useRouter();
 
   return (
-    <div onClick={() => router.push(`/stock/${stock.isin}`)} className="col-span-1 cursor-pointer group">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div onClick={() => router.push(`/stock/${stock.isin}`)} className="col-span-1 cursor-pointer group hover:shadow-md transition rounded-lg">
+      <div className="bg-white shadow-lg overflow-hidden rounded-lg">
         <div className="px-4 py-6">
           <div className="flex justify-between">
             <div>
@@ -56,18 +37,26 @@ const ListingCard: React.FC<ListingCardProps> = ({ stock, currentUser }) => {
             </div>
           </div>
 
-          <div></div>
           <div className="text-gray-600 md:text-sm">{stock.nameLong}</div>
           <div className="mt-4 flex flex-col items-center">
             <div>{stock.dividend !== null && <div className="text-sm">Utbytte:</div>}</div>
             <div>{stock.dividend !== null && <div className="text-2xl font-bold">{stock.dividend} NOK</div>}</div>
           </div>
-          <div>
-            {stock.dividendDate !== null && <div className="text-sm">Utbytte dato: {format(stock.dividendDate, 'PP')}</div>}
-            {stock.excludingDate !== null && <div className="text-sm">Excluding dato: {format(stock.excludingDate, 'PP')}</div>}
+          <div className="mt-4 flex flex-col space-y-1">
+            <div className="flex justify-between items-center">
+              {stock.dividendDate !== null && <div className="text-sm">Utbytte</div>}
+              {stock.excludingDate !== null && <div className="text-sm">Ex</div>}
+            </div>
+            <div className="flex justify-between items-center">
+              {stock.dividendDate !== null && <div className="text-m">{format(stock.dividendDate, 'dd/MM')}</div>}
+              {stock.excludingDate !== null && <div className="text-m">{format(stock.excludingDate, 'dd/MM')}</div>}
+            </div>
           </div>
         </div>
-        <div className={`text-white ${scoreColor(stock.normalizeScore)} font-extrabold text-center rounded-bottom`}>{stock.normalizeScore}</div>
+        <div className={` ${scoreColor(stock.normalizeScore)} flex justify-between pl-2 pr-2`}>
+          <div className="text-white">Score</div>
+          <div className="text-white font-extrabold text-center">{stock.normalizeScore}</div>
+        </div>
       </div>
     </div>
   );
