@@ -1,3 +1,5 @@
+'use client'
+
 export default function scoreColor(score: number) {
     const colorClasses: Record<string, string> = {
         1: 'bg-red-400',
