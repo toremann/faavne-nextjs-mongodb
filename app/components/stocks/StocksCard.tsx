@@ -9,13 +9,13 @@ import { useRouter } from 'next/navigation';
 
 import { format } from 'date-fns';
 
-interface ListingCardProps {
+interface StocksCardProps {
   stock: Stock;
   currentUser?: SafeUser | null;
   scoreColor: (score: number) => string;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ stock, currentUser }) => {
+const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor }) => {
   const router = useRouter();
 
   return (
