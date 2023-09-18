@@ -4,7 +4,7 @@ interface StockHeadProps {
   title: string;
   subtitle: string;
   price: number;
-  pct: number;
+  pct: number | null;
 }
 
 const StockHead: React.FC<StockHeadProps> = ({ title, subtitle, price, pct }) => {
