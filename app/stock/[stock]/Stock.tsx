@@ -12,19 +12,21 @@ import { SafeUser } from '@/app/types';
 import StockHead from '@/app/components/stocks/StocksHead';
 
 import Container from '@/app/components/Container';
-import { Stock } from '@prisma/client';
-import StocksInfo from '@/app/components/stocks/StocksInfo';
+import { Stock, Stats } from '@prisma/client';
+import StocksGraph from '@/app/components/stocks/StocksGraph';
 
 interface StockProps {
   stock: Stock;
+  stats: Stats;
   currentUser: SafeUser | null;
 }
 
-const Stock: React.FC<StockProps> = ({ stock, currentUser }) => {
+const Stock: React.FC<StockProps> = ({ stock, stats, currentUser }) => {
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <StockHead title={stock.name} subtitle={stock.symbol} currentUser={currentUser} />
+        <StocksGraph stats={stats} />
       </div>
     </Container>
   );

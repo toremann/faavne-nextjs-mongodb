@@ -1,10 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-
 import { SafeUser } from '@/app/types';
-
-import Heading from '../Heading';
 import HeartButton from '../HeartButton';
 
 interface StockHeadProps {
@@ -16,17 +12,10 @@ interface StockHeadProps {
 const StockHead: React.FC<StockHeadProps> = ({ title, subtitle, currentUser }) => {
   return (
     <>
-      <Heading title={title} subtitle={subtitle} />
-
-      <div
-        className="
-          w-full
-          h-[60vh]
-          overflow-hidden 
-          rounded-xl
-          relative
-        "
-      ></div>
+      <div className="text-start">
+        <div className="text-2xl font-bold">{title}</div>
+        <div className="font-light text-neutral-500 mt-2">{subtitle}</div>
+      </div>
       <div
         className="
             absolute

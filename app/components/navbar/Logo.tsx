@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { GiSeaDragon } from 'react-icons/Gi';
+import { GiSeaDragon } from 'react-icons/gi';
 
 const Logo = () => {
   const router = useRouter();
