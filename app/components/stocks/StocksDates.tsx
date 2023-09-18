@@ -16,7 +16,7 @@ const StocksDates: React.FC<StocksDatesProps> = ({ dividendDate, exDate }) => {
   return (
     <div className="p-2 my-2 flex flex-col">
       <div className="border-b text-lg font-bold">Dividend Date</div>
-      <div className={`flex justify-between m-2 p-2 rounded ${isDividendDatePassed ? 'text-red-500' : 'text-gray-600'} ${isDividendDatePassed && 'text-bold'}`}>
+      <div className={`flex justify-between m-2 p-2 rounded ${isDividendDatePassed ? 'bg-red-500' : 'text-gray-600'} ${isDividendDatePassed && 'text-bold'}`}>
         {/* @ts-ignore */}
         <div className={`${isDividendDatePassed && 'font-bold'}`}>{format(dividendDate, 'dd/MM/yyyy')}</div>
         {/* @ts-ignore */}
