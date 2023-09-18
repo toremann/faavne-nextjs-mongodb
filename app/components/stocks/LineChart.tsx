@@ -6,10 +6,12 @@ function LineChart({ chartData }: any) {
       <Line
         data={chartData}
         options={{
+          responsive: true,
+          maintainAspectRatio: true,
           plugins: {
             title: {
               display: true,
-              //   text: `Sist oppdatert ${new Date(lastUpdate).toLocaleString('en-GB')}`
+              text: 'Score',
             },
             legend: {
               display: false,

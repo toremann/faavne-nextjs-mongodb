@@ -16,7 +16,7 @@ const StockHead: React.FC<StockHeadProps> = ({ title, subtitle, price, pct }) =>
           <div className="font-light text-neutral-500">{subtitle}</div>
         </div>
         <div>
-          <div className="text-2xl font-bold text-right">{price} NOK</div>
+          <div className="text-2xl font-bold text-right text-blue-800">{price} NOK</div>
           {pct !== null && (
             <div className={`text-light text-right ${pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
               {pct > 0 ? '+' : ''}
