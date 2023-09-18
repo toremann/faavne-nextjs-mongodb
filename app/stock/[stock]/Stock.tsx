@@ -25,7 +25,7 @@ const Stock: React.FC<StockProps> = ({ stock, stats, currentUser }) => {
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
-        <StockHead title={stock.name} subtitle={stock.symbol} currentUser={currentUser} />
+        <StockHead title={stock.name} subtitle={stock.symbol} price={stock.price} pct={stock.pct} currentUser={currentUser} />
         <StocksGraph stats={stats} />
       </div>
     </Container>

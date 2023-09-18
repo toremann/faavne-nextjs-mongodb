@@ -1,29 +1,29 @@
 'use client';
 
-import { SafeUser } from '@/app/types';
-import HeartButton from '../HeartButton';
-
 interface StockHeadProps {
   title: string;
   subtitle: string;
-  currentUser?: SafeUser | null;
+  price: number;
+  pct: number;
 }
 
-const StockHead: React.FC<StockHeadProps> = ({ title, subtitle, currentUser }) => {
+const StockHead: React.FC<StockHeadProps> = ({ title, subtitle, price, pct }) => {
   return (
     <>
-      <div className="text-start">
-        <div className="text-2xl font-bold">{title}</div>
-        <div className="font-light text-neutral-500 mt-2">{subtitle}</div>
-      </div>
-      <div
-        className="
-            absolute
-            top-5
-            right-5
-          "
-      >
-        {/* <HeartButton currentUser={currentUser} /> */}
+      <div className="flex justify-between items-start">
+        <div className="text-start">
+          <div className="text-2xl font-bold">{title}</div>
+          <div className="font-light text-neutral-500">{subtitle}</div>
+        </div>
+        <div>
+          <div className="text-2xl font-bold text-right">{price} NOK</div>
+          {pct !== null && (
+            <div className={`text-light text-right ${pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
+              {pct > 0 ? '+' : ''}
+              {pct}%
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

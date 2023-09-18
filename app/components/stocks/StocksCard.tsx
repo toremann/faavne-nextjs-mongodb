@@ -28,7 +28,7 @@ const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor
             </div>
             <div className="flex flex-col ml-4">
               {stock.pct !== null && (
-                <div className={`text-sm ${stock.pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                <div className={`text-sm text-right ${stock.pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
                   {stock.pct > 0 ? '+' : ''}
                   {stock.pct}%
                 </div>

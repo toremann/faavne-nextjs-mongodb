@@ -2,7 +2,6 @@ import prisma from "@/app/libs/prismadb";
 
 export default async function getStockById(isin: string) {
     try {
-        console.log('getStockById:', isin)
 
         if (!isin) {
             throw new Error('Invalid or missing isin parameter.');
