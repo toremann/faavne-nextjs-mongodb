@@ -15,9 +15,7 @@ const StockPage = async ({ params }: { params: IParams }) => {
   const stats = await getStockStats(isin);
   const currentUser = await getCurrentUser();
 
-  console.log('stats', stats);
-
-  return <Stock stock={stock} stats={stats} currentUser={currentUser} />;
+  return <Stock stock={stock as any} stats={stats as any} currentUser={currentUser} />;
 };
 
 export default StockPage;
