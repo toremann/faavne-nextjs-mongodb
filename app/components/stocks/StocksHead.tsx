@@ -23,7 +23,7 @@ const StockHead: React.FC<StockHeadProps> = ({ title, subtitle, currentUser }) =
             right-5
           "
       >
-        <HeartButton currentUser={currentUser} />
+        {/* <HeartButton currentUser={currentUser} /> */}
       </div>
     </>
   );

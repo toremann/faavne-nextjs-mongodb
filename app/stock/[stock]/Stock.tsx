@@ -17,7 +17,7 @@ import StocksGraph from '@/app/components/stocks/StocksGraph';
 
 interface StockProps {
   stock: Stock;
-  stats: Stats;
+  stats: Stats[];
   currentUser: SafeUser | null;
 }
 

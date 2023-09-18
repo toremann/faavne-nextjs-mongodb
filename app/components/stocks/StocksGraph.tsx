@@ -9,12 +9,12 @@ import { useState, useEffect } from 'react';
 Chart.register(CategoryScale);
 
 interface StatsProps {
-  stats: Stats;
+  stats: Stats[];
 }
 
 const StocksGraph: React.FC<StatsProps> = ({ stats }) => {
-  const labels = stats.map((stat: Stat) => new Date(stat.date).toLocaleTimeString('en-GB'));
-  const data = stats.map((stat: Stat) => stat.normalizeScore);
+  const labels = stats.map((stat) => new Date(stat.date).toLocaleTimeString('en-GB'));
+  const data = stats.map((stat) => stat.normalizeScore);
 
   const [scoreData, setChartData] = useState({
     labels: labels,
