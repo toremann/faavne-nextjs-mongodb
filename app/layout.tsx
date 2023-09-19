@@ -6,6 +6,7 @@ import Navbar from './components/navbar/Navbar';
 import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
 import ToasterProvider from './providers/ToasterProvider';
+import Footer from './components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <RegisterModal />
         <LoginModal />
         <div className="pb-20 pt-28">{children}</div>
+        <Footer />
       </body>
     </html>
   );

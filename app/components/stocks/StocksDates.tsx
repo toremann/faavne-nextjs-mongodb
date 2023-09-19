@@ -1,4 +1,6 @@
 import { format, formatDistance, isBefore } from 'date-fns';
+import { nb } from 'date-fns/locale';
+
 import StocksUtilBox from './StocksUtilBox';
 
 interface StocksDatesProps {
@@ -20,14 +22,14 @@ const StocksDates: React.FC<StocksDatesProps> = ({ dividendDate, exDate }) => {
         {/* @ts-ignore */}
         <div className={`${isDividendDatePassed && 'font-bold'}`}>{format(dividendDate, 'dd/MM/yyyy')}</div>
         {/* @ts-ignore */}
-        <div className={`${isDividendDatePassed && 'font-bold'}`}>{formatDistance(dividendDate, new Date(), { addSuffix: true })}</div>
+        <div className={`${isDividendDatePassed && 'font-bold'}`}>{formatDistance(dividendDate, new Date(), { addSuffix: true, locale: nb })}</div>
       </div>
       <div className="border-b text-lg font-bold mt-2">Excluding Date</div>
       <div className={`flex justify-between m-2 p-2 rounded ${isExcludingDatePassed ? 'bg-red-500' : 'text-gray-600'}`}>
         {/* @ts-ignore */}
         <div className={`${isExcludingDatePassed && 'font-bold'}`}>{format(exDate, 'dd/MM/yyyy')}</div>
         {/* @ts-ignore */}
-        <div className={`${isExcludingDatePassed && 'font-bold'}`}> {formatDistance(exDate, new Date(), { addSuffix: true })}</div>
+        <div className={`${isExcludingDatePassed && 'font-bold'}`}> {formatDistance(exDate, new Date(), { addSuffix: true, locale: nb })}</div>
       </div>
     </div>
   );

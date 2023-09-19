@@ -33,7 +33,7 @@ const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor
                   {stock.pct}%
                 </div>
               )}
-              <div className="text-sm text-blue-800">{stock.price} NOK</div>
+              <div className="text-sm text-blue-800">{stock.price.toFixed(2)} NOK</div>
             </div>
           </div>
 

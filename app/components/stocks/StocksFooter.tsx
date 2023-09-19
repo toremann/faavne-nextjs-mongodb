@@ -12,7 +12,7 @@ const StocksFooter = () => {
   };
 
   return (
-    <div className="m-2">
+    <div className="m-2 order-last sm:order-none md:order-none">
       <Button label={'Tilbake'} onClick={handleClick} />
     </div>
   );
