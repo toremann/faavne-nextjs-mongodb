@@ -52,13 +52,17 @@ export async function DELETE(
 
     const { stockId } = params;
 
+    console.log('api/fav', 'params:', params, 'stockId:', stockId)
+
     if (!stockId || typeof stockId !== 'string') {
         throw new Error('Invalid ID');
     }
 
     let favoriteIds = [...(currentUser.favoriteIds || [])];
 
-    favoriteIds = favoriteIds.filter((id) => id !== stockId);
+    favoriteIds = favoriteIds.filter((isin) => isin !== stockId);
+
+    console.log('api/fav', favoriteIds)
 
     const user = await prisma.user.update({
         where: {
