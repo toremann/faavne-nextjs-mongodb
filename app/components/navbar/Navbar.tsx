@@ -18,6 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
+            <div>{safeCurrentUser !== null && `Hei, ${safeCurrentUser.name}`}</div>
             <UserMenu currentUser={safeCurrentUser} />
           </div>
         </Container>

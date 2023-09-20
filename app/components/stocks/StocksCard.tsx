@@ -22,22 +22,21 @@ const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor
     <div onClick={() => router.push(`/stock/${stock.isin}`)} className="col-span-1 cursor-pointer group hover:shadow-md transition rounded-lg">
       <div className="bg-white shadow-lg overflow-hidden rounded-lg">
         <div className="px-4 py-6">
-          <div className="flex justify-between">
-            <div>
-              <div className="text-2xl font-semibold text-gray-800">{stock.symbol}</div>
-            </div>
-            <div className="flex flex-col ml-4">
-              {stock.pct !== null && (
-                <div className={`text-sm text-right ${stock.pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                  {stock.pct > 0 ? '+' : ''}
-                  {stock.pct}%
-                </div>
-              )}
-              <div className="text-sm text-blue-800">{stock.price.toFixed(2)} NOK</div>
-            </div>
+          <div>
+            <div className="text-gray-600 md:text-sm">{stock.nameLong}</div>
           </div>
-
-          <div className="text-gray-600 md:text-sm">{stock.nameLong}</div>
+          <div className="flex justify-between">
+            <div className="text-lg font-semibold text-gray-800">{stock.symbol}</div>
+            <div className="text-lg text-blue-800">{stock.price.toFixed(2)} NOK</div>
+          </div>
+          <div className="flex justify-end">
+            {stock.pct !== null && (
+              <div className={`text-sm text-right ${stock.pct > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                {stock.pct > 0 ? '+' : ''}
+                {stock.pct}%
+              </div>
+            )}
+          </div>
           <div className="mt-4 flex flex-col items-center">
             <div>{stock.dividend !== null && <div className="text-sm">Utbytte:</div>}</div>
             <div>{stock.dividend !== null && <div className="text-2xl font-bold">{stock.dividend} NOK</div>}</div>
