@@ -52,7 +52,7 @@ const LoginModal = () => {
         toast.error(callback.error);
       }
     });
-    console.log(data);
+    // console.log(data);
   };
 
   const toggle = useCallback(() => {

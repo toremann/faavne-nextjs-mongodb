@@ -1,23 +1,19 @@
 'use client';
 
-import axios from 'axios';
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import { differenceInDays } from 'date-fns';
-
-import useLoginModal from '@/app/hooks/useLoginModal';
 import { SafeUser } from '@/app/types';
 
-import StockHead from '@/app/components/stocks/StocksHead';
+import { Stock, Stats } from '@prisma/client';
 
 import Container from '@/app/components/Container';
-import { Stock, Stats } from '@prisma/client';
+import Footer from '@/app/components/Footer';
+
+// Stocks components
+import StockHead from '@/app/components/stocks/StocksHead';
 import StocksGraph from '@/app/components/stocks/StocksGraph';
 import StocksDates from '@/app/components/stocks/StocksDates';
 import StocksFooter from '@/app/components/stocks/StocksFooter';
 import StocksUtilBox from '@/app/components/stocks/StocksUtilBox';
-import Footer from '@/app/components/Footer';
+import StocksFooterAdd from '@/app/components/stocks/StocksFooterAdd';
 
 interface StockProps {
   stock: Stock;
@@ -36,6 +32,7 @@ const Stock: React.FC<StockProps> = ({ stock, stats, currentUser }) => {
           <StocksFooter />
           <StocksUtilBox score={stock.normalizeScore} utbytte={stock.dividend} />
         </div>
+        <StocksFooterAdd stockId={stock.isin} currentUser={currentUser} />
       </div>
       <Footer />
     </Container>

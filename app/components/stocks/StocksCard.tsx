@@ -15,7 +15,7 @@ interface StocksCardProps {
   scoreColor: (score: number) => string;
 }
 
-const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor }) => {
+const StockCards: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor }) => {
   const router = useRouter();
 
   return (
@@ -52,7 +52,7 @@ const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor
             </div>
           </div>
         </div>
-        <div className={` ${scoreColor(stock.normalizeScore)} flex justify-between pl-2 pr-2`}>
+        <div className={`${scoreColor(stock.normalizeScore)} flex justify-between pl-2 pr-2`}>
           <div className="text-white">Score</div>
           <div className="text-white font-extrabold text-center">{stock.normalizeScore}</div>
         </div>
@@ -60,4 +60,4 @@ const ListingCard: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor
     </div>
   );
 };
-export default ListingCard;
+export default StockCards;
