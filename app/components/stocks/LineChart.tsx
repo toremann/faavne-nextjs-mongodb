@@ -12,6 +12,10 @@ function LineChart({ chartData }: any) {
             title: {
               display: true,
               text: 'Score',
+              font: {
+                size: 18,
+              },
+              color: 'black',
             },
             legend: {
               display: false,
