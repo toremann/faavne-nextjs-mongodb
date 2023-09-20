@@ -48,14 +48,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="My account" />
+                <MenuItem onClick={() => {}} label="Min konto" />
+                <MenuItem onClick={() => {}} label="Min konto" />
+                <MenuItem onClick={() => {}} label="Min konto" />
                 <hr />
-                <MenuItem onClick={() => signOut()} label="Logout" />
+                <MenuItem onClick={() => signOut()} label="Logg ut" />
               </>
             ) : (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="Login" />
-                <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+                <MenuItem onClick={loginModal.onOpen} label="Logg inn" />
+                <MenuItem onClick={registerModal.onOpen} label="Lag en konto" />
               </>
             )}
           </div>
