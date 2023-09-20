@@ -19,10 +19,11 @@ const StocksFooterAdd: React.FC<StockFooterProps> = ({ stockId, currentUser }) =
   return (
     <div className="flex items-center justify-center p-4 space-x-4">
       <div onClick={toggleFavorite} className="transform hover:scale-110 cursor-pointer">
-        <AiOutlineHeart size={24} className="text-red-700 hover:text-red-500" />
+        <AiOutlineHeart size={24} className={hasFavorited ? 'text-red-700 hover:text-black' : 'text-red-700 hover:text-red-500'} />
       </div>
-      <div onClick={() => {}} className="transform hover:scale-110 cursor-pointer">
+      <div onClick={() => {}} className="transform hover:scale-110 cursor-pointer relative">
         <AiOutlinePlusCircle size={24} className="text-blue-700 hover:text-blue-500" />
+        <span className="absolute opacity-0 transition-opacity duration-300 pointer-events-none hover:opacity-100 left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2">Some Text Here</span>
       </div>
     </div>
   );
