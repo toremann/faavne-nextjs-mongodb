@@ -7,6 +7,7 @@ import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
 import ToasterProvider from './providers/ToasterProvider';
 import Footer from './components/Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <RegisterModal />
         <LoginModal />
         <div className="pb-20 pt-28">{children}</div>
+        <Analytics />
         <Footer />
       </body>
     </html>
