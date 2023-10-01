@@ -8,7 +8,6 @@ import LoginModal from './components/modals/LoginModal';
 import ToasterProvider from './providers/ToasterProvider';
 import Footer from './components/Footer';
 import { Analytics } from '@vercel/analytics/react';
-import getStocks from './actions/getStocks';
 import getAllStocks from './actions/getAllStocks';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -25,7 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar currentUser={currentUser} stocks={stocks}/>
+        <Navbar currentUser={currentUser} stocks={stocks as any}/>
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
