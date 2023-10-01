@@ -3,12 +3,14 @@ import Container from '../Container';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
 import Search from './Search';
+import { Stocks } from '@prisma/client';
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
+  stocks: Stocks[]
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+const Navbar: React.FC<NavbarProps> = ({ currentUser, stocks }) => {
 
   const safeCurrentUser = currentUser ?? null;
 
@@ -18,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
-            <Search />
+            <Search stocks={stocks as any} />
             <UserMenu currentUser={safeCurrentUser} />
           </div>
         </Container>

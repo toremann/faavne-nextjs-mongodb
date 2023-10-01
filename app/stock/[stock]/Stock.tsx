@@ -14,6 +14,7 @@ import StocksDates from '@/app/components/stocks/StocksDates';
 import StocksFooter from '@/app/components/stocks/StocksFooter';
 import StocksUtilBox from '@/app/components/stocks/StocksUtilBox';
 import StocksFooterAdd from '@/app/components/stocks/StocksFooterAdd';
+import PageHeader from '@/app/components/PageHeader';
 
 interface StockProps {
   stock: Stock;

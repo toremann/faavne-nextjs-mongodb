@@ -1,31 +1,40 @@
 'use client';
 
+import { Stock } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 import { useState, ChangeEvent } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-// Remember to import words or whatever you're using to store all the words the user can search for
 
 interface SearchbarProps {
-  handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
-
+  stocks: Stock[]
 }
 
-const Searchbar: React.FC<SearchbarProps> = () => {
-  const words = ['MPCC', 'CAMBI'];
+const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
+
+  const router = useRouter()
+  
+  const [symbols, setSymbols] = useState(stocks);
 
   const [activeSearch, setActiveSearch] = useState([]);
 
-  console.log(activeSearch);
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value.toUpperCase();
 
-  const handleSearch = (e) => {
-    if (e.target.value == '') {
+    if (inputValue == '') {
       setActiveSearch([]);
       return false;
     }
-    setActiveSearch(words.filter((w) => w.includes(e.target.value)).slice(0, 8));
+
+    setActiveSearch(symbols.filter((stock) => stock.symbol.includes(inputValue)).slice(0, 9));
   };
 
+  const handleRouter = (route: Stock["isin"]) => {
+    setActiveSearch([])
+    router.push(`/stock/${route}`)
+  }
+
   return (
-<form className="relative">
+<div className="relative">
   <div className="relative border-b border-gray-300 focus-within:border-black transition-all duration-300">
   <button className="absolute left-1 top-1/2 -translate-y-1/2">
       <AiOutlineSearch />
@@ -41,15 +50,15 @@ const Searchbar: React.FC<SearchbarProps> = () => {
   {activeSearch.length > 0 && (
     <div className="absolute shadow-md w-full md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
       <div>
-        {activeSearch.map((result) => (
-          <div className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
-            {result}
+        {activeSearch.map((stock: any) => (
+          <div onClick={() => handleRouter(stock.isin)} key={stock.isin} className="px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer">
+            {stock.symbol} <div className='font-thin'>{stock.name}</div>
           </div>
         ))}
       </div>
     </div>
   )}
-</form>
+</div>
 
   );
 };

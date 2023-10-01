@@ -8,6 +8,8 @@ import LoginModal from './components/modals/LoginModal';
 import ToasterProvider from './providers/ToasterProvider';
 import Footer from './components/Footer';
 import { Analytics } from '@vercel/analytics/react';
+import getStocks from './actions/getStocks';
+import getAllStocks from './actions/getAllStocks';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,11 +20,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const currentUser = await getCurrentUser();
+  const stocks = await getAllStocks();
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar currentUser={currentUser} />
+        <Navbar currentUser={currentUser} stocks={stocks}/>
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
