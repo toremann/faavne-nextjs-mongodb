@@ -15,7 +15,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
   
   const [symbols, setSymbols] = useState(stocks);
 
-  const [activeSearch, setActiveSearch] = useState([]);
+  const [activeSearch, setActiveSearch] = useState<Stock[]>([]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.toUpperCase();
