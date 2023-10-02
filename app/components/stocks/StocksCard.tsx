@@ -1,7 +1,5 @@
 'use client';
 
-import scoreColor from '@/app/utils/scoreColor';
-
 import { SafeUser } from '@/app/types';
 import { Stock } from '@prisma/client';
 
@@ -15,7 +13,7 @@ interface StocksCardProps {
   scoreColor: (score: number) => string;
 }
 
-const StockCards: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor }) => {
+const StockCards: React.FC<StocksCardProps> = ({ stock, scoreColor }) => {
   const router = useRouter();
 
   return (
@@ -43,12 +41,12 @@ const StockCards: React.FC<StocksCardProps> = ({ stock, currentUser, scoreColor 
           </div>
           <div className="mt-4 flex flex-col space-y-1">
             <div className="flex justify-between items-center">
-              {stock.dividendDate !== null && <div className="text-sm">Utbytte</div>}
-              {stock.excludingDate !== null && <div className="text-sm">Ex</div>}
+              <div className="text-sm">Utbytte</div>
+              <div className="text-sm">Ex</div>
             </div>
             <div className="flex justify-between items-center">
-              {stock.dividendDate !== null && <div className="text-m">{format(stock.dividendDate, 'dd/MM')}</div>}
-              {stock.excludingDate !== null && <div className="text-m">{format(stock.excludingDate, 'dd/MM')}</div>}
+              {stock.dividendDate !== null ? <div className="text-m">{format(stock.dividendDate, 'dd/MM')}</div> : <div className='text-m'> N/A </div>}
+              {stock.excludingDate !== null ? <div className="text-m">{format(stock.excludingDate, 'dd/MM')}</div> : <div className='text-m'> N/A </div>}
             </div>
           </div>
         </div>
