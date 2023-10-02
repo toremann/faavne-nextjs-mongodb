@@ -9,8 +9,8 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       boxShadow: {
-        'custom': '0px 30px 90px rgba(0, 0, 0, 0.4)'
-      }
+        custom: '0px 30px 90px rgba(0, 0, 0, 0.4)',
+      },
     },
   },
   plugins: [],

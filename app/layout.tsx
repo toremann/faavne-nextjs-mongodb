@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar currentUser={currentUser} stocks={stocks as any}/>
+        <Navbar currentUser={currentUser} stocks={stocks as any} />
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />

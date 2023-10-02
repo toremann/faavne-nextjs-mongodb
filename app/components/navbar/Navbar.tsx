@@ -7,11 +7,10 @@ import { Stocks } from '@prisma/client';
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
-  stocks: Stocks[]
+  stocks: Stocks[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser, stocks }) => {
-
   const safeCurrentUser = currentUser ?? null;
 
   return (

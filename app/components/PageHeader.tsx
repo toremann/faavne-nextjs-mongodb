@@ -3,8 +3,8 @@
 interface PageHeaderProps {
   title: string;
   subtitle: string;
-  stockCount?: number
-  lastUpdate?: Date
+  stockCount?: number;
+  lastUpdate?: Date;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, stockCount, lastUpdate }) => {

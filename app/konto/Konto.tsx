@@ -12,7 +12,7 @@ interface KontoProps {
 const Konto: React.FC<KontoProps> = ({ currentUser }) => {
   const safeCurrentUser = currentUser ?? null;
 
-  console.log(currentUser)
+  console.log(currentUser);
 
   return (
     <Container>

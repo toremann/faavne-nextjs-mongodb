@@ -6,9 +6,11 @@ export default async function getStocks() {
       where: {
         dividend: { not: 0 },
       },
-      orderBy: [{
-        score: 'desc'
-      }]
+      orderBy: [
+        {
+          score: 'desc',
+        },
+      ],
     });
 
     return stocks;
