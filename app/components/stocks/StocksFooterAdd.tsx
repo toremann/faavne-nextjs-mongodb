@@ -1,9 +1,10 @@
 'use client';
 
-import { AiOutlineHeart, AiFillHeart, AiOutlinePlusCircle } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 import useFavorite from '@/app/hooks/useFavorite';
 import { SafeUser } from '@/app/types';
+import usePortfolio from '@/app/hooks/usePortfolio';
 
 interface StockFooterProps {
   stockId: string;
@@ -16,14 +17,18 @@ const StocksFooterAdd: React.FC<StockFooterProps> = ({ stockId, currentUser }) =
     currentUser,
   });
 
+  const { isAddedToPortfolio, togglePortfolio } = usePortfolio({
+    stockId,
+    currentUser,
+  });
+
   return (
     <div className="flex items-center justify-center p-4 space-x-4">
       <div onClick={toggleFavorite} className="transform hover:scale-110 cursor-pointer">
         {hasFavorited ? <AiFillHeart size={24} className="text-red-700 hover:text-red-500" /> : <AiOutlineHeart size={24} className="text-red-700 hover:text-red-500" />}
       </div>
-      <div onClick={() => {}} className="transform hover:scale-110 cursor-pointer relative">
-        <AiOutlinePlusCircle size={24} className="text-blue-700 hover:text-blue-500" />
-        <span className="absolute opacity-0 transition-opacity duration-300 pointer-events-none hover:opacity-100 left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2">Some Text Here</span>
+      <div onClick={togglePortfolio} className="transform hover:scale-110 cursor-pointer relative">
+        {isAddedToPortfolio ? <AiOutlineMinusCircle size={24} className="text-red-700 hover:text-red-500"/> : <AiOutlinePlusCircle size={24} className="text-blue-700 hover:text-blue-500"/> }
       </div>
     </div>
   );
