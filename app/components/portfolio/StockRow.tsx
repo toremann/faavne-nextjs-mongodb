@@ -2,7 +2,11 @@
 
 import { SafeUser } from '@/app/types';
 import { Stock } from '@prisma/client';
-import { useState } from 'react'
+import axios from 'axios';
+import { useState } from 'react';
+
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 interface StocksCardProps {
   stock: Stock;
@@ -10,43 +14,36 @@ interface StocksCardProps {
   scoreColor: (score: number) => string;
 }
 
-const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor }) => {
+type Inputs = {
+  stockName: string;
+  stockAmount: number;
+  stockDividend: number | null;
+};
 
-  // State to manage the editable stock amount
-  const [editableStockAmount, setEditableStockAmount] = useState<number>(100);
+const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [editableStockAmount, setEditableStockAmount] = useState<number>();
 
-  const handleStockAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Ensure that the entered value is a number
-    const newAmount = parseFloat(event.target.value);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-    if (!isNaN(newAmount)) {
-      setEditableStockAmount(newAmount);
-    }
-  };
-
-  const handleStockAmountBlur = () => {
-    // You can add logic here for what to do when the input loses focus
-    console.log('Stock amount updated:', editableStockAmount);
-  };
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
-    <>
-      <tbody>
-        <tr>
-          <td>{stock.name}</td>
-          <td>
-            <input
-              type="number"
-              value={editableStockAmount}
-              onChange={handleStockAmountChange}
-              onBlur={handleStockAmountBlur}
-              className="w-16 px-2 py-1 border rounded"
-            />
-          </td>
-          <td>{stock.dividend} NOK</td>
-        </tr>
-      </tbody>
-    </>
+    <div className="">
+      <form onSubmit={handleSubmit(onSubmit)} className='border-b-2 border-black-500 mb-2'>
+        <input disabled value={stock.name} {...register('stockName')} />
+        <input disabled value={stock.dividend} {...register('stockDividend')} />
+        <input className="border border-red-500" type="number" value={editableStockAmount} onChange={(e) => setEditableStockAmount(Number(e.target.value))} {...register('stockAmount', { required: true })} />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleSubmit(onSubmit)}>
+        Save
+      </button>
+      </form>
+    </div>
   );
 };
 
