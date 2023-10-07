@@ -9,6 +9,8 @@ import PageHeader from '../components/PageHeader';
 
 import { SafeUser } from '../types';
 
+import { useState, useEffect } from 'react'
+
 interface PortfolioProps {
   stocks: Stock[];
   portfolio: Portfolio[];
@@ -19,6 +21,16 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
   if (stocks.length === 0) {
     return <Empty />;
   }
+
+  const [totalDividendAmount, setTotalDividendAmount] = useState<number>(0);
+
+  const updateTotalDividendAmount = () => {
+    const newTotal = portfolio.reduce((total, entry) => {
+      const stock = stocks.find((s) => s.isin === entry.stockId);
+      return total + (stock?.dividend || 0) * entry.stockAmount;
+    }, 0);
+    setTotalDividendAmount(newTotal);
+  };
 
   return (
     <Container>
@@ -39,12 +51,13 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
               </thead>
               <tbody>
                 {stocks.map((stock: any) => (
-                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} portfolio={portfolio} />
+                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} portfolio={portfolio} updateTotalDividendAmount={updateTotalDividendAmount}
+                  />
                 ))}
               </tbody>
             </table>
             <br />
-            <p>Utbytte totalt: 0 NOK</p>
+            <p>Utbytte totalt: {totalDividendAmount} NOK</p>
           </div>
         </div>
       </div>

@@ -8,10 +8,13 @@ import { useRouter } from 'next/navigation';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
+import { useEffect } from 'react';
+
 interface StocksRowProps {
   stock: Stock;
   currentUser?: SafeUser | null;
   portfolio: Portfolio[];
+  updateTotalDividendAmount: () => void;
 }
 
 type Inputs = {
@@ -20,11 +23,13 @@ type Inputs = {
   stockDividend: number;
 };
 
-const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio }) => {
+const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, updateTotalDividendAmount }) => {
   const router = useRouter();
 
   const portfolioEntry = portfolio.find((entry) => entry.stockId === stock.isin);
   const stockAmount = portfolioEntry ? portfolioEntry.stockAmount : 0;
+
+  const dividendAmount = stock.dividend * stockAmount
 
   const {
     register,
@@ -54,11 +59,16 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio }) =
       await axios.post('/api/portfolio', newData);
       router.refresh();
       toast.success('Oppdatert antall');
+
     } catch (error) {
       toast.error('Feil ved oppdatering av antall');
       console.error('Error updating portfolio:', error);
     }
   };
+
+  useEffect(() => {
+    updateTotalDividendAmount();
+  }, [onSubmit]);
 
   return (
     <tr className="border-b-2">
@@ -69,7 +79,7 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio }) =
       <td className="w-full sm:w-auto">
         <input className="border border-red-500 w-full sm:w-32" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
       </td>
-      <td className="w-full sm:w-auto">{(stock.dividend * stockAmount).toFixed(2)} NOK</td>
+      <td className="w-full sm:w-auto">{dividendAmount.toFixed(2)} NOK</td>
       <td className="w-full sm:w-auto">
         <button className="bg-green-500 hover:bg-green-700 text-white rounded text-sm focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
           Lagre
