@@ -1,20 +1,21 @@
 'use client';
 
-import { Stock } from '@prisma/client';
+import { Portfolio, Stock } from '@prisma/client';
+
 import Container from '../components/Container';
 import { Empty } from '../components/Empty';
 import StockRow from '../components/portfolio/StockRow';
-import { SafeUser } from '../types';
 import PageHeader from '../components/PageHeader';
+
+import { SafeUser } from '../types';
 
 interface PortfolioProps {
   stocks: Stock[];
-  portfolio: any
+  portfolio: Portfolio[];
   currentUser?: SafeUser | null;
-  scoreColor: (score: number) => string;
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor, portfolio }) => {
+const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio }) => {
   if (stocks.length === 0) {
     return <Empty />;
   }
@@ -38,7 +39,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor, 
               </thead>
               <tbody>
                 {stocks.map((stock: any) => (
-                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} scoreColor={scoreColor} portfolio={portfolio}/>
+                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} portfolio={portfolio} />
                 ))}
               </tbody>
             </table>

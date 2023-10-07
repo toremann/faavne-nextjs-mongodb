@@ -28,7 +28,7 @@ const StocksFooterAdd: React.FC<StockFooterProps> = ({ stockId, currentUser }) =
         {hasFavorited ? <AiFillHeart size={24} className="text-red-700 hover:text-red-500" /> : <AiOutlineHeart size={24} className="text-red-700 hover:text-red-500" />}
       </div>
       <div onClick={togglePortfolio} className="transform hover:scale-110 cursor-pointer relative">
-        {isAddedToPortfolio ? <AiOutlineMinusCircle size={24} className="text-red-700 hover:text-red-500"/> : <AiOutlinePlusCircle size={24} className="text-blue-700 hover:text-blue-500"/> }
+        {isAddedToPortfolio ? <AiOutlineMinusCircle size={24} className="text-red-700 hover:text-red-500" /> : <AiOutlinePlusCircle size={24} className="text-blue-700 hover:text-blue-500" />}
       </div>
     </div>
   );

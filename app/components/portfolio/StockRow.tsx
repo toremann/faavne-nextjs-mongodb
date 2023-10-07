@@ -8,23 +8,23 @@ import { useRouter } from 'next/navigation';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-interface StocksCardProps {
+interface StocksRowProps {
   stock: Stock;
   currentUser?: SafeUser | null;
-  scoreColor: (score: number) => string;
-  portfolio: Portfolio
+  portfolio: Portfolio[];
 }
 
 type Inputs = {
   stockName: string;
   stockAmount: number;
-  stockDividend: number | null
+  stockDividend: number;
 };
 
-const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser, portfolio }) => {
-  const router = useRouter()
+const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio }) => {
+  const router = useRouter();
 
-  const stockAmount = portfolio.find(entry => entry.stockId === stock.isin)?.stockAmount || 0;
+  const portfolioEntry = portfolio.find((entry) => entry.stockId === stock.isin);
+  const stockAmount = portfolioEntry ? portfolioEntry.stockAmount : 0;
 
   const {
     register,
@@ -33,41 +33,41 @@ const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser, p
     formState: { errors },
   } = useForm<Inputs>();
 
- 
-const onSubmit: SubmitHandler<Inputs> = async (data) => {
-  try {
-    const stockAmountNumber = Number(data.stockAmount);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const stockAmountNumber = Number(data.stockAmount);
 
-    const newData = {
-      user: currentUser?.id,
-      stockId: stock.isin,
-      stockName: stock.name,
-      stockAmount: stockAmountNumber,
-    };
+      if (stockAmountNumber < 0) {
+        toast.error('Verdi kan ikke være negativ');
+        return;
+      }
 
-    console.log('onSubmit', newData);
+      const newData = {
+        user: currentUser?.id,
+        stockId: stock.isin,
+        stockName: stock.name,
+        stockAmount: stockAmountNumber,
+      };
 
-    await axios.post('/api/portfolio', newData);
-    router.refresh()
-    toast.success('Oppdatert antall');
+      console.log('onSubmit', newData);
 
-  } catch (error) {
-    toast.error('Feil ved oppdatering av antall');
-    console.error('Error updating portfolio:', error);
-  }
-};
+      await axios.post('/api/portfolio', newData);
+      router.refresh();
+      toast.success('Oppdatert antall');
+    } catch (error) {
+      toast.error('Feil ved oppdatering av antall');
+      console.error('Error updating portfolio:', error);
+    }
+  };
 
   return (
     <tr className="border-b-2">
-      <td className="w-full sm:w-auto hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>{stock.name}</td>
+      <td className="w-full sm:w-auto hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>
+        {stock.name}
+      </td>
       <td className="w-full sm:w-auto">{stock.dividend}</td>
       <td className="w-full sm:w-auto">
-        <input
-          className="border border-red-500 w-full sm:w-32"
-          type="number"
-          defaultValue={stockAmount}
-          {...register('stockAmount', { required: true })}
-        />
+        <input className="border border-red-500 w-full sm:w-32" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
       </td>
       <td className="w-full sm:w-auto">{(stock.dividend * stockAmount).toFixed(2)} NOK</td>
       <td className="w-full sm:w-auto">

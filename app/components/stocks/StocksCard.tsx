@@ -45,8 +45,8 @@ const StockCards: React.FC<StocksCardProps> = ({ stock, scoreColor }) => {
               <div className="text-sm">Ex</div>
             </div>
             <div className="flex justify-between items-center">
-              {stock.dividendDate !== null ? <div className="text-m">{format(stock.dividendDate, 'dd/MM')}</div> : <div className='text-m'> N/A </div>}
-              {stock.excludingDate !== null ? <div className="text-m">{format(stock.excludingDate, 'dd/MM')}</div> : <div className='text-m'> N/A </div>}
+              {stock.dividendDate !== null ? <div className="text-m">{format(stock.dividendDate, 'dd/MM')}</div> : <div className="text-m"> N/A </div>}
+              {stock.excludingDate !== null ? <div className="text-m">{format(stock.excludingDate, 'dd/MM')}</div> : <div className="text-m"> N/A </div>}
             </div>
           </div>
         </div>

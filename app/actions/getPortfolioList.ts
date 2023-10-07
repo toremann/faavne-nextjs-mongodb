@@ -12,7 +12,7 @@ export default async function getPortfolioList() {
 
     const portfolioList = await prisma.portfolio.findMany({
       where: {
-        userId: currentUser.id
+        userId: currentUser.id,
       },
     });
 
