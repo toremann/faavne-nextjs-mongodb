@@ -9,11 +9,12 @@ import PageHeader from '../components/PageHeader';
 
 interface PortfolioProps {
   stocks: Stock[];
+  portfolio: any
   currentUser?: SafeUser | null;
   scoreColor: (score: number) => string;
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }) => {
+const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor, portfolio }) => {
   if (stocks.length === 0) {
     return <Empty />;
   }
@@ -37,7 +38,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }
               </thead>
               <tbody>
                 {stocks.map((stock: any) => (
-                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} scoreColor={scoreColor} />
+                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} scoreColor={scoreColor} portfolio={portfolio}/>
                 ))}
               </tbody>
             </table>

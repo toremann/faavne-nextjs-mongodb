@@ -8,7 +8,7 @@ const StocksFooter = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    router.push('/');
+    router.back();
   };
 
   return (
