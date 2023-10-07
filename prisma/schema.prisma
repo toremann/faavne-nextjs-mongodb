@@ -24,7 +24,7 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   favoriteIds    String[]
-  portfolioIds String[]
+  portfolioIds   String[]
 
   accounts   Account[]
   portfolios Portfolio[]
@@ -66,7 +66,7 @@ model Stock {
   isin           String  @id @map("_id")
   price          Float
   pct            Float?
-  dividend       Float?
+  dividend       Float @default(0)
   dividendDate   Int?
   excludingDate  Int?
   score          Float
@@ -75,13 +75,13 @@ model Stock {
 }
 
 model Portfolio {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String   @db.ObjectId
-  stockId String @map("_stock_id")
-  stockAmount Int @default(0)
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String @db.ObjectId
+  stockId     String @map("_stock_id")
+  stockAmount Int    @default(0)
+  stockName   String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, stockId], name: "unique_user_stock")
-
 }

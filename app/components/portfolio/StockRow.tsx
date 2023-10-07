@@ -7,13 +7,11 @@ import { useState, useEffect } from 'react';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { type } from './../../types/index';
 
 interface StocksCardProps {
   stock: Stock;
   currentUser?: SafeUser | null;
   scoreColor: (score: number) => string;
-  updateTotal: (amount: number) => void;
 }
 
 type Inputs = {
@@ -22,10 +20,8 @@ type Inputs = {
   stockDividend: number | null
 };
 
-const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser, updateTotal }) => {
+const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [editableStockAmount, setEditableStockAmount] = useState<number | null>(null);
-  const [calculatedAmount, setCalculatedAmount] = useState<number | null>(null);
 
   const {
     register,
@@ -42,32 +38,21 @@ const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const newData = {
       user: currentUser?.id,
       stockId: stock.isin,
+      stockName: stock.name,
       stockAmount: stockAmountNumber,
     };
 
     console.log(newData);
 
-    await axios.post('/api/portfolio', newData);
+    // await axios.post('/api/portfolio', newData);
 
     toast.success('Oppdatert antall');
 
-    const newCalculatedAmount = data.stockAmount * stock.dividend;
-    setCalculatedAmount(newCalculatedAmount);
-    updateTotal(newCalculatedAmount);
   } catch (error) {
     toast.error('Feil ved oppdatering av antall');
     console.error('Error updating portfolio:', error);
   }
 };
-
-  useEffect(() => {
-    if (editableStockAmount !== null) {
-      const newCalculatedAmount = editableStockAmount * stock.dividend;
-      setCalculatedAmount(newCalculatedAmount);
-
-      updateTotal(newCalculatedAmount);
-    }
-  }, [editableStockAmount, stock.dividend, updateTotal]);
 
   return (
     <tr className="border-b-2">
@@ -77,12 +62,10 @@ const onSubmit: SubmitHandler<Inputs> = async (data) => {
         <input
           className="border border-red-500 w-full sm:w-32"
           type="number"
-          value={editableStockAmount}
-          onChange={(e) => setEditableStockAmount(Number(e.target.value))}
           {...register('stockAmount', { required: true })}
-        /> 
+        />
       </td>
-      <td className="w-full sm:w-auto">{calculatedAmount && `${calculatedAmount?.toFixed(2)} NOK`}</td>
+      <td className="w-full sm:w-auto">NOK</td>
       <td className="w-full sm:w-auto">
         <button className="bg-green-500 hover:bg-green-700 text-white rounded text-sm focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
           Lagre

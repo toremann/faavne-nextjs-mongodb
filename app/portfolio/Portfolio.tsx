@@ -6,25 +6,17 @@ import { Empty } from '../components/Empty';
 import StockRow from '../components/portfolio/StockRow';
 import { SafeUser } from '../types';
 import PageHeader from '../components/PageHeader';
-import {useState} from 'react'
 
 interface PortfolioProps {
   stocks: Stock[];
   currentUser?: SafeUser | null;
   scoreColor: (score: number) => string;
-  updateTotal: (amount: number) => void;
 }
 
-const Favorites: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }) => {
+const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }) => {
   if (stocks.length === 0) {
     return <Empty />;
   }
-
-  const [totalAmount, setTotalAmount] = useState<number>(0);
-
-  const updateTotal = (amount: number) => {
-    setTotalAmount((prevTotal) => prevTotal + amount);
-  };
 
   return (
     <Container>
@@ -45,12 +37,12 @@ const Favorites: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }
               </thead>
               <tbody>
                 {stocks.map((stock: any) => (
-                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} scoreColor={scoreColor} updateTotal={updateTotal} />
+                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} scoreColor={scoreColor} />
                 ))}
               </tbody>
             </table>
             <br />
-            <p>Utbytte totalt: {totalAmount?.toFixed(2)} NOK</p>
+            <p>Utbytte totalt: 0 NOK</p>
           </div>
         </div>
       </div>
@@ -58,4 +50,4 @@ const Favorites: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }
   );
 };
 
-export default Favorites;
+export default Portfolio;

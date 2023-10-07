@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
     const body = await request.json();
-    const { stockAmount, stockId, user } = body;
+    const { stockAmount, stockId, user, stockName } = body;
 
     const portfolio = await prisma.portfolio.upsert({
         where: {
@@ -15,6 +15,7 @@ export async function POST(request: Request) {
         create: {
             stockAmount,
             stockId,
+            stockName,
             user: {
                 connect: {
                     id: user,
