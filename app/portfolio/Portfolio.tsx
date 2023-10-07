@@ -9,7 +9,7 @@ import PageHeader from '../components/PageHeader';
 
 import { SafeUser } from '../types';
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface PortfolioProps {
   stocks: Stock[];
@@ -18,11 +18,11 @@ interface PortfolioProps {
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio }) => {
+  const [totalDividendAmount, setTotalDividendAmount] = useState<number>(0);
+
   if (stocks.length === 0) {
     return <Empty />;
   }
-
-  const [totalDividendAmount, setTotalDividendAmount] = useState<number>(0);
 
   const updateTotalDividendAmount = () => {
     const newTotal = portfolio.reduce((total, entry) => {
