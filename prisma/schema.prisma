@@ -81,4 +81,7 @@ model Portfolio {
   stockAmount Int @default(0)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stockId], name: "unique_user_stock")
+
 }

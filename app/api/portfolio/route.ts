@@ -5,11 +5,24 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { stockAmount, stockId, user } = body;
 
-    const portfolio = await prisma.portfolio.create({
-        data: {
+    const portfolio = await prisma.portfolio.upsert({
+        where: {
+            unique_user_stock: {
+                userId: user,
+                stockId,
+            },
+        },
+        create: {
             stockAmount,
             stockId,
-            user,
+            user: {
+                connect: {
+                    id: user,
+                },
+            },
+        },
+        update: {
+            stockAmount,
         },
     });
 

@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { type } from './../../types/index';
 
 interface StocksCardProps {
   stock: Stock;
@@ -33,19 +34,31 @@ const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser, u
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+ 
+const onSubmit: SubmitHandler<Inputs> = async (data) => {
+  try {
+    const stockAmountNumber = Number(data.stockAmount);
+
     const newData = {
-      stockAmount: data.stockAmount,
-      stockName: stock.name,
-      stockDividend: stock.dividend,
+      user: currentUser?.id,
+      stockId: stock.isin,
+      stockAmount: stockAmountNumber,
     };
+
     console.log(newData);
+
+    await axios.post('/api/portfolio', newData);
+
+    toast.success('Oppdatert antall');
 
     const newCalculatedAmount = data.stockAmount * stock.dividend;
     setCalculatedAmount(newCalculatedAmount);
-
     updateTotal(newCalculatedAmount);
-  };
+  } catch (error) {
+    toast.error('Feil ved oppdatering av antall');
+    console.error('Error updating portfolio:', error);
+  }
+};
 
   useEffect(() => {
     if (editableStockAmount !== null) {
