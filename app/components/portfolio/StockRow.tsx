@@ -18,7 +18,7 @@ interface StocksCardProps {
 type Inputs = {
   stockName: string;
   stockAmount: number;
-  stockDividend: number | null;
+  stockDividend: number | null
 };
 
 const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser, updateTotal }) => {
@@ -67,12 +67,12 @@ const StockRow: React.FC<StocksCardProps> = ({ stock, scoreColor, currentUser, u
           value={editableStockAmount}
           onChange={(e) => setEditableStockAmount(Number(e.target.value))}
           {...register('stockAmount', { required: true })}
-        />
+        /> 
       </td>
-      <td className="w-full sm:w-auto">{calculatedAmount}</td>
+      <td className="w-full sm:w-auto">{calculatedAmount && `${calculatedAmount?.toFixed(2)} NOK`}</td>
       <td className="w-full sm:w-auto">
-        <button className="bg-green-500 hover:bg-green-700 text-white rounded focus:outline-none focus:shadow-outline" type="button" onClick={handleSubmit(onSubmit)}>
-          Oppdater
+        <button className="bg-green-500 hover:bg-green-700 text-white rounded text-sm focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
+          Lagre
         </button>
       </td>
     </tr>

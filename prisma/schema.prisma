@@ -78,7 +78,7 @@ model Portfolio {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   userId      String   @db.ObjectId
   stockId String @map("_stock_id")
-  stockAmount Int?
+  stockAmount Int @default(0)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

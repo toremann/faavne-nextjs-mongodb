@@ -50,7 +50,7 @@ const Favorites: React.FC<PortfolioProps> = ({ stocks, currentUser, scoreColor }
               </tbody>
             </table>
             <br />
-            <p>Utbytte totalt: {totalAmount} NOK</p>
+            <p>Utbytte totalt: {totalAmount?.toFixed(2)} NOK</p>
           </div>
         </div>
       </div>

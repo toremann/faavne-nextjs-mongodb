@@ -5,6 +5,7 @@ import LineChart from './LineChart';
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 import { useState, useEffect } from 'react';
+import StocksGraphFooter from './StocksGraphFooter';
 
 Chart.register(CategoryScale);
 
@@ -49,6 +50,7 @@ const StocksGraph: React.FC<StatsProps> = ({ stats }) => {
   return (
     <div className="m-2">
       <LineChart chartData={scoreData} />
+      <StocksGraphFooter />
     </div>
   );
 };
