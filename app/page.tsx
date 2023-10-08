@@ -22,7 +22,7 @@ export default async function Home() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {stocks.map((stock: any) => {
-          return <StocksCard key={stock.id} stock={stock} currentUser={currentUser} scoreColor={scoreColor} />;
+          return <StocksCard key={stock.isin} stock={stock} currentUser={currentUser} scoreColor={scoreColor} />;
         })}
       </div>
     </Container>

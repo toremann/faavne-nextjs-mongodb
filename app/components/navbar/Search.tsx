@@ -35,7 +35,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
   return (
     <div className="relative">
       <div className="relative border-b border-gray-300 focus-within:border-black transition-all duration-300">
-        <button className="absolute left-1 top-1/2 -translate-y-1/2">
+        <button type="button" className="absolute left-1 top-1/2 -translate-y-1/2">
           <AiOutlineSearch />
         </button>
         <input type="search" placeholder="Søk.." className="w-full pl-6 focus:outline-none focus:appearance-none" onChange={(e) => handleSearch(e)} />
