@@ -1,3 +1,4 @@
+import getAllStocks from './actions/getAllStocks';
 import getCurrentUser from './actions/getCurrentUser';
 import getStocks from './actions/getStocks';
 
