@@ -1,5 +1,4 @@
 import getCurrentUser from '@/app/actions/getCurrentUser';
-import scoreColor from './../utils/scoreColor';
 
 import Portfolio from './Portfolio';
 import getPortfolio from '../actions/getPortfolio';

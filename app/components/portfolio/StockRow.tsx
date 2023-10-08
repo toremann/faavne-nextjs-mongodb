@@ -54,8 +54,6 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
         stockAmount: stockAmountNumber,
       };
 
-      console.log('onSubmit', newData);
-
       await axios.post('/api/portfolio', newData);
       router.refresh();
       toast.success('Oppdatert antall');
@@ -68,7 +66,8 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
 
   useEffect(() => {
     updateTotalDividendAmount();
-  }, [onSubmit]);
+    // check dependecy or use callback (?)
+  }, [onSubmit, updateTotalDividendAmount]);
 
   return (
     <tr className="border-b-2">
@@ -77,7 +76,7 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
       </td>
       <td className="w-full sm:w-auto">{stock.dividend}</td>
       <td className="w-full sm:w-auto">
-        <input className="border border-red-500 w-full sm:w-32" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
+        <input className="w-full sm:w-auto" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
       </td>
       <td className="w-full sm:w-auto">{dividendAmount.toFixed(2)} NOK</td>
       <td className="w-full sm:w-auto">

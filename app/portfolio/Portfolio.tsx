@@ -57,7 +57,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
               </tbody>
             </table>
             <br />
-            <p>Utbytte totalt: {totalDividendAmount} NOK</p>
+            <div>
+            Utbytte totalt: {totalDividendAmount} NOK
+            </div>
           </div>
         </div>
       </div>
