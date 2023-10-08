@@ -12,8 +12,6 @@ interface KontoProps {
 const Konto: React.FC<KontoProps> = ({ currentUser }) => {
   const safeCurrentUser = currentUser ?? null;
 
-  console.log(currentUser);
-
   return (
     <Container>
       <PageHeader title={'Min konto'} subtitle={'Informasjon lagret om din konto'} />

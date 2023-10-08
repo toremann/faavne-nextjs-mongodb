@@ -46,7 +46,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
           <div>
             {activeSearch.map((stock: any) => (
               <div onClick={() => handleRouter(stock.isin)} key={stock.isin} className="px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer">
-                {stock.symbol} <div className="font-light">{stock.name}</div>
+                {stock.symbol} <div className="font-light text-xs">{stock.name}</div>
               </div>
             ))}
           </div>

@@ -7,6 +7,6 @@ interface AvatarProps {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ src }) => {
-  return <Image alt="" className="rounded-full" height="30" width="30" src={src || '/images/placeholder.jpg'} />;
+  return <Image alt="" className="rounded-full" height="30" width="30" src={src || '/images/placeholder.jpg'} priority={false} />;
 };
 export default Avatar;
