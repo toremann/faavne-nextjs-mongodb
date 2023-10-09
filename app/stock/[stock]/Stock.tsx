@@ -5,7 +5,6 @@ import { SafeUser } from '@/app/types';
 import { Stock, Stats } from '@prisma/client';
 
 import Container from '@/app/components/Container';
-import Footer from '@/app/components/DevFooter';
 
 // Stocks components
 import StockHead from '@/app/components/stocks/StocksHead';

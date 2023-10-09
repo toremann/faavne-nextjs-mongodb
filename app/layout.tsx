@@ -29,10 +29,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
-        <div className="pb-20 pt-28">{children}</div>
+        <div className="pt-28">{children}</div>
         <Analytics />
         {/* <DevFooter /> */}
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   ); 

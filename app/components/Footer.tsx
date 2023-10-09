@@ -1,39 +1,44 @@
 'use client';
-import React, { useEffect, useState } from 'react';
 
-const Footer: React.FC = () => {
-  const [currentSize, setCurrentSize] = useState<string>('');
+import Link from 'next/link';
+import { FaGithub, FaLink, FaInfoCircle } from 'react-icons/fa';
 
-  useEffect(() => {
-    // Function to determine the current screen size
-    const getCurrentSize = () => {
-      if (window.innerWidth < 640) {
-        return 'sm';
-      } else if (window.innerWidth < 768) {
-        return 'md';
-      } else if (window.innerWidth < 1024) {
-        return 'lg';
-      } else {
-        return 'xl';
-      }
-    };
+const Footer = () => {
+  return (
+    <footer className="flex-1 w-full text-center py-2 mt-10 text-sm">
+      <div className="flex justify-center space-x-4">
+        {/* GitHub Link */}
+        <div className="flex flex-col items-center">
+          <Link href="https://github.com/toremann" target="_blank" rel="noopener noreferrer">
+            <div className="group flex flex-col items-center hover:text-blue-500">
+              <div><FaGithub size={24} /></div>
+              <div>Github</div>
+            </div>
+          </Link>
+        </div>
 
-    // Update currentSize when the window is resized
-    const handleResize = () => {
-      setCurrentSize(getCurrentSize());
-    };
+        {/* DNUL Link */}
+        <div className="flex flex-col items-center">
+          <Link href="http://dnul.no" target="_blank" rel="noopener noreferrer">
+            <div className="group flex flex-col items-center hover:text-blue-500">
+              <div><FaLink size={24} /></div>
+              <div>www.dnul.no</div>
+            </div>
+          </Link>
+        </div>
 
-    // Initial calculation and event listener setup
-    setCurrentSize(getCurrentSize());
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return <footer className="fixed bottom-0 w-full bg-gray-200 text-center py-2 text-sm">Current Tailwind Size: {currentSize}</footer>;
+        {/* About Link */}
+        <div className="flex flex-col items-center">
+          <Link href="/about">
+            <div className="group flex flex-col items-center hover:text-blue-500">
+              <div><FaInfoCircle size={24} /></div>
+              <div>About</div>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
