@@ -75,11 +75,9 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
         <p className='font-bold'>{stock.symbol}</p>
         {stock.name}
       </td>
-      <td className="text-xs md:text-base">{stock.dividend}</td>
       <td className="text-xs md:text-base">
-        <input className="w-32" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
-      </td>
-      <td className="text-xs md:text-base">{dividendAmount.toFixed(2)} NOK</td>
+        <p className='font-bold'>{dividendAmount.toFixed(2)} NOK</p>
+        {stock.dividend} * <input className="w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 " type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} /></td>
       <td className="">
         <button className="text-xs md:text-sm bg-green-500 hover:bg-green-700 text-white rounded focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
           Lagre

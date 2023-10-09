@@ -9,7 +9,10 @@ import PageHeader from '../components/PageHeader';
 
 import { SafeUser } from '../types';
 
-import { useState } from 'react'
+import { BiInfoCircle } from 'react-icons/bi';
+
+import { useState } from 'react';
+import InfoBox from '../components/InfoBox';
 
 interface PortfolioProps {
   stocks: Stock[];
@@ -36,7 +39,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col gap-6">
-          <PageHeader title={'Portfolio'} subtitle={'Oversikt over planlagte utbytter'} />
+          <PageHeader title={'Portfolio'} subtitle={'Utbytte kalkulator'} />
           <div>
             <div className="md:col-span-1"></div>
             <table className="w-full border-b-2">
@@ -44,22 +47,18 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
                 <tr className="border-b-2">
                   <th className="text-sm md:text-base text-left">Navn</th>
                   <th className="text-sm md:text-base text-left">Utbytte</th>
-                  <th className="text-sm md:text-base text-left">Antall</th>
-                  <th className="text-sm md:text-base text-left">Totalt</th>
-                  <th className="text-sm md:text-base text-left">Actions</th>
+                  <th className="text-sm md:text-base text-left"></th>
                 </tr>
               </thead>
               <tbody>
                 {stocks.map((stock: any) => (
-                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} portfolio={portfolio} updateTotalDividendAmount={updateTotalDividendAmount}
-                  />
+                  <StockRow key={stock.isin} stock={stock} currentUser={currentUser} portfolio={portfolio} updateTotalDividendAmount={updateTotalDividendAmount} />
                 ))}
               </tbody>
             </table>
             <br />
-            <div className='bg-black text-white md:font-thin py-3 rounded-lg text-center mb-2 w-full border-2'>
-            Utbytte totalt: {totalDividendAmount} NOK
-            </div>
+            <div className="bg-black text-white md:font-light py-3 rounded-lg text-center mb-2 w-full border-2">Utbytte totalt: {totalDividendAmount} NOK</div>
+            <InfoBox content='Utbytte formel' subcontent='Utbytte * antall aksjer = totalt utbytte'/>
           </div>
         </div>
       </div>
