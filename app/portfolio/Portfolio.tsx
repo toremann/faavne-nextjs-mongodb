@@ -42,11 +42,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
             <table className="w-full border-b-2">
               <thead>
                 <tr className="border-b-2">
-                  <th className="w-full sm:w-auto text-left">Navn</th>
-                  <th className="w-full sm:w-auto text-left">Utbytte</th>
-                  <th className="w-full sm:w-auto text-left">Antall</th>
-                  <th className="w-full sm:w-auto text-left">Utbytte totalt</th>
-                  <th className="w-full sm:w-auto text-left">Actions</th>
+                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Navn</th>
+                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Utbytte</th>
+                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Antall</th>
+                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Utbytte totalt</th>
+                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,7 +57,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
               </tbody>
             </table>
             <br />
-            <div>
+            <div className='bg-black text-white md:font-thin py-3 rounded-lg text-center mb-2 w-full border-2'>
             Utbytte totalt: {totalDividendAmount} NOK
             </div>
           </div>

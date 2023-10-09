@@ -71,16 +71,16 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
 
   return (
     <tr className="border-b-2">
-      <td className="w-full sm:w-auto hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>
+      <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>
         {stock.name}
       </td>
-      <td className="w-full sm:w-auto">{stock.dividend}</td>
-      <td className="w-full sm:w-auto">
-        <input className="w-full sm:w-auto" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
+      <td className="text-xs md:text-base">{stock.dividend}</td>
+      <td className="text-xs md:text-base">
+        <input className="w-32" type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
       </td>
-      <td className="w-full sm:w-auto">{dividendAmount.toFixed(2)} NOK</td>
-      <td className="w-full sm:w-auto">
-        <button className="bg-green-500 hover:bg-green-700 text-white rounded text-sm focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
+      <td className="text-xs md:text-base">{dividendAmount.toFixed(2)} NOK</td>
+      <td className="">
+        <button className="text-xs md:text-sm bg-green-500 hover:bg-green-700 text-white rounded focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
           Lagre
         </button>
       </td>
