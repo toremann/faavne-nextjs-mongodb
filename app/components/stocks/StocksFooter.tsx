@@ -1,5 +1,7 @@
 'use client';
 
+import {IoMdArrowRoundBack} from 'react-icons/io'
+
 import Button from '../Button';
 import { useRouter } from 'next/navigation';
 
@@ -13,7 +15,7 @@ const StocksFooter = () => {
 
   return (
     <div className="m-2 order-last sm:order-none md:order-none">
-      <Button label={'Tilbake'} onClick={handleClick} />
+      <Button label={'Tilbake'} icon={IoMdArrowRoundBack} onClick={handleClick} outline={true}/>
     </div>
   );
 };
