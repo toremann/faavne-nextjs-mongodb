@@ -1,11 +1,11 @@
 'use client';
 
-import { MoonLoader } from "react-spinners";
+import { MoonLoader } from 'react-spinners';
 
 const Loader = () => {
-  return ( 
+  return (
     <div
-    className="
+      className="
       h-[70vh]
       flex 
       flex-col 
@@ -13,12 +13,9 @@ const Loader = () => {
       items-center 
     "
     >
-      <MoonLoader
-        size={20}
-        color="black"
-      />
+      <MoonLoader size={20} color="black" />
     </div>
-   );
-}
- 
+  );
+};
+
 export default Loader;

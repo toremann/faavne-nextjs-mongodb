@@ -29,7 +29,7 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
   const portfolioEntry = portfolio.find((entry) => entry.stockId === stock.isin);
   const stockAmount = portfolioEntry ? portfolioEntry.stockAmount : 0;
 
-  const dividendAmount = stock.dividend * stockAmount
+  const dividendAmount = stock.dividend * stockAmount;
 
   const {
     register,
@@ -57,7 +57,6 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
       await axios.post('/api/portfolio', newData);
       router.refresh();
       toast.success('Oppdatert antall');
-
     } catch (error) {
       toast.error('Feil ved oppdatering av antall');
       console.error('Error updating portfolio:', error);
@@ -72,12 +71,14 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
   return (
     <tr className="border-b-2">
       <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>
-        <p className='font-bold'>{stock.symbol}</p>
+        <p className="font-bold">{stock.symbol}</p>
         {stock.name}
       </td>
       <td className="text-xs md:text-base">
-        <p className='font-bold'>{dividendAmount.toFixed(2)} NOK</p>
-        {stock.dividend} * <input className="w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 " type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} /></td>
+        <p className="font-bold">{dividendAmount.toFixed(2)} NOK</p>
+        {stock.dividend} *{' '}
+        <input className="w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 " type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
+      </td>
       <td className="">
         <button className="text-xs md:text-sm bg-green-500 hover:bg-green-700 text-white rounded focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
           Lagre
