@@ -12,7 +12,7 @@ const Logo = () => {
       <div className="transition-colors duration-300 group-hover:text-orange-500">
         <GiSeaDragon size={48} className="transition-fill duration-300 group-hover:fill-orange-400" />
       </div>
-      <div className="ml-4 font-bold text-xl transition-colors duration-300 group-hover:text-orange-300">Faavne.no</div>
+      <div className="hidden md:block ml-4 font-bold text-xl transition-colors duration-300 group-hover:text-orange-300">Faavne.no</div>
     </div>
   );
 };
