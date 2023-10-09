@@ -4,6 +4,7 @@ import getStocks from './actions/getStocks';
 
 import Container from './components/Container';
 import { Empty } from './components/Empty';
+import Footer from './components/Footer';
 import PageHeader from './components/PageHeader';
 import StocksCard from './components/stocks/StocksCard';
 import scoreColor from './utils/scoreColor';

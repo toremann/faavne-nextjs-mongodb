@@ -64,6 +64,6 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
       </div>
     </Container>
   );
-};
+}
 
 export default Portfolio;

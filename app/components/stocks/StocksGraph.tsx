@@ -50,7 +50,7 @@ const StocksGraph: React.FC<StatsProps> = ({ stats }) => {
   return (
     <div className="m-2">
       <LineChart chartData={scoreData} />
-      <StocksGraphFooter />
+      {/* <StocksGraphFooter /> */}
     </div>
   );
 };

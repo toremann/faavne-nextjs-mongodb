@@ -5,7 +5,7 @@ import { SafeUser } from '@/app/types';
 import { Stock, Stats } from '@prisma/client';
 
 import Container from '@/app/components/Container';
-import Footer from '@/app/components/Footer';
+import Footer from '@/app/components/DevFooter';
 
 // Stocks components
 import StockHead from '@/app/components/stocks/StocksHead';
@@ -34,7 +34,6 @@ const Stock: React.FC<StockProps> = ({ stock, stats, currentUser }) => {
         </div>
         <StocksFooterAdd stockId={stock.isin} currentUser={currentUser} />
       </div>
-      <Footer />
     </Container>
   );
 };
