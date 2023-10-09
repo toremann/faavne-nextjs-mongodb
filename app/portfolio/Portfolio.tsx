@@ -42,11 +42,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
             <table className="w-full border-b-2">
               <thead>
                 <tr className="border-b-2">
-                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Navn</th>
-                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Utbytte</th>
-                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Antall</th>
-                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Utbytte totalt</th>
-                  <th className="text-sm md:text-base w-full sm:w-auto text-left">Actions</th>
+                  <th className="text-sm md:text-base text-left">Navn</th>
+                  <th className="text-sm md:text-base text-left">Utbytte</th>
+                  <th className="text-sm md:text-base text-left">Antall</th>
+                  <th className="text-sm md:text-base text-left">Totalt</th>
+                  <th className="text-sm md:text-base text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>

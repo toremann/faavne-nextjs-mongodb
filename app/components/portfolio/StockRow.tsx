@@ -72,6 +72,7 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
   return (
     <tr className="border-b-2">
       <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>
+        <p className='font-bold'>{stock.symbol}</p>
         {stock.name}
       </td>
       <td className="text-xs md:text-base">{stock.dividend}</td>
