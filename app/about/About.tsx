@@ -8,7 +8,7 @@ interface AboutProps {
   userCount: number;
 }
 
-const About: React.FC<AboutProps> = async ({ stockCount, userCount }) => {
+const About: React.FC<AboutProps> = ({ stockCount, userCount }) => {
   const totalUsers = userCount;
   const totalStocks = stockCount;
   const randomStat = 42;
