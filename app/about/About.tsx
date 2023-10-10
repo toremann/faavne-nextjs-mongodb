@@ -20,19 +20,19 @@ const About: React.FC<AboutProps> = async ({ stockCount, userCount }) => {
       <div className="flex justify-center mt-8 space-x-4">
         {/* Total Users Card */}
         <div className="bg-white p-4 rounded-md shadow-md w-full max-w-md text-center">
-          <h3 className="text-md font-semibold">Users</h3>
+          <h3 className="text-md font-semibold">Brukere</h3>
           <p className="text-xl font-bold text-orange-500">{totalUsers}</p>
         </div>
 
         {/* Total Stocks Card */}
         <div className="bg-white p-4 rounded-md shadow-md w-full max-w-md text-center">
-          <h3 className="text-md font-semibold">Stocks</h3>
+          <h3 className="text-md font-semibold">Aksjer</h3>
           <p className="text-xl font-bold text-orange-500">{totalStocks}</p>
         </div>
 
         {/* Random Stat Card */}
         <div className="bg-white p-4 rounded-md shadow-md w-full max-w-md text-center">
-          <h3 className="text-md font-semibold">Random Stat</h3>
+          <h3 className="text-md font-semibold">Besøkende</h3>
           <p className="text-xl font-bold text-orange-500">42</p>
         </div>
       </div>
