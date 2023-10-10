@@ -1,11 +1,17 @@
 'use client';
 
+// Types
 import { SafeUser } from '@/app/types';
+
+// Prisma
 import { Stock } from '@prisma/client';
 
+// Imports
 import { useRouter } from 'next/navigation';
-
 import { format } from 'date-fns';
+
+// Utils
+import { formatCurrency } from '@/app/utils/formatCurrency';
 
 interface StocksCardProps {
   stock: Stock;
@@ -21,11 +27,11 @@ const StockCards: React.FC<StocksCardProps> = ({ stock, scoreColor }) => {
       <div className="bg-white shadow-lg overflow-hidden rounded-lg hover:shadow-xl transition">
         <div className="px-4 py-6">
           <div>
-            <div className="text-gray-600 md:text-sm">{stock.nameLong}</div>
+            <div className="text-gray-600 md:text-sm truncate">{stock.nameLong}</div>
           </div>
           <div className="flex justify-between">
             <div className="text-lg font-semibold text-gray-800">{stock.symbol}</div>
-            <div className="text-lg text-blue-800">{stock.price.toFixed(2)} NOK</div>
+            <div className="text-lg text-blue-800">{formatCurrency(stock.price)} NOK</div>
           </div>
           <div className="flex justify-end">
             {stock.pct !== null && (
@@ -37,7 +43,7 @@ const StockCards: React.FC<StocksCardProps> = ({ stock, scoreColor }) => {
           </div>
           <div className="mt-4 flex flex-col items-center">
             <div>{stock.dividend !== null && <div className="text-sm">Utbytte:</div>}</div>
-            <div>{stock.dividend !== null && <div className="text-2xl font-bold">{stock.dividend} NOK</div>}</div>
+            <div>{stock.dividend !== null && <div className="text-2xl font-bold">{formatCurrency(stock.dividend)} NOK</div>}</div>
           </div>
           <div className="mt-4 flex flex-col space-y-1">
             <div className="flex justify-between items-center">

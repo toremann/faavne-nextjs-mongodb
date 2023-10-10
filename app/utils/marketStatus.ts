@@ -1,5 +1,6 @@
 import { isAfter, isBefore } from 'date-fns';
 
+// Check if market is open
 export function getMarketStatusMessage() {
   const startOfDay = new Date();
   startOfDay.setHours(9, 0, 0, 0);

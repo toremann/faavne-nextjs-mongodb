@@ -1,18 +1,22 @@
 'use client';
 
+// Prisma
 import { Portfolio, Stock } from '@prisma/client';
 
+// Components
 import Container from '../components/Container';
 import { Empty } from '../components/Empty';
 import StockRow from '../components/portfolio/StockRow';
 import PageHeader from '../components/PageHeader';
+import InfoBox from '../components/InfoBox';
 
+// Types
 import { SafeUser } from '../types';
 
-import { BiInfoCircle } from 'react-icons/bi';
-
 import { useState } from 'react';
-import InfoBox from '../components/InfoBox';
+
+// Utils
+import { formatCurrency } from '../utils/formatCurrency';
 
 interface PortfolioProps {
   stocks: Stock[];
@@ -57,7 +61,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
               </tbody>
             </table>
             <br />
-            <div className="bg-black text-white md:font-light py-3 rounded-lg text-center mb-2 w-full border-2">Utbytte totalt: {totalDividendAmount} NOK</div>
+            <div className="bg-black text-white md:font-light py-3 rounded-lg text-center mb-2 w-full border-2">
+              Utbytte totalt: {formatCurrency(totalDividendAmount)} NOK
+            </div>
             <InfoBox content="Utbytte formel" subContent="Utbytte * antall aksjer = totalt utbytte" />
           </div>
         </div>
