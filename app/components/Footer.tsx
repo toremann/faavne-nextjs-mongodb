@@ -10,7 +10,9 @@ const Footer = () => {
         <div className="flex flex-col items-center">
           <Link href="https://github.com/toremann" target="_blank" rel="noopener noreferrer">
             <div className="group flex flex-col items-center hover:text-blue-500">
-              <div><FaGithub size={16} /></div>
+              <div>
+                <FaGithub size={16} />
+              </div>
               <div>Github</div>
             </div>
           </Link>
@@ -19,7 +21,9 @@ const Footer = () => {
         <div className="flex flex-col items-center">
           <Link href="http://dnul.no" target="_blank" rel="noopener noreferrer">
             <div className="group flex flex-col items-center hover:text-blue-500">
-              <div><FaLink size={16} /></div>
+              <div>
+                <FaLink size={16} />
+              </div>
               <div>www.dnul.no</div>
             </div>
           </Link>
@@ -28,7 +32,9 @@ const Footer = () => {
         <div className="flex flex-col items-center">
           <Link href="/about">
             <div className="group flex flex-col items-center hover:text-blue-500">
-              <div><FaInfoCircle size={16} /></div>
+              <div>
+                <FaInfoCircle size={16} />
+              </div>
               <div>About</div>
             </div>
           </Link>

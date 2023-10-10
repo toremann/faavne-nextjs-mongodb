@@ -3,8 +3,8 @@ import getUserLength from '../actions/getUserLength';
 import About from './About';
 
 const AboutPage = async () => {
-  const stockCount = await getStockLength()
-  const userCount = await getUserLength()
+  const stockCount = await getStockLength();
+  const userCount = await getUserLength();
 
   return <About stockCount={stockCount} userCount={userCount} />;
 };

@@ -4,13 +4,13 @@ import Container from '../components/Container';
 import PageHeader from '../components/PageHeader';
 
 interface AboutProps {
-  stockCount: number
-  userCount: number
+  stockCount: number;
+  userCount: number;
 }
 
 const About: React.FC<AboutProps> = async ({ stockCount, userCount }) => {
-  const totalUsers = userCount
-  const totalStocks = stockCount
+  const totalUsers = userCount;
+  const totalStocks = stockCount;
   const randomStat = 42;
 
   return (

@@ -5,7 +5,7 @@ export default async function getAllStocks() {
     const users = await prisma.user.findMany();
     const usersCount = users.length;
 
-    return usersCount
+    return usersCount;
   } catch (error) {
     throw error;
   }

@@ -5,7 +5,7 @@ export default async function getAllStocks() {
     const stocks = await prisma.stock.findMany();
     const stockCount = stocks.length;
 
-    return stockCount
+    return stockCount;
   } catch (error) {
     throw error;
   }

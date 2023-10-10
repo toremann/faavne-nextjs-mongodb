@@ -51,7 +51,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem onClick={() => router.push('/favorites')} label="Favoritter" />
                 <MenuItem onClick={() => router.push('/konto')} label="Min konto" />
                 <hr />
-                <MenuItem onClick={() => signOut({callbackUrl: '/'})} label="Logg ut" />
+                <MenuItem onClick={() => signOut({ callbackUrl: '/' })} label="Logg ut" />
               </>
             ) : (
               <>
