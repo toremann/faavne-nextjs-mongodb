@@ -36,10 +36,10 @@ const usePortfolio = ({ stockId, currentUser }: IusePortfolio) => {
 
         if (isAddedToPortfolio) {
           request = () => axios.delete(`/api/portfolio/${stockId}`);
-          toast.error('Removed stock from portfolio');
+          toast.error('Fjernet aksje fra portfolio');
         } else {
           request = () => axios.post(`/api/portfolio/${stockId}`);
-          toast.success('Added to portfolio');
+          toast.success('Lagt til i portfolio');
         }
 
         await request();

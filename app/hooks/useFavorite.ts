@@ -36,10 +36,10 @@ const useFavorite = ({ stockId, currentUser }: IUseFavorite) => {
 
         if (hasFavorited) {
           request = () => axios.delete(`/api/favorites/${stockId}`);
-          toast.error('Removed stock from favorites');
+          toast.error('Fjernet aksje fra favoritter');
         } else {
           request = () => axios.post(`/api/favorites/${stockId}`);
-          toast.success('Added to favorites');
+          toast.success('Lagt til i favoritter');
         }
 
         await request();
