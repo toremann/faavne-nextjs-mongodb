@@ -1,6 +1,9 @@
 'use client';
 
+// Prisma
 import { Stock } from '@prisma/client';
+
+// Imports
 import { useRouter } from 'next/navigation';
 import { useState, ChangeEvent } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -12,19 +15,14 @@ interface SearchbarProps {
 const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
   const router = useRouter();
 
-  const [symbols, setSymbols] = useState(stocks);
-
   const [activeSearch, setActiveSearch] = useState<Stock[]>([]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value.toUpperCase();
+    const inputValue = e.target.value;
 
-    if (inputValue == '') {
-      setActiveSearch([]);
-      return false;
-    }
+    const filteredStocks = stocks.filter((stock) => stock.symbol.includes(inputValue) || stock.name.toLowerCase().includes(inputValue.toLowerCase())).slice(0, 9);
 
-    setActiveSearch(symbols.filter((stock) => stock.symbol.includes(inputValue)).slice(0, 9));
+    setActiveSearch(filteredStocks);
   };
 
   const handleRouter = (route: Stock['isin']) => {

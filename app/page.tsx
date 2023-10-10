@@ -17,8 +17,6 @@ export default async function Home() {
   const stocks = await getStocks();
   const { content, subContent, closed } = getMarketStatusMessage();
 
-  console.log(content, subContent);
-
   if (stocks.length === 0) {
     return <Empty />;
   }
