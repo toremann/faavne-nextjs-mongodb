@@ -6,12 +6,13 @@ import PageHeader from '../components/PageHeader';
 interface AboutProps {
   stockCount: number;
   userCount: number;
+  dividendCount: number;
 }
 
-const About: React.FC<AboutProps> = ({ stockCount, userCount }) => {
+const About: React.FC<AboutProps> = ({ stockCount, userCount, dividendCount }) => {
   const totalUsers = userCount;
   const totalStocks = stockCount;
-  const randomStat = 42;
+  const totalDividendStocks = dividendCount
 
   return (
     <Container>
@@ -32,8 +33,8 @@ const About: React.FC<AboutProps> = ({ stockCount, userCount }) => {
 
         {/* Random Stat Card */}
         <div className="bg-white p-4 rounded-md shadow-md w-full max-w-md text-center">
-          <h3 className="text-md font-semibold">Besøkende</h3>
-          <p className="text-xl font-bold text-orange-500">42</p>
+          <h3 className="text-md font-semibold">Aktive utbytter</h3>
+          <p className="text-xl font-bold text-orange-500">{totalDividendStocks}</p>
         </div>
       </div>
     </Container>

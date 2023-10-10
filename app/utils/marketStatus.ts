@@ -5,7 +5,7 @@ export function getMarketStatusMessage() {
   startOfDay.setHours(9, 0, 0, 0);
 
   const endOfDay = new Date();
-  endOfDay.setHours(11, 0, 0, 0);
+  endOfDay.setHours(16, 30, 0, 0);
 
   if (isAfter(new Date(), endOfDay) || isBefore(new Date(), startOfDay)) {
     return {
