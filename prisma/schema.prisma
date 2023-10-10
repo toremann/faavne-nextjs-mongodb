@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Stocks {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  favoriteIds    String[]
+  portfolioIds   String[]
+
+  accounts   Account[]
+  portfolios Portfolio[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Stats {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  date           DateTime @default(now()) @db.Date
+  price          Float?
+  score          Float?
+  normalizeScore Int?
+  stock          Stock    @relation(fields: [stockId], references: [isin])
+  stockId        String   @map("_stock_id") // This field should match the type of the `isin` field in the Stock model
+}
+
+model Stock {
+  name           String
+  nameLong       String
+  symbol         String
+  isin           String  @id @map("_id")
+  price          Float
+  pct            Float?
+  dividend       Float @default(0)
+  dividendDate   Int?
+  excludingDate  Int?
+  score          Float
+  normalizeScore Int
+  stats          Stats[]
+}
+
+model Portfolio {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String @db.ObjectId
+  stockId     String @map("_stock_id")
+  stockAmount Int    @default(0)
+  stockName   String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stockId], name: "unique_user_stock")
+}
