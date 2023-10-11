@@ -20,6 +20,11 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
+    if (!inputValue) {
+      setActiveSearch([]);
+      return;
+    }
+
     const filteredStocks = stocks.filter((stock) => stock.symbol.includes(inputValue) || stock.name.toLowerCase().includes(inputValue.toLowerCase())).slice(0, 9);
 
     setActiveSearch(filteredStocks);
