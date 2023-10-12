@@ -12,7 +12,6 @@ import getAllStocks from './actions/getAllStocks';
 import Footer from './components/Footer';
 import { getMarketStatusMessage } from './utils/marketStatus';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -37,6 +36,5 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Footer />
       </body>
     </html>
-  ); 
-
+  );
 }

@@ -12,7 +12,7 @@ interface AboutProps {
 const About: React.FC<AboutProps> = ({ stockCount, userCount, dividendCount }) => {
   const totalUsers = userCount;
   const totalStocks = stockCount;
-  const totalDividendStocks = dividendCount
+  const totalDividendStocks = dividendCount;
 
   return (
     <Container>

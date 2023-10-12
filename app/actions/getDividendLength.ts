@@ -5,10 +5,10 @@ export default async function getDividendLength() {
     const stocks = await prisma.stock.findMany({
       where: {
         dividend: { not: 0 },
-      }
+      },
     });
 
-    const dividendLength = stocks.length
+    const dividendLength = stocks.length;
 
     return dividendLength;
   } catch (error: any) {

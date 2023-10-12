@@ -1,6 +1,7 @@
 'use client';
 
-import InfoBox from './InfoBox'; // Assuming the InfoBox component is in the same directory
+import { useRouter } from 'next/navigation';
+import { PiListMagnifyingGlassBold } from 'react-icons/pi';
 
 interface PageHeaderProps {
   title: string;
@@ -10,19 +11,30 @@ interface PageHeaderProps {
     subContent: string;
     closed: Boolean;
   };
+  link?: {
+    linkBool: Boolean;
+    linkUrl: string;
+    linkText: string;
+  };
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, link }) => {
+  const router = useRouter();
   const infoBoxActive = false;
 
   return (
-    <div className="text-start flex flex-col md:flex-row">
-      <div className="w-full md:w-1/3">
+    <div className="flex flex-col sm:flex-row mb-2">
+      <div className="w-full">
         <div className="text:text-sm md:text-2xl font-bold">{title}</div>
         <div className="font-light text-neutral-500">{subtitle}</div>
       </div>
-
-      <div className="w-full md:w-2/3 flex-grow md:ml-5 justify-center align-middle"></div>
+      {link && link.linkBool && (
+        <div className="w-full sm:justify-end flex">
+          <div className="text-sm flex  flex-row gap-2 cursor-pointer hover:underline underline-offset-2 underline-orange-600" onClick={() => router.push(`${link.linkUrl}`)}>
+            <PiListMagnifyingGlassBold size={20} /> {link.linkText}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

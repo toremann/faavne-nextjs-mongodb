@@ -61,9 +61,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
               </tbody>
             </table>
             <br />
-            <div className="bg-black text-white md:font-light py-3 rounded-lg text-center mb-2 w-full border-2">
-              Utbytte totalt: {formatCurrency(totalDividendAmount)} NOK
-            </div>
+            <div className="bg-black text-white md:font-light py-3 rounded-lg text-center mb-2 w-full border-2">Utbytte totalt: {formatCurrency(totalDividendAmount)} NOK</div>
             <InfoBox content="Utbytte formel" subContent="Utbytte * antall aksjer = totalt utbytte" />
           </div>
         </div>
