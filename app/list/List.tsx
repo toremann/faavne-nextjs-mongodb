@@ -26,9 +26,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto flex justify-between items-center">
-        <div className="flex flex-col gap-3">
           <PageHeader title={'Alle utbytte aksjer'} subtitle={'Liste over alle utbytte aksjer'} />
-        </div>
         <div className="mb-4">
           <input type="text" placeholder="Søk..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="p-2 border border-gray-300 rounded-md" />
         </div>
