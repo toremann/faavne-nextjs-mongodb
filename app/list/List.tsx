@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { format, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { useState } from 'react';
+import { RiSearchLine } from 'react-icons/ri';
 
 interface ListProps {
   stocks: Stock[];
@@ -20,15 +21,27 @@ interface ListProps {
 const List: React.FC<ListProps> = ({ stocks }) => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
+
+  const handleSearchClick = () => {
+    setShowSearch(!showSearch);
+  };
 
   const filteredStocks = stocks.filter((stock) => stock.symbol.toLowerCase().includes(searchTerm.toLowerCase()) || stock.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto flex justify-between items-center">
-          <PageHeader title={'Alle utbytte aksjer'} subtitle={'Liste over alle utbytte aksjer'} />
+        <PageHeader title={'Alle utbytte aksjer'} subtitle={'Liste over alle utbytte aksjer'} />
         <div className="mb-4">
-          <input type="text" placeholder="Søk..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="p-2 border border-gray-300 rounded-md" />
+          {!showSearch ? (
+            <div onClick={handleSearchClick} style={{ cursor: 'pointer' }}>
+              <RiSearchLine size={20} />
+              {searchTerm && <div className='text-xs '>Filter aktivt!</div>}
+            </div>
+          ) : (
+            <input type="text" placeholder="Søk..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onBlur={handleSearchClick} className="p-2 border border-gray-300 rounded-md" />
+          )}
         </div>
       </div>
       <div className="max-w-screen-lg mx-auto">
