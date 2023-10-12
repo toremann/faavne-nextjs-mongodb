@@ -40,7 +40,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
               {searchTerm && <div className='text-xs text-red-600'>Filter aktivt!</div>}
             </div>
           ) : (
-            <input type="text" placeholder="Søk..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onBlur={handleSearchClick}   className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full"            />
+            <input type="text" placeholder="Søk i listen..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onBlur={handleSearchClick}   className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full"            />
           )}
         </div>
       </div>
