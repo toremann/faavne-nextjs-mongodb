@@ -37,22 +37,31 @@ const List: React.FC<ListProps> = ({ stocks }) => {
         <PageHeader title={'Alle utbytte aksjer'} subtitle={'Liste over alle utbytte aksjer'} />
         <div className="mb-4 flex justify-end">
           {!showSearch ? (
-            <div onClick={handleSearchClick} className='cursor-pointer'>
+            <div onClick={handleSearchClick} className="cursor-pointer">
               <RiSearchLine size={20} />
-              {searchTerm && <div className='text-xs text-red-600'>Filter aktivt!</div>}
+              {searchTerm && <div className="text-xs text-red-600">Filter aktivt!</div>}
             </div>
           ) : (
-            <input type="text" placeholder="Søk i listen..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onBlur={handleSearchClick}   className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full"            />
+            <input
+              type="text"
+              placeholder="Søk i listen..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onBlur={handleSearchClick}
+              className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full"
+            />
           )}
         </div>
       </div>
       <div className="max-w-screen-lg mx-auto">
         {filteredStocks.map((stock) => (
-          <div key={stock.isin} className="flex hover:bg-slate-100 cursor-pointer pl-2 border-solid border-b-2 hover:border-orange-500 border-gray-300 relative group">
-            <div className="text-sm md:text-base flex-1 truncate pr-4" onClick={() => router.push(`/stock/${stock.isin}`)}>
-              <div className='flex flex-row items-center gap-2'>
-              <div><BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`}/></div>
-              <div className="font-bold -visible">{stock.symbol}</div>
+          <div key={stock.isin} onClick={() => router.push(`/stock/${stock.isin}`)} className="flex hover:bg-slate-100 cursor-pointer pl-2 border-solid border-b-2 hover:border-orange-500 border-gray-300 relative group">
+            <div className="text-sm md:text-base flex-1 truncate pr-4">
+              <div className="flex flex-row items-center gap-2">
+                <div>
+                  <BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`} />
+                </div>
+                <div className="font-bold -visible">{stock.symbol}</div>
               </div>
               <div>{stock.name}</div>
             </div>
