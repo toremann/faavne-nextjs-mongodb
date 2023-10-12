@@ -33,14 +33,14 @@ const List: React.FC<ListProps> = ({ stocks }) => {
     <Container>
       <div className="max-w-screen-lg mx-auto flex justify-between items-center">
         <PageHeader title={'Alle utbytte aksjer'} subtitle={'Liste over alle utbytte aksjer'} />
-        <div className="mb-4">
+        <div className="mb-4 flex justify-end">
           {!showSearch ? (
-            <div onClick={handleSearchClick} style={{ cursor: 'pointer' }}>
+            <div onClick={handleSearchClick} className='cursor-pointer'>
               <RiSearchLine size={20} />
-              {searchTerm && <div className='text-xs '>Filter aktivt!</div>}
+              {searchTerm && <div className='text-xs text-red-600'>Filter aktivt!</div>}
             </div>
           ) : (
-            <input type="text" placeholder="Søk..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onBlur={handleSearchClick} className="p-2 border border-gray-300 rounded-md" />
+            <input type="text" placeholder="Søk..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} onBlur={handleSearchClick}   className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full"            />
           )}
         </div>
       </div>
