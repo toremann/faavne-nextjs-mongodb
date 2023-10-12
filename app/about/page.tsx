@@ -6,7 +6,7 @@ import About from './About';
 const AboutPage = async () => {
   const stockCount = await getStockLength();
   const userCount = await getUserLength();
-  const dividendCount = await getDividendLength()
+  const dividendCount = await getDividendLength();
 
   return <About stockCount={stockCount} userCount={userCount} dividendCount={dividendCount} />;
 };

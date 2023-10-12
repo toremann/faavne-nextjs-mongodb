@@ -1,4 +1,4 @@
-'use client'
+'use client';
 // Returns a color for the score
 
 export default function scoreColor(score: number) {
