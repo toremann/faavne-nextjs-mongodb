@@ -13,6 +13,8 @@ import { format, formatDistance } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { useState } from 'react';
 import { RiSearchLine } from 'react-icons/ri';
+import { BsCircleFill } from 'react-icons/bs';
+import scoreColorIcon from '../utils/scoreColorIcon';
 
 interface ListProps {
   stocks: Stock[];
@@ -48,7 +50,10 @@ const List: React.FC<ListProps> = ({ stocks }) => {
         {filteredStocks.map((stock) => (
           <div key={stock.isin} className="flex hover:bg-slate-100 cursor-pointer pl-2 border-solid border-b-2 hover:border-orange-500 border-gray-300 relative group">
             <div className="text-sm md:text-base flex-1 truncate pr-4" onClick={() => router.push(`/stock/${stock.isin}`)}>
+              <div className='flex flex-row items-center gap-2'>
+              <div><BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`}/></div>
               <div className="font-bold -visible">{stock.symbol}</div>
+              </div>
               <div>{stock.name}</div>
             </div>
             <div className="text-right flex flex-col text-sm md:text-base">

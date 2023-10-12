@@ -1,4 +1,5 @@
 import getAllStocks from '../actions/getAllStocks';
+import getStockStats from '../actions/getStockStats';
 import List from './List';
 
 const StockPage = async () => {
