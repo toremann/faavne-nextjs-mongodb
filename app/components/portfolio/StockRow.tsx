@@ -71,8 +71,8 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
   }, [onSubmit, updateTotalDividendAmount]);
 
   return (
-    <tr className="border-b-2">
-      <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer dark:text-gray-600" onClick={() => router.push(`/stock/${stock.isin}`)}>
+    <tr className="border-b-2 border-gray-300 dark:border-gray-500 dark:hover:border-orange-500 dark:bg-gray-800/75 dark:hover:bg-gray-800">
+      <td className="pl-2 p-2 text-sm md:text-base hover:text-sky-700 cursor-pointer dark:text-gray-600" onClick={() => router.push(`/stock/${stock.isin}`)}>
         <div className="flex flex-row items-center gap-2">
           <div>
             <BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`} />
@@ -81,7 +81,7 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
         </div>
         {stock.name}
       </td>
-      <td className="text-xs dark:text-white md:text-base">
+      <td className="text-sm dark:text-white md:text-base">
         <p className="font-bold">{dividendAmount.toFixed(2)} NOK</p>
         {stock.dividend} *
         <input

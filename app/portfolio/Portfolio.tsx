@@ -48,7 +48,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
             <div className="md:col-span-1"></div>
             <table className="w-full border-b-2">
               <thead>
-                <tr className="border-b-2 dark:text-white">
+                <tr className="border-b-2 dark:border-hidden dark:text-white">
                   <th className="text-sm md:text-base text-left">Navn</th>
                   <th className="text-sm md:text-base text-left">Utbytte</th>
                   <th className="text-sm md:text-base text-left"></th>

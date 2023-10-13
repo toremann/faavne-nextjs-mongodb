@@ -65,7 +65,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
                 <div>
                   <BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`} />
                 </div>
-                <div className="font-bold -visible dark:text-white">{stock.symbol}</div>
+                <div className="font-bold dark:text-white">{stock.symbol}</div>
               </div>
               <div className="dark:text-gray-600">{stock.name}</div>
             </div>
