@@ -48,7 +48,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onBlur={handleSearchClick}
-              className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full"
+              className="p-2 border border-gray-300 rounded-md w-3/4 sm:w-full dark:bg-black dark:text-white"
             />
           )}
         </div>
@@ -58,7 +58,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
           <div
             key={stock.isin}
             onClick={() => router.push(`/stock/${stock.isin}`)}
-            className="flex hover:bg-slate-100 dark:hover:bg-slate-600 cursor-pointer pl-2 border-solid border-b-2 dark:bg-gray-800 hover:border-orange-500 border-gray-300 dark:border-gray-500 relative group"
+            className="flex hover:bg-gray-300 p-2 dark:hover:bg-gray-800/50 cursor-pointer pl-2 border-solid border-b-2 dark:bg-gray-800 bg-gray-200/75 hover:border-orange-500 border-gray-300 dark:border-gray-500 relative group"
           >
             <div className="text-sm md:text-base flex-1 truncate pr-4">
               <div className="flex flex-row items-center gap-2">
@@ -67,7 +67,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
                 </div>
                 <div className="font-bold -visible dark:text-white">{stock.symbol}</div>
               </div>
-              <div className='dark:text-gray-600'>{stock.name}</div>
+              <div className="dark:text-gray-600">{stock.name}</div>
             </div>
             <div className="text-right flex flex-col text-sm md:text-base dark:text-white">
               <div>{stock.dividendDate ? format(stock.dividendDate, 'dd/MM/yy') : 'Ingen dato'}</div>
