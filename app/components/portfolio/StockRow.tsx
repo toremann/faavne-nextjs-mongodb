@@ -9,6 +9,8 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { useEffect } from 'react';
+import { BsCircleFill } from 'react-icons/bs';
+import scoreColorIcon from '@/app/utils/scoreColorIcon';
 
 interface StocksRowProps {
   stock: Stock;
@@ -71,13 +73,23 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
   return (
     <tr className="border-b-2">
       <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer dark:text-gray-600" onClick={() => router.push(`/stock/${stock.isin}`)}>
-        <p className="font-bold dark:text-white">{stock.symbol}</p>
+        <div className="flex flex-row items-center gap-2">
+          <div>
+            <BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`} />
+          </div>
+          <div className="font-bold dark:text-white">{stock.symbol}</div>
+        </div>
         {stock.name}
       </td>
       <td className="text-xs dark:text-white md:text-base">
         <p className="font-bold">{dividendAmount.toFixed(2)} NOK</p>
         {stock.dividend} *
-        <input className="dark:bg-black w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 " type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
+        <input
+          className="dark:bg-black w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 "
+          type="number"
+          defaultValue={stockAmount}
+          {...register('stockAmount', { required: true })}
+        />
       </td>
       <td className="">
         <button className="text-xs md:text-sm bg-green-500 hover:bg-green-700 text-white rounded focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
