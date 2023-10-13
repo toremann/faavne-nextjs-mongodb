@@ -24,7 +24,7 @@ const StockCards: React.FC<StocksCardProps> = ({ stock, scoreColor }) => {
 
   return (
     <div onClick={() => router.push(`/stock/${stock.isin}`)} className="col-span-1 cursor-pointer group  rounded-lg">
-      <div className="bg-white dark:bg-gray-800 shadow-lg overflow-hidden rounded-lg hover:shadow-xl dark:hover:bg-gray-800/50 transition">
+      <div className="bg-white dark:bg-gray-800/75 dark:hover:bg-gray-800 shadow-lg overflow-hidden rounded-lg hover:shadow-xl  transition">
         <div className="px-4 py-6">
           <div>
             <div className="text-gray-600 md:text-sm truncate">{stock.nameLong}</div>

@@ -58,7 +58,7 @@ const List: React.FC<ListProps> = ({ stocks }) => {
           <div
             key={stock.isin}
             onClick={() => router.push(`/stock/${stock.isin}`)}
-            className="flex hover:bg-gray-300 p-2 dark:hover:bg-gray-800/50 cursor-pointer pl-2 border-solid border-b-2 dark:bg-gray-800 bg-gray-200/75 hover:border-orange-500 border-gray-300 dark:border-gray-500 relative group"
+            className="flex hover:bg-gray-300 p-2 dark:hover:bg-gray-800 cursor-pointer pl-2 border-solid border-b-2 dark:bg-gray-800/75 bg-gray-200/75 hover:border-orange-500 border-gray-300 dark:border-gray-500 relative group"
           >
             <div className="text-sm md:text-base flex-1 truncate pr-4">
               <div className="flex flex-row items-center gap-2">

@@ -70,14 +70,14 @@ const StockRow: React.FC<StocksRowProps> = ({ stock, currentUser, portfolio, upd
 
   return (
     <tr className="border-b-2">
-      <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer" onClick={() => router.push(`/stock/${stock.isin}`)}>
-        <p className="font-bold">{stock.symbol}</p>
+      <td className="text-xs md:text-base hover:text-sky-700 cursor-pointer dark:text-gray-600" onClick={() => router.push(`/stock/${stock.isin}`)}>
+        <p className="font-bold dark:text-white">{stock.symbol}</p>
         {stock.name}
       </td>
-      <td className="text-xs md:text-base">
+      <td className="text-xs dark:text-white md:text-base">
         <p className="font-bold">{dividendAmount.toFixed(2)} NOK</p>
-        {stock.dividend} *{' '}
-        <input className="w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 " type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
+        {stock.dividend} *
+        <input className="dark:bg-black w-20 border-b-2 focus:border-none border-dotted text-center border-gray-400 " type="number" defaultValue={stockAmount} {...register('stockAmount', { required: true })} />
       </td>
       <td className="">
         <button className="text-xs md:text-sm bg-green-500 hover:bg-green-700 text-white rounded focus:outline-none focus:shadow-outline py-2 px-4" type="button" onClick={handleSubmit(onSubmit)}>
