@@ -35,7 +35,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className="hidden md:block text-sm font-semibold text-black dark:text-white">Norske utbytte aksjer!</div>
           <div className="hidden md:block text-sm font-light dark:text-white">{safeCurrentUser !== null && `Hei, ${safeCurrentUser.name} 🙋‍♂️`}</div>
         </div>
-        <div onClick={toggleOpen} className="p-4 md:py-1 md: px-2 border-[1px] border-neutral-200 dark:text-white flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition">
+        <div
+          onClick={toggleOpen}
+          className="p-4 md:py-1 md: px-2 border-[1px] border-neutral-200 dark:text-white flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
+        >
           <AiOutlineMenu />
           <div className="hidden md:block">
             <Avatar src={currentUser?.image} />
