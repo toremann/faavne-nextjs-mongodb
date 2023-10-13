@@ -5,7 +5,7 @@ import { FaGithub, FaLink, FaInfoCircle } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="flex-1 w-full text-center py-2 mt-10 text-xs">
+    <footer className="flex-1 w-full text-center py-2 mt-10 text-xs dark:bg-black dark:text-white">
       <div className="flex justify-center space-x-4">
         <div className="flex flex-col items-center">
           <Link href="https://github.com/toremann" target="_blank" rel="noopener noreferrer">

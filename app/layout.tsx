@@ -6,7 +6,6 @@ import Navbar from './components/navbar/Navbar';
 import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
 import ToasterProvider from './providers/ToasterProvider';
-import DevFooter from './components/DevFooter';
 import { Analytics } from '@vercel/analytics/react';
 import getAllStocks from './actions/getAllStocks';
 import Footer from './components/Footer';
@@ -23,14 +22,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const currentUser = await getCurrentUser();
   const stocks = await getAllStocks();
 
+  const bodyClassName = `dark:bg-black ${inter.className}`;
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={bodyClassName}>
         <Navbar currentUser={currentUser} stocks={stocks as any} />
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />
-        <div className="pt-28 dark:bg-black">{children}</div>
+        <div className="pt-28">{children}</div>
         <Analytics />
         {/* <DevFooter /> */}
         <Footer />
