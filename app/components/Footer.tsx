@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { FaGithub, FaLink, FaInfoCircle } from 'react-icons/fa';
+import DarkModeToggle from './DarkmodeButton';
 
 const Footer = () => {
   return (
@@ -38,6 +39,15 @@ const Footer = () => {
               <div>About</div>
             </div>
           </Link>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <div className="group flex flex-col items-center hover:text-blue-500">
+            <div>
+              <DarkModeToggle />
+            </div>
+            <div>Theme</div>
+          </div>
         </div>
       </div>
     </footer>
