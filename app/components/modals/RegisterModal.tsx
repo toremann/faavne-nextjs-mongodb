@@ -69,7 +69,7 @@ const RegisterModal = () => {
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
           <div>Har du allerede en konto?</div>
-          <div onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline">
+          <div onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline dark:text-white">
             Logg inn
           </div>
         </div>
