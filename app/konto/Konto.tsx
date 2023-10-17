@@ -15,11 +15,11 @@ const Konto: React.FC<KontoProps> = ({ currentUser }) => {
   return (
     <Container>
       <PageHeader title={'Min konto'} subtitle={'Informasjon lagret om din konto'} />
-      <div>Brukernavn: {safeCurrentUser !== null && safeCurrentUser.name}</div>
-      <div>Epost: {safeCurrentUser !== null && safeCurrentUser.email}</div>
-      <div>Id: {safeCurrentUser !== null && safeCurrentUser.id}</div>
-      <div>Konto opprettet: {safeCurrentUser !== null && new Date(safeCurrentUser.createdAt).toLocaleDateString('en-GB')}</div>
-      <div>Konto oppdatert: {safeCurrentUser !== null && new Date(safeCurrentUser.updatedAt).toLocaleDateString('en-GB')}</div>
+      <div className="dark:text-white">Brukernavn: {safeCurrentUser !== null && safeCurrentUser.name}</div>
+      <div className="dark:text-white">Epost: {safeCurrentUser !== null && safeCurrentUser.email}</div>
+      <div className="dark:text-white">Id: {safeCurrentUser !== null && safeCurrentUser.id}</div>
+      <div className="dark:text-white">Konto opprettet: {safeCurrentUser !== null && new Date(safeCurrentUser.createdAt).toLocaleDateString('en-GB')}</div>
+      <div className="dark:text-white">Konto oppdatert: {safeCurrentUser !== null && new Date(safeCurrentUser.updatedAt).toLocaleDateString('en-GB')}</div>
     </Container>
   );
 };
