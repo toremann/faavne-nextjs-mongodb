@@ -45,11 +45,11 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
       </div>
 
       {activeSearch.length > 0 && (
-        <div className="absolute shadow-md w-full md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
+        <div className="absolute shadow-md w-full md:w-3/4 bg-white dark:bg-black overflow-hidden right-0 top-12 text-sm">
           <div>
             {activeSearch.map((stock: any) => (
-              <div onClick={() => handleRouter(stock.isin)} key={stock.isin} className="px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer">
-                {stock.symbol} <div className="font-light text-xs">{stock.name}</div>
+              <div onClick={() => handleRouter(stock.isin)} key={stock.isin} className="px-4 py-3 hover:bg-neutral-100 dark:hover:bg-gray-800/50 dark:text-white transition font-semibold cursor-pointer">
+                {stock.symbol} <div className="font-light text-xs dark:text-white">{stock.name}</div>
               </div>
             ))}
           </div>
