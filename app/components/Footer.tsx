@@ -43,10 +43,7 @@ const Footer = () => {
 
         <div className="flex flex-col items-center">
           <div className="group flex flex-col items-center hover:text-blue-500">
-            <div>
-              <DarkModeToggle />
-            </div>
-            <div>Theme</div>
+            <DarkModeToggle />
           </div>
         </div>
       </div>
