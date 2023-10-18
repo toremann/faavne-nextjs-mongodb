@@ -4,9 +4,11 @@
 import { Stock } from '@prisma/client';
 
 // Imports
+import scoreColorIcon from '@/app/utils/scoreColorIcon';
 import { useRouter } from 'next/navigation';
 import { useState, ChangeEvent } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { BsCircleFill } from 'react-icons/bs';
 
 interface SearchbarProps {
   stocks: Stock[];
@@ -41,15 +43,25 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
         <button type="button" className="dark:text-white absolute left-1 top-1/2 -translate-y-1/2">
           <AiOutlineSearch />
         </button>
-        <input type="search" placeholder="Søk.." className="w-full pl-6 p-2 border border-gray-300 rounded-md dark:bg-black" onChange={(e) => handleSearch(e)} />
+        <input type="search" placeholder="Søk.." className="w-full pl-6 p-2 border border-gray-300 rounded-md dark:bg-black dark:text-white" onChange={(e) => handleSearch(e)} />
       </div>
 
       {activeSearch.length > 0 && (
         <div className="absolute shadow-md w-full md:w-3/4 bg-white dark:bg-black overflow-hidden right-0 top-12 text-sm">
           <div>
             {activeSearch.map((stock: any) => (
-              <div onClick={() => handleRouter(stock.isin)} key={stock.isin} className="px-4 py-3 hover:bg-neutral-100 dark:hover:bg-gray-800/50 dark:text-white transition font-semibold cursor-pointer">
-                {stock.symbol} <div className="font-light text-xs dark:text-white">{stock.name}</div>
+              <div
+                onClick={() => handleRouter(stock.isin)}
+                key={stock.isin}
+                className="px-4 py-3 hover:bg-neutral-100 dark:hover:bg-gray-800/50 dark:text-white transition font-semibold cursor-pointer"
+              >
+                <div className="flex flex-row items-center gap-2">
+                  <div>
+                    <BsCircleFill size={10} className={`${scoreColorIcon(stock.normalizeScore)}`} />
+                  </div>
+                  <div>{stock.symbol}</div>
+                </div>
+                <div className="font-light text-xs dark:text-white">{stock.name}</div>
               </div>
             ))}
           </div>
