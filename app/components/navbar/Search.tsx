@@ -47,7 +47,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ stocks }) => {
       </div>
 
       {activeSearch.length > 0 && (
-        <div className="absolute shadow-md w-full md:w-3/4 bg-white dark:bg-black overflow-hidden right-0 top-12 text-sm">
+        <div className="absolute shadow-md w-full bg-white dark:bg-black overflow-hidden right-0 top-12 text-sm">
           <div>
             {activeSearch.map((stock: any) => (
               <div
