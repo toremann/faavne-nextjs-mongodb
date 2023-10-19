@@ -10,7 +10,7 @@ function LineChart({ chartData }: any) {
           maintainAspectRatio: true,
           plugins: {
             title: {
-              display: true,
+              display: false,
               text: 'Score',
               font: {
                 size: 18,
