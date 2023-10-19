@@ -1,6 +1,6 @@
 'use client';
 
-import { MoonLoader } from 'react-spinners';
+import { PulseLoader } from 'react-spinners';
 
 const Loader = () => {
   const isDarkMode = typeof window !== 'undefined' && (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches));
@@ -15,7 +15,7 @@ const Loader = () => {
       items-center
     "
     >
-      <MoonLoader size={20} color={!isDarkMode ? 'black' : 'white'} />
+      <PulseLoader size={20} color={!isDarkMode ? 'black' : 'white'} />
       <div className="text-black dark:text-white">Henter data..</div>
     </div>
   );
