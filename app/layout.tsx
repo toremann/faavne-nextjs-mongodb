@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/react';
 import getAllStocks from './actions/getAllStocks';
 import Footer from './components/Footer';
 import { getMarketStatusMessage } from './utils/marketStatus';
+import Theme from './providers/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,14 +28,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className={bodyClassName}>
-        <Navbar currentUser={currentUser} stocks={stocks as any} />
-        <ToasterProvider />
-        <RegisterModal />
-        <LoginModal />
-        <div className="pt-28">{children}</div>
-        <Analytics />
-        {/* <DevFooter /> */}
-        <Footer />
+        <Theme>
+          <Navbar currentUser={currentUser} stocks={stocks as any} />
+          <ToasterProvider />
+          <RegisterModal />
+          <LoginModal />
+          <div className="pt-28">{children}</div>
+          <Analytics />
+          {/* <DevFooter /> */}
+          <Footer />
+        </Theme>
       </body>
     </html>
   );

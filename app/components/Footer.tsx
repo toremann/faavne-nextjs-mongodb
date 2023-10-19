@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import { FaGithub, FaLink, FaInfoCircle } from 'react-icons/fa';
 import DarkModeToggle from './DarkmodeButton';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
-
   // Dirty hydration error fix
   const [loaded, setLoaded] = useState(false);
 
@@ -51,9 +50,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="group flex flex-col items-center hover:text-blue-500">
-            {loaded && <DarkModeToggle /> }
-          </div>
+          <div className="group flex flex-col items-center hover:text-blue-500">{loaded && <DarkModeToggle />}</div>
         </div>
       </div>
     </footer>
