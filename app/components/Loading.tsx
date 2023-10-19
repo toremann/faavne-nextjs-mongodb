@@ -3,6 +3,8 @@
 import { MoonLoader } from 'react-spinners';
 
 const Loader = () => {
+  const isDarkMode = typeof window !== 'undefined' && (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches));
+
   return (
     <div
       className="
@@ -10,10 +12,11 @@ const Loader = () => {
       flex 
       flex-col 
       justify-center 
-      items-center 
+      items-center
     "
     >
-      <MoonLoader size={20} color="black" />
+      <MoonLoader size={20} color={!isDarkMode ? 'black' : 'white'} />
+      <div className="text-black dark:text-white">Henter data..</div>
     </div>
   );
 };
