@@ -32,10 +32,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div className="flex flex-col py-3 px-4 rounded-full transition">
-          <div className="hidden md:block text-sm font-semibold text-black">Norske utbytte aksjer!</div>
-          <div className="hidden md:block text-sm font-light">{safeCurrentUser !== null && `Hei, ${safeCurrentUser.name} 🙋‍♂️`}</div>
+          <div className="hidden md:block text-sm font-semibold text-black dark:text-white">Norske utbytte aksjer!</div>
+          <div className="hidden md:block text-sm font-light dark:text-white">{safeCurrentUser !== null && `Hei, ${safeCurrentUser.name} 🙋‍♂️`}</div>
         </div>
-        <div onClick={toggleOpen} className="p-4 md:py-1 md: px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition">
+        <div
+          onClick={toggleOpen}
+          className="p-4 md:py-1 md: px-2 border-[1px] border-neutral-200 dark:text-white flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
+        >
           <AiOutlineMenu />
           <div className="hidden md:block">
             <Avatar src={currentUser?.image} />
@@ -43,7 +46,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
+        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white dark:bg-black dark:border dark:border-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>

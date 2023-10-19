@@ -6,11 +6,11 @@ import Navbar from './components/navbar/Navbar';
 import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
 import ToasterProvider from './providers/ToasterProvider';
-import DevFooter from './components/DevFooter';
 import { Analytics } from '@vercel/analytics/react';
 import getAllStocks from './actions/getAllStocks';
 import Footer from './components/Footer';
 import { getMarketStatusMessage } from './utils/marketStatus';
+import Theme from './providers/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,17 +23,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const currentUser = await getCurrentUser();
   const stocks = await getAllStocks();
 
+  const bodyClassName = `dark:bg-black ${inter.className}`;
+
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar currentUser={currentUser} stocks={stocks as any} />
-        <ToasterProvider />
-        <RegisterModal />
-        <LoginModal />
-        <div className="pt-28">{children}</div>
-        <Analytics />
-        {/* <DevFooter /> */}
-        <Footer />
+      <body className={bodyClassName}>
+        <Theme>
+          <Navbar currentUser={currentUser} stocks={stocks as any} />
+          <ToasterProvider />
+          <RegisterModal />
+          <LoginModal />
+          <div className="pt-28">{children}</div>
+          <Analytics />
+          {/* <DevFooter /> */}
+          <Footer />
+        </Theme>
       </body>
     </html>
   );

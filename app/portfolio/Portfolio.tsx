@@ -42,13 +42,13 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col">
           <PageHeader title={'Portfolio'} subtitle={'Utbytte kalkulator'} />
           <div>
             <div className="md:col-span-1"></div>
             <table className="w-full border-b-2">
               <thead>
-                <tr className="border-b-2">
+                <tr className="border-b-2 dark:border-hidden dark:text-white">
                   <th className="text-sm md:text-base text-left">Navn</th>
                   <th className="text-sm md:text-base text-left">Utbytte</th>
                   <th className="text-sm md:text-base text-left"></th>
@@ -60,8 +60,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ stocks, currentUser, portfolio })
                 ))}
               </tbody>
             </table>
-            <br />
-            <div className="bg-black text-white md:font-light py-3 rounded-lg text-center mb-2 w-full border-2">Utbytte totalt: {formatCurrency(totalDividendAmount)} NOK</div>
+            <div className="bg-gray-200/75 text-black dark:text-white dark:bg-gray-800 md:font-light py-3 mt-2 rounded-lg text-center mb-2 w-full border-2">
+              Utbytte totalt: {formatCurrency(totalDividendAmount)} NOK
+            </div>
             <InfoBox content="Utbytte formel" subContent="Utbytte * antall aksjer = totalt utbytte" />
           </div>
         </div>

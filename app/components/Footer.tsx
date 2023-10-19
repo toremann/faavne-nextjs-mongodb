@@ -2,10 +2,19 @@
 
 import Link from 'next/link';
 import { FaGithub, FaLink, FaInfoCircle } from 'react-icons/fa';
+import DarkModeToggle from './DarkmodeButton';
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
+  // Dirty hydration error fix
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, [loaded]);
+
   return (
-    <footer className="flex-1 w-full text-center py-2 mt-10 text-xs">
+    <footer className="flex-1 w-full text-center py-2 mt-10 text-xs dark:bg-black dark:text-white">
       <div className="flex justify-center space-x-4">
         <div className="flex flex-col items-center">
           <Link href="https://github.com/toremann" target="_blank" rel="noopener noreferrer">
@@ -38,6 +47,10 @@ const Footer = () => {
               <div>About</div>
             </div>
           </Link>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <div className="group flex flex-col items-center hover:text-blue-500">{loaded && <DarkModeToggle />}</div>
         </div>
       </div>
     </footer>

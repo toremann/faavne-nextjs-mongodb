@@ -48,7 +48,8 @@ const StocksGraph: React.FC<StatsProps> = ({ stats }) => {
   }, [stats]);
 
   return (
-    <div className="m-2">
+    <div className="p-2 my-2">
+      <div className="text-black text-lg text-center font-bold dark:text-white">Stats</div>
       <LineChart chartData={scoreData} />
       {/* <StocksGraphFooter /> */}
     </div>
