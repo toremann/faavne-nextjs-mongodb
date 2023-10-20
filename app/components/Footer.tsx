@@ -22,7 +22,7 @@ const Footer = () => {
               <div>
                 <FaGithub size={16} />
               </div>
-              <div>Github</div>
+              <div>github</div>
             </div>
           </Link>
         </div>
@@ -44,7 +44,7 @@ const Footer = () => {
               <div>
                 <FaInfoCircle size={16} />
               </div>
-              <div>About</div>
+              <div>info</div>
             </div>
           </Link>
         </div>
