@@ -11,6 +11,10 @@ export default function scoreColorIcon(score: number) {
     100: 'text-blue-500',
   };
 
+  if (score > 100) {
+    return 'text-purple-500';
+  }
+
   let textColorClass = 'text-gray-800'; // Change this to the default text color you want
 
   for (const pointRange in colorClasses) {
