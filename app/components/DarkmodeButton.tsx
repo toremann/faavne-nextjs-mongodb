@@ -32,9 +32,9 @@ const DarkModeToggle = () => {
   return (
     <>
       <div className="cursor-pointer" onClick={toggleTheme}>
-        {theme ? <IoMdSunny size={16} /> : <IoMdMoon size={16} />}
+      {theme === 'light' ? <IoMdSunny size={16} /> : <IoMdMoon size={16} />}
       </div>
-      <div>{theme}</div>
+      <div className="cursor-pointer" onClick={toggleTheme}>{theme}</div>
     </>
   );
 };
