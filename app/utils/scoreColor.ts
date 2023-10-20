@@ -11,6 +11,10 @@ export default function scoreColor(score: number) {
     100: 'bg-blue-500 dark:bg-blue-500/90',
   };
 
+  if (score > 100) {
+    return 'bg-purple-500 dark:bg-purple-500/90';
+  }
+
   let bgColorClass = 'bg-gray-200';
 
   for (const pointRange in colorClasses) {
