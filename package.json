@@ -17,7 +17,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.16",
     "@vercel/analytics": "^1.1.1",
-    "autoprefixer": "10.4.16",
+    "autoprefixer": "10.4.17",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.1",
